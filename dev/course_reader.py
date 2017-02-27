@@ -4,6 +4,7 @@ import psycopg2
 PG_USER = "lspangler"
 PG_USER_PASS = ""
 PG_HOST_INFO = ""
+#It's a comment
 
 
 def load_course_database(db_name, csv_filename):
