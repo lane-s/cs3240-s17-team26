@@ -1,0 +1,37 @@
+{% extends 'index.html' %}
+{% load bootstrap3 %}
+
+{% block content %}
+    <script>
+
+    function check_field_value(new_val) {
+        if(new_val == 'C') {
+            $('#company_form').removeClass('hidden');
+            $('#company_form :input').addAttr('required');
+        } else {
+            $('#company_form').addClass('hidden');
+            $('#company_form :input').removeAttr('required');
+        }
+    }
+
+    $(document).ready(function() {
+        $('#company_form :input').removeAttr('required');
+        $('#id_detail_form-type').change( function() {
+            console.log(this.value);
+            check_field_value(this.value);
+        });
+    });
+                      
+    </script>
+    <form method="post" class="form" action="/">
+        {% csrf_token %}
+        <div>{% bootstrap_field detail_form.type %}</div>
+        <div>{% bootstrap_form user_form %}</div>
+        <div id="company_form" class="hidden">{% bootstrap_form company_form set_required=False %}</div>
+        {% buttons %}
+        <button type="submit" class="btn btn-primary">
+            {% bootstrap_icon "star" %} Submit
+        </button>
+        {% endbuttons %}
+    </form>
+{% endblock %}
