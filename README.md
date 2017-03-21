@@ -8,6 +8,6 @@ Activate it ```source activate your_env```
 
 Make sure pip is installed in the environment (may have to do ```conda install pip```)
 
-In the root folder of the project do ```pip install requirements.txt```
+In the root folder of the project do ```pip install -r requirements.txt```
 
 
