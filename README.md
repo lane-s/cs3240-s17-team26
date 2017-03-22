@@ -4,10 +4,10 @@
 
 Create a virtual environment (using conda or virtualenv)
 
-Activate it ```source active your_env```
+Activate it ```source activate your_env```
 
 Make sure pip is installed in the environment (may have to do ```conda install pip```)
 
-In the root folder of the project do ```pip install requirements.txt```
+In the root folder of the project do ```pip install -r requirements.txt```
 
 
