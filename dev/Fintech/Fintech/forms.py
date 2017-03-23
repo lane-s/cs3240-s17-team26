@@ -13,11 +13,6 @@ class UserForm(ModelForm):
             'password': PasswordInput(),
         }
 
-class UserDetailForm(ModelForm):
-    class Meta:
-        model = UserDetails
-        fields = ('type',)
-
 class CompanyForm(ModelForm):
     class Meta:
         model = CompanyDetails

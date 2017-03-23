@@ -13,6 +13,10 @@ class UserDetails(models.Model):
         choices=user_types,
         default='I',
     )
+    @classmethod
+    def create(cls, user, type):
+        details = cls(user = user, type = type)
+        return details
 
 class CompanyDetails(models.Model):
     user = models.OneToOneField(User)

@@ -4,34 +4,53 @@
 {% block content %}
     <script>
 
-    function check_field_value(new_val) {
-        if(new_val == 'C') {
-            $('#company_form').removeClass('hidden');
-            $('#company_form :input').addAttr('required');
-        } else {
-            $('#company_form').addClass('hidden');
-            $('#company_form :input').removeAttr('required');
-        }
-    }
-
     $(document).ready(function() {
-        $('#company_form :input').removeAttr('required');
-        $('#id_detail_form-type').change( function() {
-            console.log(this.value);
-            check_field_value(this.value);
+        if (location.hash) {
+            $("a[href='" + location.hash + "']").tab("show");
+        }
+        $(document.body).on("click", "a[data-toggle]", function(event) {
+            location.hash = this.getAttribute("href");
         });
     });
-                      
+    $(window).on("popstate", function() {
+        var anchor = location.hash || $("a[data-toggle='tab']").first().attr("href");
+        $("a[href='" + anchor + "']").tab("show");
+    });
+
+                          
     </script>
-    <form method="post" class="form" action="{% url 'signup' %}">
-        {% csrf_token %}
-        <div>{% bootstrap_field detail_form.type %}</div>
-        <div>{% bootstrap_form user_form %}</div>
-        <div id="company_form" class="hidden">{% bootstrap_form company_form set_required=False %}</div>
-        {% buttons %}
-        <button type="submit" class="btn btn-primary">
-            {% bootstrap_icon "star" %} Submit
-        </button>
-        {% endbuttons %}
-    </form>
+    
+    <ul class="nav nav-tabs" id="UserTypeTabs">
+        <li class="active"><a  href="#Investor" data-toggle="tab">Investor</a></li>
+        <li><a href="#Company" data-toggle="tab">Company</a></li>
+    </ul>
+
+    <div id="content" class="tab-content">
+
+        <div class="tab-pane active" id="Investor">
+            <form method="post" class="form" action="{/signup/#Investor">
+                {% csrf_token %}
+                <div>{% bootstrap_form investor_user_form %}</div>
+                {% buttons %}
+                <button type="submit" class="btn btn-primary">
+                    Create Account
+                </button>
+                {% endbuttons %}
+            </form>
+        </div>
+
+        <div class="tab-pane" id="Company">
+            <form method="post" class="form" action="/signup/#Company">
+                {% csrf_token %}
+                <div>{% bootstrap_form company_user_form %}</div>
+                <div> {% bootstrap_form company_detail_form %}</div>
+                {% buttons %}
+                <button type="submit" class="btn btn-primary">
+                    Create Account
+                </button>
+                {% endbuttons %}
+            </form>
+        </div>  
+
+    </div>
 {% endblock %}
