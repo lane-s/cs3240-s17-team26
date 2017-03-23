@@ -16,15 +16,15 @@ In the root folder of the project do ```pip install -r requirements.txt```
 
 ### Setting up the database
 
-Run '''python manage.py migrate'''
+Run ```python manage.py migrate```
 
 ### Finally
 
-'''python manage.py runserver'''
+```python manage.py runserver```
 
 ## Managing through the admin interface
 
-Run the command '''python manage.py createsuperuser''' to make yourself a superuser account
+Run the command ```python manage.py createsuperuser``` to make yourself a superuser account
 
 Go to /admin and log in with the superuser account to manage users
 
@@ -32,7 +32,7 @@ Go to /admin and log in with the superuser account to manage users
 
 Create new models or make modifcations to existing models. Then run '''manage.py makemigrations'''
 
-Then use '''manage.py migrate''' to apply the migrations
+Then use ```manage.py migrate``` to apply the migrations
 
 
 
