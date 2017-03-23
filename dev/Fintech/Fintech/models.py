@@ -13,7 +13,6 @@ class UserDetails(models.Model):
         choices=user_types,
         default='I',
     )
-    bio = models.CharField(max_length=30)
 
 class CompanyDetails(models.Model):
     user = models.OneToOneField(User)

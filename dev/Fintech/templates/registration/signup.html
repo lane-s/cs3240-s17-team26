@@ -23,7 +23,7 @@
     });
                       
     </script>
-    <form method="post" class="form" action="/">
+    <form method="post" class="form" action="{% url 'signup' %}">
         {% csrf_token %}
         <div>{% bootstrap_field detail_form.type %}</div>
         <div>{% bootstrap_form user_form %}</div>
