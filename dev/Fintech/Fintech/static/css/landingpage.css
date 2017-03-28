@@ -4,8 +4,8 @@ h1 {
     font-size: 72px;
     background-color: darkgreen;
     color: white;
-    border-bottom: 3px solid white;
-    padding: 3px;
+    border-bottom: 3px solid black;
+    -webkit-text-stroke: 1px black;
 }
 
 h3 {
@@ -21,4 +21,15 @@ h4 {
     text-align: center;
     font-size: 50pt;
 
+}
+
+p1{
+    text-align: center;
+    width: 75%;
+    padding: 5px;
+}
+
+p2{
+    align-content: center;
+    padding: 5px;
 }
