@@ -2,9 +2,34 @@
 {% load bootstrap3 %}
 
 {% block content %}
-<h3> Our platform brings companies and investors together blah blah blah (find better words) <h3>
-<p>
-	<a href="/signup/">Not a member yet? Sign up</a>
-</p>
+    <nav class="navbar navbar-default" id="bar" style="border-bottom: 3px solid black;">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="">Home</a>
+        </div>
 
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <button type="button" class="btn btn-default navbar-btn"><a style="color: black; text-decoration: none;" href="/login/">Login</a></button>
+                <button type="button" class="btn btn-default navbar-btn"><a style="color: black; text-decoration: none;" href="/signup/">Sign up</a></button>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+    <h3> Our platform brings companies and investors together. We prodvide a secure platform for members of the
+        investing community to communicate and share knowledge with one another.
+        <h3>
+
+            <div class="jumbotron" id="signup_jumbo">
+                <style>
+                    #signup_jumbo {
+                        border: 3px solid black;
+                        background-color: silver;
+                    }
+                </style>
+                <h4>Not a User?</h4>
+                <p1>Want to be able to reap the benefits of our platform? </p1>
+                <p></p>
+                <p2><a style="background-color: green;" class="btn btn-primary btn-lg" href="/signup/" role="button">Sign Up</a></p2>
+            </div>
 {% endblock %}

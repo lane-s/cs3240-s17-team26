@@ -2,14 +2,29 @@
 {% load bootstrap3 %}
 
 {% block content %}
-{% if login_form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
-{% endif %}
-	<form method="post" class="form" action="{% url 'login' %}">
-	    {% csrf_token %}
+    <nav class="navbar navbar-default" id="bar" style="border-bottom: 3px solid black;">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="">Home</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    {% if login_form.errors %}
+        <p>Your username and password didn't match. Please try again.</p>
+    {% endif %}
+    <form method="post" class="form" action="{% url 'login' %}">
+        {% csrf_token %}
         {% bootstrap_form form %}
-        <button type="submit" class="btn btn-primary">
-            Login
-        </button>
-	</form>
+
+            <button style="background-color: green;" type="submit" class="btn btn-primary">
+                Login
+            </button>
+
+    </form>
 {% endblock %}

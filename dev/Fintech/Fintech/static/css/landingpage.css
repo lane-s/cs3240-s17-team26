@@ -1,0 +1,42 @@
+h1 {
+    margin: auto;
+    text-align: center;
+    font-size: 72px;
+    background-color: darkgreen;
+    color: white;
+    border-bottom: 3px solid black;
+    -webkit-text-stroke: 1px black;
+}
+
+h3 {
+    margin: auto;
+    margin-bottom: 10px;
+    padding: 5px;
+    width: 75%;
+    text-align: center;
+    font-style: italic;
+}
+
+h4 {
+    text-align: center;
+    font-size: 50pt;
+
+}
+
+p1{
+    text-align: center;
+    width: 75%;
+    padding: 5px;
+}
+
+p2{
+    align-content: center;
+    padding: 5px;
+}
+
+form {
+    margin-left: 2%;
+    width: 40%;
+    padding: 5px;
+
+}
