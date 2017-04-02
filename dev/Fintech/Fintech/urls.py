@@ -27,4 +27,9 @@ urlpatterns = [
     url(r'^login/$',  auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout, name='logout'),
     url(r'^admin/', admin.site.urls, name='admin'),
+    url(r'^groups/$', views.viewGroups, name='groups'),
+    url(r'^groups/new/$', views.createGroup, name='createGroup'),
+    url(r'^groups/(?P<pk>\d+)/leave/$', views.leaveGroup, name='leaveGroup'),
+    url(r'^groups/(?P<pk>\d+)/edit/$', views.editGroup, name='editGroup'),
+    url(r'^groups/(?P<pk>\d+)/$', views.viewGroup, name='viewGroup')
 ]

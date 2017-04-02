@@ -1,6 +1,6 @@
 # importing forms
 from django.forms import ModelForm, Form, CharField, PasswordInput
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from Fintech.models import UserDetails,CompanyDetails
 
 
@@ -18,6 +18,15 @@ class CompanyForm(ModelForm):
         model = CompanyDetails
         fields = ('company_name','company_phone','company_location','company_country')
 
+class GroupForm(ModelForm):
+    class Meta:
+        model = Group
+        fields = ('name',)
+
+class GroupAddUser(Form):
+    username = CharField(label='Username', max_length=50)
+
 class LoginForm(Form):
 	username = CharField(label='Username', max_length=50)
 	password = CharField(label='Password', max_length=50, widget=PasswordInput())
+

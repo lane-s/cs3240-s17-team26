@@ -1,0 +1,24 @@
+{% extends 'index.html' %}
+{% load bootstrap3 %}
+
+{% block content %}
+
+	<p2><a style="background-color: green;" class="btn btn-primary btn-lg" href="/groups/new/" role="button">New Group</a></p2>
+
+	{% if group_list %}
+		{% for g in group_list %}
+			<div class="row">
+				<aside class="col-md-4">
+					<section class="group_info">
+						<h2>
+							<li><a href={% url 'viewGroup' g.pk %} >{{ g.name }}</a></li>
+						</h2>
+					</section>
+				</aside>
+			</div>
+		{% endfor %}
+	{% else %}
+		<h3> You do not belong to any groups. <h3>
+	{% endif %}
+
+{% endblock %}

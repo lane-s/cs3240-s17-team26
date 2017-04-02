@@ -2,16 +2,17 @@
 {% load bootstrap3 %}
 
 {% block content %}
-    {% if login_form.errors %}
-        <p>Your username and password didn't match. Please try again.</p>
-    {% endif %}
-    <form method="post" class="form" action="{% url 'login' %}">
+
+	<h1> {{group.name}} </h1>
+
+	<form method="post" class="form" action="/groups/{{group.pk}}/edit/">
         {% csrf_token %}
         {% bootstrap_form form %}
 
             <button style="background-color: green;" type="submit" class="btn btn-primary">
-                Login
+                Add User
             </button>
 
     </form>
+
 {% endblock %}
