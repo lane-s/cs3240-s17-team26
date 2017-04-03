@@ -14,6 +14,16 @@ from Fintech.models import UserDetails
 def logged_in(request):
     return {'logged_in':request.user.is_authenticated}
 
+def super_user(request):
+    return {'super_user':request.user.is_superuser}
+
+def investor_user(request):
+    if (request.user.is_authenticated and not request.user.is_superuser):
+        isInvestor = True if not CompanyDetails.objects.filter(user=request.user) else False
+        return {'investor_user': isInvestor}
+    else:
+        return {'investor_user': False}
+
 def company_user(request):
     if(request.user.is_authenticated):
         isCompany = True if CompanyDetails.objects.filter(user=request.user) else False

@@ -65,7 +65,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'Fintech.views.logged_in',
-                'Fintech.views.company_user'
+                'Fintech.views.company_user',
+                'Fintech.views.investor_user',
+                'Fintech.views.super_user'
             ],
         },
     },
