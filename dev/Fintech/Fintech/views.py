@@ -120,7 +120,7 @@ def editGroup(request, pk):
             user = User.objects.get(username=username)
             if not user:
                 messages.error(request, "No user with that username exists")
-            elif user.groups.get(pk=pk):
+            elif user.groups.filter(pk=pk):
                 messages.error(request, "User is already in that group")
             else:
                 user.groups.add(group)
