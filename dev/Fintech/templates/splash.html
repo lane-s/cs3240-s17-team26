@@ -20,4 +20,14 @@
                 <p2><a style="background-color: green;" class="btn btn-primary btn-lg" href="/signup/" role="button">Sign Up</a></p2>
             </div>
      {% endif %}
+    {% if logged_in %}
+        {%  if company_user %}
+            <h1 style="background-color: white; border-top: solid 3px black; -webkit-text-stroke: unset; color: black; font-size: x-large; ">
+            Your Reports </h1>
+        {% endif %}
+        {% if not company_user %}
+            <h1 style="background-color: white; border-top: solid 3px black; -webkit-text-stroke: unset; color: black; font-size: x-large; ">
+            All Reports </h1>
+        {% endif %}
+    {% endif %}
 {% endblock %}
