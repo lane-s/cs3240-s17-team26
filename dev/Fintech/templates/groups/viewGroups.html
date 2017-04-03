@@ -3,15 +3,15 @@
 
 {% block content %}
 
-	<p2><a style="background-color: green;" class="btn btn-primary btn-lg" href="/groups/new/" role="button">New Group</a></p2>
+	<p2><a style="margin-left: 1%; background-color: green;" class="btn btn-primary btn-lg" href="/groups/new/" role="button">New Group</a></p2>
 
 	{% if group_list %}
 		{% for g in group_list %}
 			<div class="row">
 				<aside class="col-md-4">
 					<section class="group_info">
-						<h2>
-							<li><a href={% url 'viewGroup' g.pk %} >{{ g.name }}</a></li>
+						<h2 style="margin-left: 5%; font-size: x-large;"> Groups:
+							<li style="text-decoration:underline; margin-left: 15%; color: green; font-size: x-large;"><a style="color: green; font-size: x-large;" href={% url 'viewGroup' g.pk %} >{{ g.name }}</a></li>
 						</h2>
 					</section>
 				</aside>

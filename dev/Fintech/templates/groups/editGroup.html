@@ -3,9 +3,9 @@
 
 {% block content %}
 
-	<h1> {{group.name}} </h1>
+	<h1 style="background-color: silver; color: white; padding: 0; border: solid black 3px; width: 80%;"> {{group.name}} </h1>
 
-	<form method="post" class="form" action="/groups/{{group.pk}}/edit/">
+	<form style="margin-left: 12%; width: 25%;"method="post" class="form" action="/groups/{{group.pk}}/edit/">
         {% csrf_token %}
         {% bootstrap_form form %}
 
