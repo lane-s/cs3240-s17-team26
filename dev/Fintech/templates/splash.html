@@ -4,9 +4,10 @@
 {% block content %}
     <h3> Our platform brings companies and investors together. We prodvide a secure platform for members of the
         investing community to communicate and share knowledge with one another.
-        <h3>
+        {% if user.is_authenticated == False%}
+            <h3>
 
-            <div class="jumbotron" id="signup_jumbo">
+                <div class="jumbotron" id="signup_jumbo">
                 <style>
                     #signup_jumbo {
                         border: 3px solid black;
@@ -18,4 +19,5 @@
                 <p></p>
                 <p2><a style="background-color: green;" class="btn btn-primary btn-lg" href="/signup/" role="button">Sign Up</a></p2>
             </div>
+     {% endif %}
 {% endblock %}
