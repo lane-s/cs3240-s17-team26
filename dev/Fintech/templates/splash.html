@@ -4,7 +4,7 @@
 {% block content %}
     <h3> Our platform brings companies and investors together. We prodvide a secure platform for members of the
         investing community to communicate and share knowledge with one another.
-        {% if user.is_authenticated == False%}
+        {% if not logged_in%}
             <h3>
 
                 <div class="jumbotron" id="signup_jumbo">
