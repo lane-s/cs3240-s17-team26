@@ -15,7 +15,7 @@ def logged_in(request):
     return {'logged_in':request.user.is_authenticated}
 
 def company_user(request):
-    return {'company_user': CompanyDetail.objects.filter(user=request.user)}
+    return {'company_user': CompanyDetails.objects.filter(user=request.user)}
 
 def index(request):
     if not request.user.is_authenticated:
