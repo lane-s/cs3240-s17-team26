@@ -15,15 +15,19 @@ def logged_in(request):
     return {'logged_in':request.user.is_authenticated}
 
 def company_user(request):
-    return {'company_user': CompanyDetails.objects.filter(user=request.user)}
+    if(request.user.is_authenticated):
+        isCompany = True if CompanyDetails.objects.filter(user=request.user) else False
+        return {'company_user': isCompany}
+    else:
+        return {'company_user':False}
 
 def index(request):
     if not request.user.is_authenticated:
         #If not logged in render splash
-        return render(request,'splash.html',{})
+        return render(request,'splash.html')
     else:
         #Otherwise render report view
-        return render(request,'splash.html',{}) 
+        return render(request,'splash.html') 
 
 
 def signupform(request):
