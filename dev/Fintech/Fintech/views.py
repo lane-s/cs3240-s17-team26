@@ -11,15 +11,24 @@ from Fintech.forms import *
 from django.contrib.auth import views as auth_views
 from Fintech.models import UserDetails
 
-def logged_in(request):
-    return {'logged_in':request.user.is_authenticated}
 
-def company_user(request):
-    if(request.user.is_authenticated):
-        isCompany = True if CompanyDetails.objects.filter(user=request.user) else False
-        return {'company_user': isCompany}
+def is_company_user(user):
+    return True if CompanyDetails.objects.filter(user=request.user) else False
+
+
+def is_site_manager(user):
+    return True if user.groups.filter(name="Site Managers")
+
+def user_context_processor(request):
+    if request.user.is_authenticated:
+        logged_in = True
+        company_user = is_company_user(request.user)
+        site_manager = is_site_manager(request.user)
+
+        return {'logged_in':logged_in,'company_user':company_user,'site_manager':site_manager}
     else:
-        return {'company_user':False}
+        return {'logged_in':False,'company_user':False,'site_manager':False}
+
 
 def index(request):
     if not request.user.is_authenticated:
@@ -81,7 +90,10 @@ def createGroup(request):
 
 @login_required
 def viewGroups(request):
-    group_list = request.user.groups.all()
+    if is_site_manager(request.user):
+        group_list = Groups.objects.all()
+    else:
+        group_list = request.user.groups.all()
 
     return render(request, 'groups/viewGroups.html',{'group_list':group_list})
 
@@ -90,6 +102,9 @@ def viewGroup(request, pk):
 
     group = get_object_or_404(Group, pk=pk)
     user_list = User.objects.filter(groups__pk=pk)
+
+    if request.user not in user_list:
+        return redirect('groups')
 
     return render(request, 'groups/viewGroup.html',{'group':group, 'user_list':user_list})
 
@@ -112,9 +127,12 @@ def leaveGroup(request, pk):
 
 @login_required
 def editGroup(request, pk):
-
     group = get_object_or_404(Group, pk=pk)
     user_list = User.objects.filter(groups__pk=pk)
+
+    #Make sure only users in the group can add users
+    if request.user not in user_list:
+        return redirect('groups')
 
     if request.method == 'POST':
         add_user_form = GroupAddUser(request.POST, prefix="add_user_form")
