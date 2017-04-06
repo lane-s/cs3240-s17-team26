@@ -13,11 +13,11 @@ from Fintech.models import UserDetails
 
 
 def is_company_user(user):
-    return True if CompanyDetails.objects.filter(user=request.user) else False
+    return True if CompanyDetails.objects.filter(user=user) else False
 
 
 def is_site_manager(user):
-    return True if user.groups.filter(name="Site Managers")
+    return True if user.groups.filter(name="Site Managers") else False
 
 def user_context_processor(request):
     if request.user.is_authenticated:
@@ -90,12 +90,15 @@ def createGroup(request):
 
 @login_required
 def viewGroups(request):
+    site_manager_group = None
+
     if is_site_manager(request.user):
-        group_list = Groups.objects.all()
+        site_manager_group = get_object_or_404(Group, name="Site Managers")
+        group_list = Group.objects.all().exclude(name="Site Managers")
     else:
         group_list = request.user.groups.all()
 
-    return render(request, 'groups/viewGroups.html',{'group_list':group_list})
+    return render(request, 'groups/viewGroups.html',{'group_list':group_list,'site_manager_group':site_manager_group})
 
 @login_required
 def viewGroup(request, pk):
@@ -103,25 +106,47 @@ def viewGroup(request, pk):
     group = get_object_or_404(Group, pk=pk)
     user_list = User.objects.filter(groups__pk=pk)
 
-    if request.user not in user_list:
+    in_group = request.user in user_list
+
+    if not in_group and not is_site_manager(request.user):
         return redirect('groups')
 
-    return render(request, 'groups/viewGroup.html',{'group':group, 'user_list':user_list})
+    return render(request, 'groups/viewGroup.html',{'group':group, 'user_list':user_list, 'user_id':request.user.pk, 'in_group':in_group})
 
 @login_required
-def leaveGroup(request, pk):
+def leaveGroup(request, pk, user_id):
 
     group = get_object_or_404(Group, pk=pk)
-    request.user.groups.remove(group)
 
-    #Delete empty groups
-    user_list = User.objects.filter(groups__pk=pk)
+    if group.name != "Site Managers":
+        user = get_object_or_404(User, pk=user_id)
 
-    if not user_list:
+        user.groups.remove(group)
+
+        #Delete empty groups
+        user_list = User.objects.filter(groups__pk=pk)
+
+        if not user_list:
+            group.delete()
+            if request.user.pk == user_id:
+                messages.success(request, "You were the last user, so the group has been deleted")
+            else:
+                messages.success(request, "You removed the last user, so the group has been deleted")
+        else:
+            if request.user.pk == user.id:
+                messages.success(request, "You left the group")
+            else:
+                messages.success(request, "User removed from group")
+                return redirect('viewGroup', pk=group.pk)
+
+    return redirect('groups')
+
+@login_required
+def deleteGroup(request, pk):
+    group = get_object_or_404(Group, pk=pk)
+
+    if is_site_manager(request.user) and group.name != "Site Managers":
         group.delete()
-        messages.success(request, "You were the last user, so the group has been deleted")
-    else:
-        messages.success(request, "You left the group")
 
     return redirect('groups')
 
@@ -131,7 +156,7 @@ def editGroup(request, pk):
     user_list = User.objects.filter(groups__pk=pk)
 
     #Make sure only users in the group can add users
-    if request.user not in user_list:
+    if request.user not in user_list and not is_site_manager(request.user):
         return redirect('groups')
 
     if request.method == 'POST':

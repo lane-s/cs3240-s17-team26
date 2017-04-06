@@ -29,7 +29,8 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls, name='admin'),
     url(r'^groups/$', views.viewGroups, name='groups'),
     url(r'^groups/new/$', views.createGroup, name='createGroup'),
-    url(r'^groups/(?P<pk>\d+)/leave/$', views.leaveGroup, name='leaveGroup'),
+    url(r'^groups/(?P<pk>\d+)/leave/(?P<user_id>\d+)$', views.leaveGroup, name='leaveGroup'),
     url(r'^groups/(?P<pk>\d+)/edit/$', views.editGroup, name='editGroup'),
+    url(r'^groups/(?P<pk>\d+)/delete/$', views.deleteGroup, name='deleteGroup'),
     url(r'^groups/(?P<pk>\d+)/$', views.viewGroup, name='viewGroup')
 ]
