@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 import os
 from django.core.urlresolvers import reverse
+from django.contrib.messages import constants as messages
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -50,6 +51,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger'
+}
+
 ROOT_URLCONF = 'Fintech.urls'
 
 TEMPLATES = [
@@ -64,10 +69,14 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+<<<<<<< HEAD
                 'Fintech.views.logged_in',
                 'Fintech.views.company_user',
                 'Fintech.views.investor_user',
                 'Fintech.views.super_user'
+=======
+                'Fintech.views.user_context_processor',
+>>>>>>> origin/master
             ],
         },
     },

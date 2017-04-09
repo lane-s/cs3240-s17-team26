@@ -12,8 +12,14 @@
 				<section class="user_info">
 					<h2>
 						<li style="margin-left: 42%; color: green; font-size: large;">
-							<p2 style="color: black; font-size: large;">{{ u.username }}</p2>
+							<p2 style="color: black; font-size: large;">
+								{{ u.username }}
+								{% if site_manager and group.name != "Site Managers" and u.pk != user_id %}
+									<span><a style="display: inline; color: red" class="glyphicon glyphicon-remove" href="{% url 'leaveGroup' group.pk u.pk %}" role="button"></a></span>
+								{% endif %}
+							</p2>
 						</li>
+
 					</h2>
 				</section>
 			</aside>
@@ -22,6 +28,12 @@
 
 	<p2><a style="margin-left: 12%; margin-top: 5%; background-color: green;" class="btn btn-primary btn-lg" href="{% url 'editGroup' group.pk %}" role="button">Add Users</a></p2>
 
-	<p2><a style="margin-top: 5%; background-color: green;" class="btn btn-primary btn-lg" href="{% url 'leaveGroup' group.pk %}" role="button">Leave Group</a></p2>
+	{% if in_group %}
+		<p2><a style="margin-top: 5%; background-color: green;" class="btn btn-primary btn-lg" href="{% url 'leaveGroup' group.pk user_id %}" role="button">Leave Group</a></p2>
+	{% endif %}
+
+	{% if site_manager and group.name != "Site Managers" %}
+		<p2><a style="margin-top: 5%; background-color: red;" class="btn btn-primary btn-lg" href="{% url 'deleteGroup' group.pk%}" role="button">Delete Group</a></p2>
+	{% endif %}
 
 {% endblock %}

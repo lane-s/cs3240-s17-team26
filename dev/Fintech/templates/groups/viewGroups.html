@@ -5,6 +5,18 @@
 
 	<p2><a style="margin-left: 1%; background-color: green;" class="btn btn-primary btn-lg" href="/groups/new/" role="button">New Group</a></p2>
 
+	{% if site_manager_group %}
+		<div class="row">
+			<aside class="col-md-4">
+				<section class="group_info">
+					<h2 style="margin-left: 5%; font-size: x-large;">
+						<li style="text-decoration:underline; margin-left: 15%; color: black; font-size: x-large;"><a style="color: black; font-size: x-large;" href={% url 'viewGroup' site_manager_group.pk %} >{{ site_manager_group.name }}</a></li>
+					</h2>
+				</section>
+			</aside>
+		</div>
+	{% endif %}
+
 	{% if group_list %}
 		{% for g in group_list %}
 			<div class="row">
