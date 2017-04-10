@@ -208,8 +208,10 @@ def editGroup(request, pk):
 @login_required
 @request_passes_test(suspended_test,login_url='/',redirect_field_name=None)
 def createReport(request):
+
     company_user = CompanyDetails.objects.filter(user=request.user)
-    if company_user:
+
+    if company_user or is_site_manager(request.user):
         if request.method == 'POST':
             report_form = ReportForm(request.POST, prefix="report_form")
             if report_form.is_valid():
@@ -230,7 +232,7 @@ def createReport(request):
 @login_required
 @request_passes_test(suspended_test,login_url='/',redirect_field_name=None)
 def uploadFile(request):
-    if 
+    
     if request.method == 'POST':
         file_form = FileForm(request.Post, prefix="")
         file_form.save(commit="false")
@@ -245,13 +247,21 @@ def uploadFile(request):
 def viewReport(request, pk):
     report = get_object_or_404(Report, pk=pk)
 
-    return render(request, 'reports/viewReport.html', {'report': report})
+    if not report.is_private or report.owner is request.user or is_site_manager(request.user):
+        #checks if user is in report group or is a collaborator
+        return render(request, 'reports/viewReport.html', {'report': report})
+    else:
+        return redirect('index')
 
 @login_required
 @request_passes_test(suspended_test,login_url='/',redirect_field_name=None)
 def editReport(request, pk):
     report = get_object_or_404(Report,pk=pk)
     report_form = ReportForm(instance=report)
+
+    if report.owner is not request.user and not is_site_manager(request.user):
+        return redirect('index')
+
     if request.method == 'POST':
         report_form = ReportForm(request.POST, instance=report)
         if report_form.is_valid():
