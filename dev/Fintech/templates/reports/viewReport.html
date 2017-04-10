@@ -1,0 +1,19 @@
+{% extends 'index.html' %}
+{% load bootstrap3 %}
+
+{% block content %}
+
+	<h1> {{report.title}} </h1>
+        <h2><p2><b>Report Date: </b>{{ report.timestamp }}</p2></h2>
+        <h2><p2><b>Company Name: </b>{{ report.company_name }}</p2></h2>
+        <h2><p2><b>Company CEO: </b>{{ report.company_ceo }}</p2></h2>
+        <h2><p2><b>Company Phone: </b>{{ report.company_phone }}</p2></h2>
+        <h2><p2><b>Company Location: </b>{{ report.company_location }}</p2></h2>
+        <h2><p2><b>Company Country: </b>{{ report.company_country }}</p2></h2>
+        <h2><p2><b>Sector: </b>{{ report.sector }}</p2></h2>
+        <h2><p2><b>Industry: </b>{{ report.industry }}</p2></h2>
+        <h2><p2><b>Current Projects: </b>{{ report.current_projects}}</p2></h2>
+
+	<p2><a style="background-color: green;" class="btn btn-primary btn-lg" href="{% url 'editReport' report.pk %}" role="button">Edit Report</a></p2>
+
+{% endblock %}

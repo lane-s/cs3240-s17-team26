@@ -10,7 +10,7 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect, HttpResponse
 from Fintech.forms import *
 from django.contrib.auth import views as auth_views
-from Fintech.models import UserDetails
+from Fintech.models import UserDetails, CompanyDetails, Report, File
 
 
 def super_user(request):
@@ -49,7 +49,8 @@ def index(request):
         return render(request,'splash.html')
     else:
         #Otherwise render report view
-        return render(request,'splash.html') 
+        report_list = Report.objects.all()
+        return render(request, 'splash.html', {'report_list': report_list})
 
 
 def signupform(request):
@@ -204,5 +205,56 @@ def editGroup(request, pk):
     return render(request, 'groups/editGroup.html',{'group':group, 'form':add_user_form})
 
 
+def createReport(request):
+    company_user = CompanyDetails.objects.filter(user=request.user)
+    if company_user:
+        if request.method == 'POST':
+            report_form = ReportForm(request.POST, prefix="report_form")
+            if report_form.is_valid():
+                report = report_form.save(commit=False)
+                report.owner = request.user
+                report.save()
+                #if report.has_attachments == True:
+                    #upload multiples files
+                messages.success(request, "Report created")
+                return redirect('index')
+        else:
+            report_form = ReportForm(prefix="report_form")
+        return render(request, 'reports/createReport.html', {'report_form': report_form})
+
+    else:
+        return redirect('index')
+
+
+def uploadFile(request):
+    if request.method == 'POST':
+        file_form = FileForm(request.Post, prefix="")
+        file_form.save(commit="false")
+        messages.success(request, "File uploaded to report")
+        return redirect('reports')
+    else:
+        file_form = FileForm(prefix="file_form")
+    return render(request, 'reports/uploadFiles.html',{'file_form': file_form})
+
+
+def viewReport(request, pk):
+    report = get_object_or_404(Report, pk=pk)
+
+    return render(request, 'reports/viewReport.html', {'report': report})
+
+
+def editReport(request, pk):
+    report = get_object_or_404(Report,pk=pk)
+    report_form = ReportForm(instance=report)
+    if request.method == 'POST':
+        report_form = ReportForm(request.POST, instance=report)
+        if report_form.is_valid():
+            report_form.save()
+            messages.success(request, "Report edited")
+            return redirect('index')
+    else:
+        report_form = ReportForm(instance=report)
+
+    return render(request, 'reports/editReport.html',{'report_form': report_form})
 
 
