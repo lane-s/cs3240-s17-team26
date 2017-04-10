@@ -188,7 +188,7 @@ def editGroup(request, pk):
 
         if add_user_form.is_valid():
             username = add_user_form.cleaned_data['username'];
-            user = User.objects.get(username=username)
+            user = User.objects.filter(username=username)
             if not user:
                 messages.error(request, "No user with that username exists")
             elif user.groups.filter(pk=pk):
