@@ -4,10 +4,10 @@
 {% block content %}
     <h3> Our platform brings companies and investors together. We prodvide a secure platform for members of the
         investing community to communicate and share knowledge with one another.
-        {% if not logged_in %}
-            <h3>
-
-                <div class="jumbotron" id="signup_jumbo">
+    </h3>
+    {% if not logged_in %}
+        <h3>
+            <div class="jumbotron" id="signup_jumbo">
                 <style>
                     #signup_jumbo {
                         border: 3px solid black;
@@ -15,19 +15,21 @@
                     }
                 </style>
                 <h4>Not a User?</h4>
-                <p1>Want to be able to reap the benefits of our platform? </p1>
+                <p1>Want to be able to reap the benefits of our platform?</p1>
                 <p></p>
-                <p2><a style="background-color: green;" class="btn btn-primary btn-lg" href="/signup/" role="button">Sign Up</a></p2>
+                <p2><a style="background-color: green;" class="btn btn-primary btn-lg" href="/signup/" role="button">Sign
+                    Up</a></p2>
             </div>
-     {% endif %}
+        </h3>
+    {% endif %}
     {% if logged_in %}
-        {%  if company_user %}
-            <h1 style="background-color: white; border-top: solid 3px black; -webkit-text-stroke: unset; color: black; font-size: x-large; ">
-            Your Reports </h1>
+        {% if company_user %}
+            <h1 style="background-color: white; border-top: solid 3px black; -webkit-text-stroke: unset; color: black; font-size: 35pt; ">
+                Your Reports </h1>
         {% endif %}
-        {% if not company_user %}
-            <h1 style="background-color: white; border-top: solid 3px black; -webkit-text-stroke: unset; color: black; font-size: x-large; ">
-            All Reports </h1>
+        {% if investor_user %}
+            <h1 style="background-color: white; border-top: solid 3px black; -webkit-text-stroke: unset; color: black; font-size: 35pt; ">
+                All Reports </h1>
         {% endif %}
     {% endif %}
 {% endblock %}

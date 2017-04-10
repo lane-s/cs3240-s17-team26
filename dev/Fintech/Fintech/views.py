@@ -12,20 +12,21 @@ from django.contrib.auth import views as auth_views
 from Fintech.models import UserDetails
 
 
+def super_user(request):
+    return {'super_user':request.user.is_superuser}
+
 def is_company_user(user):
     return True if CompanyDetails.objects.filter(user=user) else False
-
 
 def is_site_manager(user):
     return True if user.groups.filter(name="Site Managers") else False
 
 def user_context_processor(request):
     if request.user.is_authenticated:
-        logged_in = True
         company_user = is_company_user(request.user)
         site_manager = is_site_manager(request.user)
 
-        return {'logged_in':logged_in,'company_user':company_user,'site_manager':site_manager}
+        return {'logged_in':True,'company_user':company_user,'site_manager':site_manager}
     else:
         return {'logged_in':False,'company_user':False,'site_manager':False}
 
