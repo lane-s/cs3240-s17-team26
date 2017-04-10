@@ -205,7 +205,8 @@ def editGroup(request, pk):
 
     return render(request, 'groups/editGroup.html',{'group':group, 'form':add_user_form})
 
-
+@login_required
+@request_passes_test(suspended_test,login_url='/',redirect_field_name=None)
 def createReport(request):
     company_user = CompanyDetails.objects.filter(user=request.user)
     if company_user:
@@ -226,7 +227,8 @@ def createReport(request):
     else:
         return redirect('index')
 
-
+@login_required
+@request_passes_test(suspended_test,login_url='/',redirect_field_name=None)
 def uploadFile(request):
     if request.method == 'POST':
         file_form = FileForm(request.Post, prefix="")
@@ -237,13 +239,15 @@ def uploadFile(request):
         file_form = FileForm(prefix="file_form")
     return render(request, 'reports/uploadFiles.html',{'file_form': file_form})
 
-
+@login_required
+@request_passes_test(suspended_test,login_url='/',redirect_field_name=None)
 def viewReport(request, pk):
     report = get_object_or_404(Report, pk=pk)
 
     return render(request, 'reports/viewReport.html', {'report': report})
 
-
+@login_required
+@request_passes_test(suspended_test,login_url='/',redirect_field_name=None)
 def editReport(request, pk):
     report = get_object_or_404(Report,pk=pk)
     report_form = ReportForm(instance=report)
