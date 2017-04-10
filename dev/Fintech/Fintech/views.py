@@ -188,7 +188,7 @@ def editGroup(request, pk):
 
         if add_user_form.is_valid():
             username = add_user_form.cleaned_data['username'];
-            user = User.objects.get(username=username)
+            user = User.objects.filter(username=username)
             if not user:
                 messages.error(request, "No user with that username exists")
             elif user.groups.filter(pk=pk):
@@ -196,7 +196,7 @@ def editGroup(request, pk):
             elif is_site_manager(user) and group.name == "Suspended Users":
                 messages.error(request, "Site Managers cannot be suspended")
             else:
-                user.groups.add(group)
+                user[0].groups.add(group)
                 messages.success(request, "User added to group")
 
     else:
@@ -230,6 +230,7 @@ def createReport(request):
 @login_required
 @request_passes_test(suspended_test,login_url='/',redirect_field_name=None)
 def uploadFile(request):
+    if 
     if request.method == 'POST':
         file_form = FileForm(request.Post, prefix="")
         file_form.save(commit="false")
