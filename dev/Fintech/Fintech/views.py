@@ -191,9 +191,9 @@ def editGroup(request, pk):
             user = User.objects.filter(username=username)
             if not user:
                 messages.error(request, "No user with that username exists")
-            elif user.groups.filter(pk=pk):
+            elif user[0].groups.filter(pk=pk):
                 messages.error(request, "User is already in that group")
-            elif is_site_manager(user) and group.name == "Suspended Users":
+            elif is_site_manager(user[0]) and group.name == "Suspended Users":
                 messages.error(request, "Site Managers cannot be suspended")
             else:
                 user[0].groups.add(group)
