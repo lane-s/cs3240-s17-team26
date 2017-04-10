@@ -188,7 +188,7 @@ def editGroup(request, pk):
 
         if add_user_form.is_valid():
             username = add_user_form.cleaned_data['username'];
-            user = User.objects.get(username=username)
+            user = User.objects.filter(username=username)
             if not user:
                 messages.error(request, "No user with that username exists")
             elif user.groups.filter(pk=pk):
@@ -196,7 +196,7 @@ def editGroup(request, pk):
             elif is_site_manager(user) and group.name == "Suspended Users":
                 messages.error(request, "Site Managers cannot be suspended")
             else:
-                user.groups.add(group)
+                user[0].groups.add(group)
                 messages.success(request, "User added to group")
 
     else:
@@ -205,7 +205,8 @@ def editGroup(request, pk):
 
     return render(request, 'groups/editGroup.html',{'group':group, 'form':add_user_form})
 
-
+@login_required
+@request_passes_test(suspended_test,login_url='/',redirect_field_name=None)
 def createReport(request):
     company_user = CompanyDetails.objects.filter(user=request.user)
     if company_user:
@@ -226,8 +227,10 @@ def createReport(request):
     else:
         return redirect('index')
 
-
+@login_required
+@request_passes_test(suspended_test,login_url='/',redirect_field_name=None)
 def uploadFile(request):
+    if 
     if request.method == 'POST':
         file_form = FileForm(request.Post, prefix="")
         file_form.save(commit="false")
@@ -237,13 +240,15 @@ def uploadFile(request):
         file_form = FileForm(prefix="file_form")
     return render(request, 'reports/uploadFiles.html',{'file_form': file_form})
 
-
+@login_required
+@request_passes_test(suspended_test,login_url='/',redirect_field_name=None)
 def viewReport(request, pk):
     report = get_object_or_404(Report, pk=pk)
 
     return render(request, 'reports/viewReport.html', {'report': report})
 
-
+@login_required
+@request_passes_test(suspended_test,login_url='/',redirect_field_name=None)
 def editReport(request, pk):
     report = get_object_or_404(Report,pk=pk)
     report_form = ReportForm(instance=report)
