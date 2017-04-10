@@ -17,6 +17,18 @@
 		</div>
 	{% endif %}
 
+	{% if suspended_user_group %}
+		<div class="row">
+			<aside class="col-md-4">
+				<section class="group_info">
+					<h2 style="margin-left: 5%; font-size: x-large;">
+						<li style="text-decoration:underline; margin-left: 15%; color: red; font-size: x-large;"><a style="color: red; font-size: x-large;" href={% url 'viewGroup' suspended_user_group.pk %} >{{ suspended_user_group.name }}</a></li>
+					</h2>
+				</section>
+			</aside>
+		</div>
+	{% endif %}
+
 	{% if group_list %}
 		{% for g in group_list %}
 			<div class="row">

@@ -4,6 +4,7 @@ from django.core.urlresolvers import reverse
 
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from Fintech.decorators import request_passes_test
 
 from django.contrib import messages
 from django.http import HttpResponseRedirect, HttpResponse
@@ -21,14 +22,25 @@ def is_company_user(user):
 def is_site_manager(user):
     return True if user.groups.filter(name="Site Managers") else False
 
+def is_suspended(user):
+    return True if user.groups.filter(name="Suspended Users") else False
+
+def suspended_test(request):
+    passes = not is_suspended(request.user);
+    if not passes:
+        messages.error(request,"Your account has been suspended. Please contact a Site Manager")
+    return passes;
+
+
 def user_context_processor(request):
     if request.user.is_authenticated:
         company_user = is_company_user(request.user)
         site_manager = is_site_manager(request.user)
+        suspended_user = is_suspended(request.user)
 
-        return {'logged_in':True,'company_user':company_user,'site_manager':site_manager}
+        return {'logged_in':True,'company_user':company_user,'site_manager':site_manager,'suspended_user':suspended_user}
     else:
-        return {'logged_in':False,'company_user':False,'site_manager':False}
+        return {'logged_in':False,'company_user':False,'site_manager':False,'suspended_user':False}
 
 
 def index(request):
@@ -71,6 +83,7 @@ def signupform(request):
 
 
 @login_required
+@request_passes_test(suspended_test,login_url='/',redirect_field_name=None)
 def createGroup(request):
 
     if request.method == 'POST':
@@ -90,18 +103,22 @@ def createGroup(request):
     return render(request, 'groups/createGroup.html', {'group_form':group_form})
 
 @login_required
+@request_passes_test(suspended_test,login_url='/',redirect_field_name=None)
 def viewGroups(request):
+
     site_manager_group = None
 
     if is_site_manager(request.user):
         site_manager_group = get_object_or_404(Group, name="Site Managers")
-        group_list = Group.objects.all().exclude(name="Site Managers")
+        suspended_user_group = get_object_or_404(Group, name="Suspended Users")
+        group_list = Group.objects.all().exclude(name="Site Managers").exclude(name="Suspended Users")
     else:
         group_list = request.user.groups.all()
 
-    return render(request, 'groups/viewGroups.html',{'group_list':group_list,'site_manager_group':site_manager_group})
+    return render(request, 'groups/viewGroups.html',{'group_list':group_list,'site_manager_group':site_manager_group,'suspended_user_group':suspended_user_group})
 
 @login_required
+@request_passes_test(suspended_test,login_url='/',redirect_field_name=None)
 def viewGroup(request, pk):
 
     group = get_object_or_404(Group, pk=pk)
@@ -115,6 +132,7 @@ def viewGroup(request, pk):
     return render(request, 'groups/viewGroup.html',{'group':group, 'user_list':user_list, 'user_id':request.user.pk, 'in_group':in_group})
 
 @login_required
+@request_passes_test(suspended_test,login_url='/',redirect_field_name=None)
 def leaveGroup(request, pk, user_id):
 
     group = get_object_or_404(Group, pk=pk)
@@ -127,7 +145,7 @@ def leaveGroup(request, pk, user_id):
         #Delete empty groups
         user_list = User.objects.filter(groups__pk=pk)
 
-        if not user_list:
+        if not user_list and group.name != "Suspended Users":
             group.delete()
             if request.user.pk == user_id:
                 messages.success(request, "You were the last user, so the group has been deleted")
@@ -144,6 +162,7 @@ def leaveGroup(request, pk, user_id):
 
 @login_required
 def deleteGroup(request, pk):
+
     group = get_object_or_404(Group, pk=pk)
 
     if is_site_manager(request.user) and group.name != "Site Managers":
@@ -152,7 +171,9 @@ def deleteGroup(request, pk):
     return redirect('groups')
 
 @login_required
+@request_passes_test(suspended_test,login_url='/',redirect_field_name=None)
 def editGroup(request, pk):
+
     group = get_object_or_404(Group, pk=pk)
     user_list = User.objects.filter(groups__pk=pk)
 
@@ -170,6 +191,8 @@ def editGroup(request, pk):
                 messages.error(request, "No user with that username exists")
             elif user.groups.filter(pk=pk):
                 messages.error(request, "User is already in that group")
+            elif is_site_manager(user) and group.name == "Suspended Users":
+                messages.error(request, "Site Managers cannot be suspended")
             else:
                 user.groups.add(group)
                 messages.success(request, "User added to group")
