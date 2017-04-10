@@ -18,9 +18,13 @@ In the root folder of the project do ```pip install -r requirements.txt```
 
 Run ```python manage.py migrate```
 
-### Finally
+Run ```python manage.py loaddata initialdata.json``` to seed the database
 
-```python manage.py runserver```
+To reset the database, delete the db.sqlite3 file and then rerun these commands.
+
+### Run the app
+
+Use ```python manage.py runserver```
 
 ## Managing through the admin interface
 
@@ -30,9 +34,14 @@ Go to /admin and log in with the superuser account to manage users
 
 ## Creating new models, modifying models
 
-Create new models or make modifcations to existing models. Then run '''manage.py makemigrations'''
+Create new models or make modifcations to existing models. Then run '''python manage.py makemigrations'''
 
-Then use ```manage.py migrate``` to apply the migrations
+Use ```python manage.py migrate``` to apply the migrations
+
+
+
+
+
 
 
 
