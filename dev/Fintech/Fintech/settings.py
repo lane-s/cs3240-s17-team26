@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap3',
-    'Fintech'
+    'Fintech', 
+    'django_countries'
 ]
 
 MIDDLEWARE = [
