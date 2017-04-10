@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django_countries.fields import CountryField
 
 class UserDetails(models.Model):
     user = models.OneToOneField(User)
@@ -22,7 +23,7 @@ class CompanyDetails(models.Model):
     company_name = models.CharField(max_length=30)
     company_phone = models.CharField(max_length=30)
     company_location = models.CharField(max_length=30)
-    company_country = models.CharField(max_length=30)#Look at django countries for choices
+    company_country = CountryField(blank_label='(Select Country)')#Look at django countries for choices
 
 
 class Report(models.Model):
