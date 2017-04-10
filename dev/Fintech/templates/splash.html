@@ -45,10 +45,24 @@
 		    <h3> There are no reports to view. <h3>
 	    {% endif %}
 
-        {% endif %}
-        {% if investor_user %}
+        {% else %}
             <h1 style="background-color: white; border-top: solid 3px black; -webkit-text-stroke: unset; color: black; font-size: 35pt; ">
                 All Reports </h1>
+            {% if report_list %}
+                {% for r in report_list %}
+                    <div class="row">
+                        <aside class="col-md-4">
+                            <section class="report_info">
+                                <h2>
+                                    <li><a href={% url 'viewReport' r.pk %} >{{ r.title }}</a></li>
+                                </h2>
+                            </section>
+                        </aside>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <h3> There are no reports to view. <h3>
+            {% endif %}
         {% endif %}
     {% endif %}
 {% endblock %}

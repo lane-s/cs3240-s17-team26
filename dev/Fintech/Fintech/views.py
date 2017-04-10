@@ -44,12 +44,16 @@ def user_context_processor(request):
 
 
 def index(request):
-    if not request.user.is_authenticated:
+    if not request.user.is_authenticated or is_suspended(request.user):
         #If not logged in render splash
         return render(request,'splash.html')
     else:
         #Otherwise render report view
-        report_list = Report.objects.all()
+        if is_company_user(request.user):
+            report_list = Report.objects.filter(owner=request.user)
+        else:
+            report_list = Report.objects.all()
+
         return render(request, 'splash.html', {'report_list': report_list})
 
 
@@ -247,7 +251,7 @@ def uploadFile(request):
 def viewReport(request, pk):
     report = get_object_or_404(Report, pk=pk)
 
-    if not report.is_private or report.owner is request.user or is_site_manager(request.user):
+    if not report.is_private or report.owner.pk == request.user.pk or is_site_manager(request.user):
         #checks if user is in report group or is a collaborator
         return render(request, 'reports/viewReport.html', {'report': report})
     else:
@@ -259,7 +263,7 @@ def editReport(request, pk):
     report = get_object_or_404(Report,pk=pk)
     report_form = ReportForm(instance=report)
 
-    if report.owner is not request.user and not is_site_manager(request.user):
+    if report.owner.pk != request.user.pk and not is_site_manager(request.user):
         return redirect('index')
 
     if request.method == 'POST':
