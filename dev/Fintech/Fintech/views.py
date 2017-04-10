@@ -108,6 +108,7 @@ def createGroup(request):
 def viewGroups(request):
 
     site_manager_group = None
+    suspended_user_group = None
 
     if is_site_manager(request.user):
         site_manager_group = get_object_or_404(Group, name="Site Managers")
