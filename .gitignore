@@ -99,5 +99,4 @@ ENV/
 .DS_Store
 
 #Database
-.sqlite3
-.sqlite3
+*.sqlite3
