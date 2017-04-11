@@ -258,7 +258,6 @@ def uploadFile(request):
 @request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
 def viewReport(request, pk):
     report = get_object_or_404(Report, pk=pk)
-
     if not report.is_private or report.owner.pk == request.user.pk or is_site_manager(request.user):
         # checks if user is in report group or is a collaborator
         return render(request, 'reports/viewReport.html', {'report': report})
