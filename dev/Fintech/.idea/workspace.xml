@@ -35,7 +35,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="492">
@@ -44,6 +44,26 @@
                 <element signature="n#style#0;n#nav#0;n#body#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#button#0;n#div#1;n#div#0;n#nav#0;n#body#0;n#!!top" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="viewReport.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/reports/viewReport.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="125">
+              <caret line="5" column="41" lean-forward="false" selection-start-line="5" selection-start-column="41" selection-end-line="5" selection-end-column="41" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="viewGroup.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/groups/viewGroup.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="125">
+              <caret line="5" column="67" lean-forward="false" selection-start-line="5" selection-start-column="67" selection-end-line="5" selection-end-column="67" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -60,17 +80,17 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/templates/groups/viewGroups.html" />
-        <option value="$PROJECT_DIR$/templates/groups/viewGroup.html" />
         <option value="$PROJECT_DIR$/Fintech/forms.py" />
         <option value="$PROJECT_DIR$/Fintech/models.py" />
         <option value="$PROJECT_DIR$/templates/registration/signup.html" />
         <option value="$PROJECT_DIR$/Fintech/views.py" />
         <option value="$PROJECT_DIR$/Fintech/settings.py" />
         <option value="$PROJECT_DIR$/templates/groups/editGroup.html" />
-        <option value="$PROJECT_DIR$/templates/reports/viewReport.html" />
         <option value="$PROJECT_DIR$/Fintech/static/css/landingpage.css" />
         <option value="$PROJECT_DIR$/templates/splash.html" />
         <option value="$PROJECT_DIR$/templates/index.html" />
+        <option value="$PROJECT_DIR$/templates/groups/viewGroup.html" />
+        <option value="$PROJECT_DIR$/templates/reports/viewReport.html" />
       </list>
     </option>
   </component>
@@ -545,20 +565,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/templates/groups/viewGroup.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="5" column="104" lean-forward="false" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="104" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/groups/createGroup.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/registration/login.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
@@ -570,6 +576,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -685,7 +692,7 @@
         <state relative-caret-position="125">
           <caret line="5" column="104" lean-forward="false" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="104" />
           <folding>
-            <element signature="e#76#172#0#HTML" expanded="false" />
+            <element signature="e#76#175#0#HTML" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -776,7 +783,7 @@
         <state relative-caret-position="125">
           <caret line="5" column="104" lean-forward="false" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="104" />
           <folding>
-            <element signature="e#76#172#0#HTML" expanded="false" />
+            <element signature="e#76#175#0#HTML" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -854,16 +861,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/groups/viewGroup.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="5" column="104" lean-forward="false" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="104" />
-          <folding>
-            <element signature="e#76#172#0#HTML" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/groups/createGroup.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -905,13 +902,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/groups/viewGroups.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="19" column="13" lean-forward="false" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -950,25 +940,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/reports/viewReport.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="5" column="75" lean-forward="false" selection-start-line="5" selection-start-column="75" selection-end-line="5" selection-end-column="75" />
-          <folding>
-            <element signature="e#182#206#0#HTML" expanded="true" />
-            <element signature="e#276#300#0#HTML" expanded="true" />
-            <element signature="e#374#397#0#HTML" expanded="true" />
-            <element signature="e#470#493#0#HTML" expanded="true" />
-            <element signature="e#569#592#0#HTML" expanded="true" />
-            <element signature="e#674#697#0#HTML" expanded="true" />
-            <element signature="e#777#800#0#HTML" expanded="true" />
-            <element signature="e#862#885#0#HTML" expanded="true" />
-            <element signature="e#951#974#0#HTML" expanded="true" />
-            <element signature="e#1052#1116#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Fintech/static/css/main.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1003,6 +974,46 @@
             <element signature="n#style#0;n#nav#0;n#body#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#button#0;n#div#1;n#div#0;n#nav#0;n#body#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/reports/editReport.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/reports/createReport.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="7" column="21" lean-forward="true" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/groups/viewGroups.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="19" column="13" lean-forward="false" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/groups/viewGroup.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="5" column="67" lean-forward="false" selection-start-line="5" selection-start-column="67" selection-end-line="5" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/reports/viewReport.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="5" column="41" lean-forward="false" selection-start-line="5" selection-start-column="41" selection-end-line="5" selection-end-column="41" />
+          <folding />
         </state>
       </provider>
     </entry>
