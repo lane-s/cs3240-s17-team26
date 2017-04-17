@@ -12,5 +12,25 @@
     "fields":{
       "name": "Suspended Users"
     }
+  },
+  {
+      "model": "auth.user",
+      "pk": 1,
+      "fields": {
+          "password": "pbkdf2_sha256$30000$2PWkDkzCt11W$zG2tWULqnguOeZsKx4kUxCaq6LxbWemgp51Tzp4ToTY=",
+          "last_login": "2017-04-17T17:42:55.648Z",
+          "is_superuser": true,
+          "username": "manager",
+          "first_name": "",
+          "last_name": "",
+          "email": "manager@noreply.com",
+          "is_staff": true,
+          "is_active": true,
+          "date_joined": "2017-04-10T21:22:50Z",
+          "groups": [
+              1
+          ],
+          "user_permissions": []
+      }
   }
 ]
