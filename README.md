@@ -20,6 +20,9 @@ Run ```python manage.py migrate```
 
 Run ```python manage.py loaddata initialdata.json``` to seed the database
 
+This will create a super user and site manager with the username 'manager'
+The password for this account is 'passwordsosecure' by default
+
 To reset the database, delete the db.sqlite3 file and then rerun these commands.
 
 ### Run the app
