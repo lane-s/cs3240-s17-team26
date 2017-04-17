@@ -373,7 +373,7 @@ def sendMessage(request):
             # if report.has_attachments == True:
             # upload multiples files
             messages.success(request, "Message sent")
-            return redirect('index')
+            return redirect('viewMessages')
     else:
             message_form = MessageForm(prefix="message_form")
     return render(request, 'messages/sendMessage.html', {'message_form': message_form})
