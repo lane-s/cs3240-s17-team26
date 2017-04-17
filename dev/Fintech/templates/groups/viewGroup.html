@@ -32,7 +32,7 @@
 		<p2><a style="margin-top: 5%; background-color: green;" class="btn btn-primary btn-lg" href="{% url 'leaveGroup' group.pk user_id %}" role="button">Leave Group</a></p2>
 	{% endif %}
 
-	{% if site_manager and group.name != "Site Managers" %}
+	{% if site_manager and group.name != "Site Managers" and group.name != "Suspended Users" %}
 		<p2><a style="margin-top: 5%; background-color: red;" class="btn btn-primary btn-lg" href="{% url 'deleteGroup' group.pk%}" role="button">Delete Group</a></p2>
 	{% endif %}
 

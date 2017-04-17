@@ -4,7 +4,10 @@
 {% block content %}
     <form method="post" class="form" action="/reports/new/">
         {% csrf_token %}
-        <div>{% bootstrap_form report_form %}</div>
+        <div>
+        {% bootstrap_form report_form %}
+        {% bootstrap_form permissions_form %}
+        </div>
         {% buttons %}
         <button style= "background-color: green;" type="submit" class="btn btn-primary">
             Create Report

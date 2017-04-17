@@ -36,6 +36,7 @@ urlpatterns = [
     url(r'^reports/new/$', views.createReport, name='createReport'),
     url(r'^reports/(?P<pk>\d+)/view/$', views.viewReport, name='viewReport'),
     url(r'^reports/(?P<pk>\d+)/edit/$',views.editReport, name='editReport'),
+    url(r'^reports/(?P<pk>\d+)/delete/$',views.deleteReport, name='deleteReport'),
     url(r'^search/?q=', views.search, name='searchReports'),
     url(r'^messages/$', views.viewMessages, name='viewMessages'),
     url(r'^messages/new/$', views.sendMessage, name='sendMessage'),

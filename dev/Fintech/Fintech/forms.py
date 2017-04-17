@@ -1,7 +1,8 @@
 # importing forms
 from django.forms import ModelForm, Form, CharField, PasswordInput
+from django import forms
 from django.contrib.auth.models import User, Group
-from Fintech.models import UserDetails, CompanyDetails, Report, File, Message
+from Fintech.models import UserDetails, CompanyDetails, Report, ReportPermissions, File, Message
 
 
 # creating our forms
@@ -40,6 +41,20 @@ class ReportForm(ModelForm):
         model = Report
         fields = ('title', 'company_name', 'company_ceo', 'company_phone', 'company_location', 'company_country',
                   'sector', 'industry', 'current_projects', 'is_private', 'has_attachments')
+
+class ReportPermissionsForm(ModelForm):
+    class Meta:
+        model = ReportPermissions
+        fields = ('allowed_users','allowed_groups')
+
+    def __init__ (self, *args, **kwargs):
+        super(ReportPermissionsForm, self).__init__(*args, **kwargs)
+        self.fields["allowed_users"].widget = forms.widgets.CheckboxSelectMultiple()
+        self.fields["allowed_users"].help_text = ""
+        self.fields["allowed_users"].queryset = User.objects.all()
+        self.fields["allowed_groups"].widget = forms.widgets.CheckboxSelectMultiple()
+        self.fields["allowed_groups"].help_text = ""
+        self.fields["allowed_groups"].queryset = Group.objects.all()
 
 
 class FileForm(ModelForm):

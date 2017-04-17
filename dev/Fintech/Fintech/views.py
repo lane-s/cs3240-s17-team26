@@ -28,6 +28,8 @@ def is_site_manager(user):
 def is_suspended(user):
     return True if user.groups.filter(name="Suspended Users") else False
 
+def can_view_report(user, report):
+    return True if report.permissions.allowed_users.filter(pk=user.pk) or user.groups.filter(pk__in=[g.pk for g in report.permissions.allowed_groups.all()]) else False
 
 def suspended_test(request):
     passes = not is_suspended(request.user)
@@ -56,8 +58,14 @@ def index(request):
         # Otherwise render report view
         if is_company_user(request.user):
             report_list = Report.objects.filter(owner=request.user)
-        else:
+        elif is_site_manager(request.user):
             report_list = Report.objects.all()
+        else:
+            groupPermissions = [g.reportpermissions_set.all() for g in request.user.groups.all()];
+
+            report_list = Report.objects.filter(Q(is_private=False) 
+                | Q(permissions__in=request.user.reportpermissions_set.all()) 
+                | Q(permissions__in=[item for sublist in groupPermissions for item in sublist]))
 
         return render(request, 'splash.html', {'report_list': report_list})
 
@@ -225,17 +233,25 @@ def createReport(request):
     if company_user or is_site_manager(request.user):
         if request.method == 'POST':
             report_form = ReportForm(request.POST, prefix="report_form")
-            if report_form.is_valid():
+            permissions_form = ReportPermissionsForm(request.POST, prefix="permissions_form")
+
+            if report_form.is_valid() and permissions_form.is_valid():
                 report = report_form.save(commit=False)
                 report.owner = request.user
                 report.save()
+
+                permissions = permissions_form.save(commit=False);
+                permissions.report = report;
+                permissions.save();
+                permissions_form.save_m2m();
                 # if report.has_attachments == True:
                 # upload multiples files
                 messages.success(request, "Report created")
                 return redirect('index')
         else:
             report_form = ReportForm(prefix="report_form")
-        return render(request, 'reports/createReport.html', {'report_form': report_form})
+            permissions_form = ReportPermissionsForm(prefix="permissions_form")
+        return render(request, 'reports/createReport.html', {'report_form': report_form,'permissions_form':permissions_form})
 
     else:
         return redirect('index')
@@ -258,9 +274,10 @@ def uploadFile(request):
 @request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
 def viewReport(request, pk):
     report = get_object_or_404(Report, pk=pk)
-    if not report.is_private or report.owner.pk == request.user.pk or is_site_manager(request.user):
+    is_owner = report.owner.pk == request.user.pk
+    if not report.is_private or is_owner or is_site_manager(request.user) or can_view_report(request.user,report):
         # checks if user is in report group or is a collaborator
-        return render(request, 'reports/viewReport.html', {'report': report})
+        return render(request, 'reports/viewReport.html', {'report': report, 'is_owner':is_owner})
     else:
         return redirect('index')
 
@@ -276,15 +293,26 @@ def editReport(request, pk):
 
     if request.method == 'POST':
         report_form = ReportForm(request.POST, instance=report)
-        if report_form.is_valid():
+        permissions_form = ReportPermissionsForm(request.POST, instance=report.permissions)
+
+        if report_form.is_valid() and permissions_form.is_valid():
             report_form.save()
+            permissions_form.save()
             messages.success(request, "Report edited")
-            return redirect('index')
+            return redirect('viewReport',pk=report.pk)
     else:
         report_form = ReportForm(instance=report)
+        permissions_form = ReportPermissionsForm(instance=report.permissions)
 
-    return render(request, 'reports/editReport.html', {'report_form': report_form})
+    return render(request, 'reports/editReport.html', {'report_form': report_form,'permissions_form':permissions_form, 'report':report})
 
+def deleteReport(request, pk):
+    report = get_object_or_404(Report, pk=pk)
+
+    if is_site_manager(request.user) or report.owner.pk == request.user.pk:
+        report.delete()
+
+    return redirect('index')  
 
 def normalize_query(query_string,
                     findterms=re.compile(r'"([^"]+)"|(\S+)').findall,

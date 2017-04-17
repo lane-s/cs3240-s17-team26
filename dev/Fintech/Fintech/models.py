@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User,Group
 from django_countries.fields import CountryField
 
 class UserDetails(models.Model):
@@ -40,6 +40,12 @@ class Report(models.Model):
     current_projects = models.TextField()
     is_private = models.BooleanField()
     has_attachments = models.BooleanField()
+
+class ReportPermissions(models.Model):
+    report = models.OneToOneField(Report,on_delete=models.CASCADE,
+        related_name='permissions')
+    allowed_users = models.ManyToManyField(User, blank=True)
+    allowed_groups = models.ManyToManyField(Group, blank=True)
 
 
 class File(models.Model):
