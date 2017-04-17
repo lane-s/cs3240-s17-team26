@@ -358,7 +358,7 @@ def search(request):
             entry_query = get_query(query_string,
                                     ['company_name', 'current_projects', 'title', 'current_projects'])
 
-            found_entries = Report.objects.filter(entry_query).order_by('title')
+            found_entries = Report.objects.filter(entry_query)
 
     return render(request, 'reports/searchReports.html',
                   {'query_string': query_string, 'found_entries': found_entries})
@@ -383,7 +383,7 @@ def viewMessage(request, pk):
     return render(request, 'messages/viewMessage.html', {'message': message})
 
 def viewMessages(request):
-    message_list = Message.objects.filter(receiver=request.user)
+    message_list = Message.objects.filter(receiver=request.user).order_by('-timestamp')
     return render(request, 'messages/viewMessages.html', {'message_list': message_list})
 
 def deleteMessage(request, pk):
