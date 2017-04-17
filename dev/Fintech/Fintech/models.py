@@ -48,3 +48,10 @@ class File(models.Model):
     upload_date = models.DateTimeField(auto_now_add=True,auto_now=False)
     is_encrypted = models.BooleanField()
     upload = models.FileField(upload_to='reports/')
+
+class Message(models.Model):
+    sender = models.ForeignKey(User, related_name="sender")
+    receiver = models.ForeignKey(User, related_name="receiver")
+    subject = models.CharField(max_length=50)
+    content = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True,auto_now=False)

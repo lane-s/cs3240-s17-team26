@@ -1,0 +1,17 @@
+{% extends 'index.html' %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block content %}
+
+
+        <p2><b>Sent: </b>{{ message.timestamp }}</p2>
+    </h2>
+    <h2 style="margin-left: 5%;">
+        <p2><b>From: </b>{{ message.sender }}</p2>
+    </h2>
+    <h2 style="margin-left: 5%" ;>
+        <p2>{{ message.content }}</p2>
+    </h2>
+
+{% endblock %}

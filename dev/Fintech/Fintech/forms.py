@@ -1,7 +1,7 @@
 # importing forms
 from django.forms import ModelForm, Form, CharField, PasswordInput
 from django.contrib.auth.models import User, Group
-from Fintech.models import UserDetails, CompanyDetails, Report, File
+from Fintech.models import UserDetails, CompanyDetails, Report, File, Message
 
 
 # creating our forms
@@ -47,5 +47,9 @@ class FileForm(ModelForm):
         model = File
         fields = ('title', 'is_encrypted', 'upload')
 
+class MessageForm(ModelForm):
+    class Meta:
+        model = Message
+        fields = ('receiver','subject','content')
 
 

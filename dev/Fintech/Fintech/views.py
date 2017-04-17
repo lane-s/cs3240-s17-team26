@@ -10,7 +10,7 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect, HttpResponse
 from Fintech.forms import *
 from django.contrib.auth import views as auth_views
-from Fintech.models import UserDetails, CompanyDetails, Report, File
+from Fintech.models import UserDetails, CompanyDetails, Report, File, Message
 
 
 def super_user(request):
@@ -334,3 +334,26 @@ def search(request):
 
     return render(request, 'reports/searchReports.html',
                   {'query_string': query_string, 'found_entries': found_entries})
+
+def sendMessage(request):
+    if request.method == 'POST':
+        message_form = MessageForm(request.POST, prefix="message_form")
+        if message_form.is_valid():
+            message = message_form.save(commit=False)
+            message.sender = request.user
+            message.save()
+            # if report.has_attachments == True:
+            # upload multiples files
+            messages.success(request, "Message sent")
+            return redirect('index')
+    else:
+            message_form = MessageForm(prefix="message_form")
+    return render(request, 'messages/sendMessage.html', {'message_form': message_form})
+
+def viewMessage(request):
+    message = get_object_or_404(Message)
+    return render(request, 'messages/viewMessage.html', {'message': message})
+
+def viewMessages(request):
+    message_list = Message.objects.filter(receiver=request.user)
+    return render(request, 'messages/viewMessages.html', {'message_list': message_list})
