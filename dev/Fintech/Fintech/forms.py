@@ -67,4 +67,4 @@ class MessageForm(ModelForm):
         model = Message
         fields = ('receiver','subject','content')
 
-
+class Report
