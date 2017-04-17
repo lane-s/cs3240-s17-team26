@@ -40,5 +40,8 @@ urlpatterns = [
     url(r'^search/?q=', views.search, name='searchReports'),
     url(r'^messages/$', views.viewMessages, name='viewMessages'),
     url(r'^messages/new/$', views.sendMessage, name='sendMessage'),
-    url(r'^messages/view/$', views.viewMessage, name='viewMessage')
+    url(r'^messages/(?P<pk>\d+)/view/$', views.viewMessage, name='viewMessage'),
+    url(r'^messages/(?P<pk>\d+)/delete/$', views.deleteMessage, name='deleteMessage'),
+
+
 ]

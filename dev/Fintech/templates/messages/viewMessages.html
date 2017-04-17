@@ -11,11 +11,13 @@
 				<aside class="col-md-4">
 					<section class="message_info">
 						<h2>
-							<li><a href={% url 'viewMessage' %} >{{ m.subject }}</a></li>
+							<li><a href={% url 'viewMessage' m.pk %} >{{ m.subject }}</a></li>
 						</h2>
 					</section>
+					
 				</aside>
 			</div>
+
 		{% endfor %}
 	{% else %}
 		<h3> You have no messages. <h3>

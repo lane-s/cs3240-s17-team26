@@ -5,7 +5,7 @@
 {% block content %}
 
 
-        <p2><b>Sent: </b>{{ message.timestamp }}</p2>
+    <p2><b>Sent: </b>{{ message.timestamp }}</p2>
     </h2>
     <h2 style="margin-left: 5%;">
         <p2><b>From: </b>{{ message.sender }}</p2>
@@ -13,5 +13,6 @@
     <h2 style="margin-left: 5%" ;>
         <p2>{{ message.content }}</p2>
     </h2>
-
+<p2><a style="margin-left: 5%; margin-top:1%; background-color: red;" class="btn btn-primary btn-lg"
+               href="{% url 'deleteMessage' message.pk %}" role="button">Delete Message</a></p2>
 {% endblock %}

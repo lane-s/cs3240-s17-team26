@@ -378,10 +378,17 @@ def sendMessage(request):
             message_form = MessageForm(prefix="message_form")
     return render(request, 'messages/sendMessage.html', {'message_form': message_form})
 
-def viewMessage(request):
-    message = get_object_or_404(Message)
+def viewMessage(request, pk):
+    message = get_object_or_404(Message, pk=pk)
     return render(request, 'messages/viewMessage.html', {'message': message})
 
 def viewMessages(request):
     message_list = Message.objects.filter(receiver=request.user)
     return render(request, 'messages/viewMessages.html', {'message_list': message_list})
+
+def deleteMessage(request, pk):
+    message = get_object_or_404(Message, pk=pk)
+    if message.receiver == request.user:
+        message.delete()
+    return redirect("viewMessages")
+
