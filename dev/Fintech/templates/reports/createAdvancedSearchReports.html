@@ -1,5 +1,17 @@
 {% extends 'index.html' %}
 {% load bootstrap3 %}
-
 {% block content %}
+    <h1 style="width: 90%; padding: 0.5%;border: solid black 2px; background-color: green; font-size: xx-large">Advanced
+        Search</h1>
+            <form  style="margin-left: 4.5%; padding: 0.5%;" method="post" class="form" action={% url 'advancedSearchReports' %}>
+                {% csrf_token %}
+                <div>
+                    {% bootstrap_form advanced_search_form %}
+                </div>
+                {% buttons %}
+                    <button style="background-color: green;" type="submit" class="btn btn-primary">
+                        Search
+                    </button>
+                {% endbuttons %}
+            </form>
 {% endblock %}

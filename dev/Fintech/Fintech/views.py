@@ -365,26 +365,30 @@ def search(request):
 
 
 def createAdvancedSearch(request):
-    return render(request, 'reports/createAdvancedSearchReports.html')
+    advanced_search_form = advancedSearchForm(prefix="advanced_search_form")
+    return render(request, 'reports/createAdvancedSearchReports.html', {'advanced_search_form': advanced_search_form})
 
 
 def advancedSearch(request):
+    found_entries = None
     search_values_array = []
     search_filters_array = []
-    if request.method == 'GET':
-        search_filters = request.GET.get('fields')
-        search_values = request.GET.get('values')
-        search_filters_array = search_filters.split('#')
-        search_values_array = search_values.split('#')
+    if request.method == 'POST':
+        search_form = advancedSearchForm(request.POST, prefix="advanced_search_form")
+        for each in search_form:
+            search_form.fields
+            search_values_array += each
         search_dict = {}
         for each in search_filters_array:
             search_dict[search_filters_array[each]] = search_values_array[each]
         found_entries = Report.objects
-        for filters in search_filters:
-            entry_query = get_query(search_dict[filters], filters)
-            found_entries = found_entries.filter(entry_query)
+        if search_filters_array:
+            for filters in search_filters_array:
+                if search_dict[filters] != filters:
+                    entry_query = get_query(search_dict[filters], filters)
+                    found_entries = found_entries.filter(entry_query)
     return render(request, 'reports/advancedSearchReports.html',
-                  {'search_filters': search_filters_array, 'search_values': search_values_array,'found_entries': found_entries})
+                  {'search_filters': search_filters_array, 'search_values': search_values_array, 'found_entries': found_entries})
 
 
 def sendMessage(request):

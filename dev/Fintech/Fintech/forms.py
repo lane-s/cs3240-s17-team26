@@ -1,5 +1,5 @@
 # importing forms
-from django.forms import ModelForm, Form, CharField, PasswordInput
+from django.forms import ModelForm, Form, CharField, PasswordInput, DateField
 from django import forms
 from django.contrib.auth.models import User, Group
 from Fintech.models import UserDetails, CompanyDetails, Report, ReportPermissions, File, Message
@@ -67,4 +67,15 @@ class MessageForm(ModelForm):
         model = Message
         fields = ('receiver','subject','content')
 
-class Report
+class advancedSearchForm(Form):
+    title = CharField(label= 'Title', required=False, max_length=30,)
+    timestart = DateField(label= 'Start Date Range', required=False,)
+    timeend = DateField(label= 'End Date Range', required=False,)
+    company_name = CharField(label= 'Company Name', max_length=30, required=False,)
+    company_ceo = CharField(label= 'Company CEO', max_length=30, required=False,)
+    company_phone = CharField(label= 'Company Phone', max_length=30, required=False,)
+    company_location = CharField(label= 'Company Location', max_length=30, required=False,)
+    company_country = CharField(label= 'Company Country', max_length=30, required=False,)
+    sector = CharField(label= 'Sector', max_length=30, required=False,)
+    industry = CharField(label= 'Industry', max_length=30, required=False,)
+    current_projects = CharField(label= 'Current Projects', required=False,)

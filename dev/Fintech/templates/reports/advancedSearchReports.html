@@ -2,5 +2,22 @@
 {% load bootstrap3 %}
 
 {% block content %}
-
+    {% if found_entries %}
+        <h1 style="width: 90%; padding: 0.5%;border: solid black 2px; background-color: green; font-size: xx-large">Search Results</h1>
+        {% for f in found_entries %}
+            <div class="row">
+                <aside class="col-md-4">
+                    <section class="search_results">
+                        <h2 style="margin-left: 5%; font-size: x-large;">
+                            <li style="text-decoration:underline; margin-left: 15%; color: green; font-size: x-large;">
+                                <a style="color: green; font-size: x-large;"
+                                   href={% url 'viewReport' f.pk %}>{{ f.title }}</a></li>
+                        </h2>
+                    </section>
+                </aside>
+            </div>
+        {% endfor %}
+    {% else %}
+        <h3> No Search Results Found for your search </h3>
+    {% endif %}
 {% endblock %}
