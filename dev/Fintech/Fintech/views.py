@@ -55,6 +55,12 @@ def index(request):
         # If not logged in render splash
         return render(request, 'splash.html')
     else:
+        has_messages = False
+        message_list = Message.objects.filter(receiver=request.user)
+        for m in message_list:
+            if m.opened == False:
+                has_messages = True
+                break
         # Otherwise render report view
         if is_company_user(request.user):
             report_list = Report.objects.filter(owner=request.user)
@@ -66,8 +72,7 @@ def index(request):
             report_list = Report.objects.filter(Q(is_private=False) 
                 | Q(permissions__in=request.user.reportpermissions_set.all()) 
                 | Q(permissions__in=[item for sublist in groupPermissions for item in sublist]))
-
-        return render(request, 'splash.html', {'report_list': report_list})
+        return render(request, 'splash.html', {'report_list': report_list,'has_messages':has_messages})
 
 
 def signupform(request):
@@ -397,6 +402,7 @@ def sendMessage(request):
         if message_form.is_valid():
             message = message_form.save(commit=False)
             message.sender = request.user
+            message.opened = False
             message.save()
             # if report.has_attachments == True:
             # upload multiples files
@@ -408,6 +414,8 @@ def sendMessage(request):
 
 def viewMessage(request, pk):
     message = get_object_or_404(Message, pk=pk)
+    message.opened = True
+    message.save()
     return render(request, 'messages/viewMessage.html', {'message': message})
 
 def viewMessages(request):

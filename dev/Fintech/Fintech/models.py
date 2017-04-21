@@ -61,3 +61,4 @@ class Message(models.Model):
     subject = models.CharField(max_length=50)
     content = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True,auto_now=False)
+    opened = models.BooleanField()
