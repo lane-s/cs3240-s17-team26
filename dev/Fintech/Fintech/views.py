@@ -322,7 +322,6 @@ def viewReport(request, pk):
 def editReport(request, pk):
     report = get_object_or_404(Report, pk=pk)
 
-
     #Apparently only managers should be allowed to edit reports
     if not is_site_manager(request.user):
         return redirect('index')

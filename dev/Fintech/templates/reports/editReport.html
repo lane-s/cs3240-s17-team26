@@ -2,6 +2,21 @@
 {% load bootstrap3 %}
 
 {% block content %}
+    {% if report.is_private %}
+        <script>
+            $(document).ready(function() {
+                $("input[id='id_is_private']").addClass("checked");
+            });
+        </script>
+    {% else %}
+        <script>
+            $(document).ready(function() {
+                $("label[for='id_allowed_users_0']").parent().hide();
+                $("label[for='id_allowed_groups_0']").parent().hide();
+            });
+        </script>
+    {% endif %}
+
     <script type="text/html" id="file-template">
     <div id="file-__prefix__" style="margin-top:15px;margin-bottom:15px;">
         {{ file_formset.empty_form }}
@@ -9,8 +24,6 @@
     </script>
     <script>
     $(document).ready(function() {
-        $("label[for='id_allowed_users_0']").parent().hide();
-        $("label[for='id_allowed_groups_0']").parent().hide();
 
         $("input[id='id_is_private']").unbind().click(function(){
         if($(this).hasClass("checked")){
