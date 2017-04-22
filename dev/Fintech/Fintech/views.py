@@ -279,14 +279,14 @@ def createReport(request):
                 permissions.save();
                 permissions_form.save_m2m();
 
+
                 for form in file_formset:
                     file = form.save(commit=False)
                     file.upload_date = datetime.date.today()
                     file.report = report
                     file.save()
-                    print("File saved")
 
-                if File.objects.filter(report=report):
+                if File.objects.filter(report__pk=report.pk):
                     report.has_attachments = True;
                 else:
                     report.has_attachments = False;

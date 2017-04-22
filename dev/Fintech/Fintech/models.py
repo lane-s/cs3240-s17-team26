@@ -50,7 +50,7 @@ class ReportPermissions(models.Model):
 
 
 def generate_file_path(instance, filename):
-    return os.path.join("reportFiles", instance.title, filename)
+    return os.path.join("reportFiles", instance.title.replace(" ",""), filename.replace(" ",""))
 
 class File(models.Model):
     report = models.ForeignKey(Report)
@@ -58,6 +58,9 @@ class File(models.Model):
     upload_date = models.DateTimeField(auto_now_add=True,auto_now=False)
     is_encrypted = models.BooleanField()
     upload = models.FileField(upload_to=generate_file_path)
+
+    def filename(self):
+        return os.path.basename(self.file.name)
 
 class Message(models.Model):
     sender = models.ForeignKey(User, related_name="sender")
