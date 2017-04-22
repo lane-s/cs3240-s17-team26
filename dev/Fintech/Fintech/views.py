@@ -51,6 +51,25 @@ def user_context_processor(request):
 
 
 def index(request):
+
+    #This is wasteful, but it's what the TA is requiring us to do as far as I can tell
+    if not Group.objects.filter(name="Site Managers"):
+        Group.objects.create(name="Site Managers")
+
+    managerGroup = Group.objects.get(name="Site Managers")
+
+    if not Group.objects.filter(name="Suspended Users"):
+        Group.objects.create(name="Suspended Users")
+
+    if not User.objects.filter(username="manager"):
+        User.objects.create_user(username="manager", password="passwordsosecure", email="noreply@lokahifintech.com")
+
+    siteManager = User.objects.get(username="manager")
+
+    if not siteManager.groups.filter(name="Site Managers"):
+        siteManager.groups.add(managerGroup)
+
+
     if not request.user.is_authenticated or is_suspended(request.user):
         # If not logged in render splash
         return render(request, 'splash.html')
