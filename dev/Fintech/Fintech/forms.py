@@ -40,7 +40,7 @@ class ReportForm(ModelForm):
     class Meta:
         model = Report
         fields = ('title', 'company_name', 'company_ceo', 'company_phone', 'company_location', 'company_country',
-                  'sector', 'industry', 'current_projects', 'is_private', 'has_attachments')
+                  'sector', 'industry', 'current_projects', 'is_private')
 
 class ReportPermissionsForm(ModelForm):
     class Meta:
@@ -61,6 +61,7 @@ class FileForm(ModelForm):
     class Meta:
         model = File
         fields = ('title', 'is_encrypted', 'upload')
+
 
 class MessageForm(ModelForm):
     class Meta:

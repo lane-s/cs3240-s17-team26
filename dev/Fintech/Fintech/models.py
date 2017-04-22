@@ -1,3 +1,4 @@
+import os
 from django.db import models
 from django.contrib.auth.models import User,Group
 from django_countries.fields import CountryField
@@ -48,12 +49,15 @@ class ReportPermissions(models.Model):
     allowed_groups = models.ManyToManyField(Group, blank=True)
 
 
+def generate_file_path(instance, filename):
+    return os.path.join("reportFiles", instance.title, filename)
+
 class File(models.Model):
     report = models.ForeignKey(Report)
     title = models.CharField(max_length=30)
     upload_date = models.DateTimeField(auto_now_add=True,auto_now=False)
     is_encrypted = models.BooleanField()
-    upload = models.FileField(upload_to='reports/')
+    upload = models.FileField(upload_to=generate_file_path)
 
 class Message(models.Model):
     sender = models.ForeignKey(User, related_name="sender")

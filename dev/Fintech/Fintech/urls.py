@@ -17,6 +17,8 @@ import django
 django.setup()
 
 from django.contrib.auth import views as auth_views
+from django.conf.urls.static import static
+from django.conf import settings
 from django.conf.urls import url
 from django.contrib import admin
 from Fintech import views
@@ -47,4 +49,4 @@ urlpatterns = [
     url(r'^messages/(?P<pk>\d+)/delete/$', views.deleteMessage, name='deleteMessage'),
 
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

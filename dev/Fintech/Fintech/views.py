@@ -1,15 +1,20 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.core.urlresolvers import reverse
 
+import datetime
+import re
+
+from django.contrib import messages
+from django.contrib.auth import views as auth_views
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from Fintech.decorators import request_passes_test
-import re
+
 from django.db.models import Q
-from django.contrib import messages
 from django.http import HttpResponseRedirect, HttpResponse
+from django.forms import inlineformset_factory
+
+from Fintech.decorators import request_passes_test
 from Fintech.forms import *
-from django.contrib.auth import views as auth_views
 from Fintech.models import UserDetails, CompanyDetails, Report, File, Message
 
 
@@ -249,6 +254,8 @@ def editGroup(request, pk):
     return render(request, 'groups/editGroup.html', {'group': group, 'form': add_user_form})
 
 
+FileFormset = inlineformset_factory(Report, File, form=FileForm, extra=0)
+
 @login_required
 @request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
 def createReport(request):
@@ -259,40 +266,43 @@ def createReport(request):
             report_form = ReportForm(request.POST, prefix="report_form")
             permissions_form = ReportPermissionsForm(request.POST, prefix="permissions_form")
 
-            if report_form.is_valid() and permissions_form.is_valid():
+            file_formset = FileFormset(request.POST,request.FILES,prefix="file_formset") 
+
+            if report_form.is_valid() and permissions_form.is_valid() and file_formset.is_valid():
                 report = report_form.save(commit=False)
                 report.owner = request.user
+                report.has_attachments = False
                 report.save()
 
                 permissions = permissions_form.save(commit=False);
                 permissions.report = report;
                 permissions.save();
                 permissions_form.save_m2m();
-                # if report.has_attachments == True:
-                # upload multiples files
+
+                for form in file_formset:
+                    file = form.save(commit=False)
+                    file.upload_date = datetime.date.today()
+                    file.report = report
+                    file.save()
+                    print("File saved")
+
+                if File.objects.filter(report=report):
+                    report.has_attachments = True;
+                else:
+                    report.has_attachments = False;
+
+                report.save()
+
                 messages.success(request, "Report created")
                 return redirect('index')
         else:
             report_form = ReportForm(prefix="report_form")
             permissions_form = ReportPermissionsForm(prefix="permissions_form")
-        return render(request, 'reports/createReport.html', {'report_form': report_form,'permissions_form':permissions_form})
+            file_formset = FileFormset(prefix="file_formset")
+        return render(request, 'reports/createReport.html', {'report_form': report_form,'permissions_form':permissions_form,'file_formset':file_formset})
 
     else:
         return redirect('index')
-
-
-@login_required
-@request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
-def uploadFile(request):
-    if request.method == 'POST':
-        file_form = FileForm(request.Post, prefix="")
-        file_form.save(commit="false")
-        messages.success(request, "File uploaded to report")
-        return redirect('reports')
-    else:
-        file_form = FileForm(prefix="file_form")
-    return render(request, 'reports/uploadFiles.html', {'file_form': file_form})
-
 
 @login_required
 @request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
@@ -300,8 +310,9 @@ def viewReport(request, pk):
     report = get_object_or_404(Report, pk=pk)
     is_owner = report.owner.pk == request.user.pk
     if not report.is_private or is_owner or is_site_manager(request.user) or can_view_report(request.user,report):
+        unencrypted_files = File.objects.filter(report__pk = report.pk, is_encrypted=False)
         # checks if user is in report group or is a collaborator
-        return render(request, 'reports/viewReport.html', {'report': report, 'is_owner':is_owner})
+        return render(request, 'reports/viewReport.html', {'report': report, 'is_owner':is_owner,'unencrypted_files':unencrypted_files})
     else:
         return redirect('index')
 
@@ -310,25 +321,37 @@ def viewReport(request, pk):
 @request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
 def editReport(request, pk):
     report = get_object_or_404(Report, pk=pk)
-    report_form = ReportForm(instance=report)
 
-    if report.owner.pk != request.user.pk and not is_site_manager(request.user):
+
+    #Apparently only managers should be allowed to edit reports
+    if not is_site_manager(request.user):
         return redirect('index')
 
     if request.method == 'POST':
         report_form = ReportForm(request.POST, instance=report)
         permissions_form = ReportPermissionsForm(request.POST, instance=report.permissions)
+        file_formset = FileFormset(request.POST,request.FILES,instance=report)
 
-        if report_form.is_valid() and permissions_form.is_valid():
+        if report_form.is_valid() and permissions_form.is_valid() and file_formset.is_valid():
             report_form.save()
             permissions_form.save()
+
+            files = file_formset.save()
+
+            for f in files:
+                f.report = report
+                if not f.upload_date:
+                    f.upload_date = datetime.date.today()
+                f.save()
+
             messages.success(request, "Report edited")
             return redirect('viewReport',pk=report.pk)
     else:
         report_form = ReportForm(instance=report)
         permissions_form = ReportPermissionsForm(instance=report.permissions)
+        file_formset = FileFormset(instance=report)
 
-    return render(request, 'reports/editReport.html', {'report_form': report_form,'permissions_form':permissions_form, 'report':report})
+    return render(request, 'reports/editReport.html', {'report_form': report_form,'permissions_form':permissions_form, 'report':report, 'file_formset':file_formset})
 
 def deleteReport(request, pk):
     report = get_object_or_404(Report, pk=pk)
