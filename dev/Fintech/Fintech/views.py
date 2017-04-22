@@ -74,6 +74,12 @@ def index(request):
         # If not logged in render splash
         return render(request, 'splash.html')
     else:
+        has_messages = False
+        message_list = Message.objects.filter(receiver=request.user)
+        for m in message_list:
+            if m.opened == False:
+                has_messages = True
+                break
         # Otherwise render report view
         if is_company_user(request.user):
             report_list = Report.objects.filter(owner=request.user)
@@ -85,8 +91,7 @@ def index(request):
             report_list = Report.objects.filter(Q(is_private=False) 
                 | Q(permissions__in=request.user.reportpermissions_set.all()) 
                 | Q(permissions__in=[item for sublist in groupPermissions for item in sublist]))
-
-        return render(request, 'splash.html', {'report_list': report_list})
+        return render(request, 'splash.html', {'report_list': report_list,'has_messages':has_messages})
 
 
 def signupform(request):
@@ -375,12 +380,40 @@ def search(request):
     if request.method == 'GET':
             query_string = request.GET.get('q')
             entry_query = get_query(query_string,
-                                    ['company_name', 'current_projects', 'title', 'current_projects'])
+                                    ['company_name', 'current_projects', 'title', 'timestamp', 'company_ceo', 'company_phone', 'company_location', 'company_country', 'sector', 'industry'])
 
-            found_entries = Report.objects.filter(entry_query).order_by('title')
+            found_entries = Report.objects.filter(entry_query)
 
     return render(request, 'reports/searchReports.html',
                   {'query_string': query_string, 'found_entries': found_entries})
+
+
+def createAdvancedSearch(request):
+    advanced_search_form = advancedSearchForm(prefix="advanced_search_form")
+    return render(request, 'reports/createAdvancedSearchReports.html', {'advanced_search_form': advanced_search_form})
+
+
+def advancedSearch(request):
+    found_entries = None
+    search_values_array = []
+    search_filters_array = []
+    if request.method == 'POST':
+        search_form = advancedSearchForm(request.POST, prefix="advanced_search_form")
+        for each in search_form:
+            search_form.fields
+            search_values_array += each
+        search_dict = {}
+        for each in search_filters_array:
+            search_dict[search_filters_array[each]] = search_values_array[each]
+        found_entries = Report.objects
+        if search_filters_array:
+            for filters in search_filters_array:
+                if search_dict[filters] != filters:
+                    entry_query = get_query(search_dict[filters], filters)
+                    found_entries = found_entries.filter(entry_query)
+    return render(request, 'reports/advancedSearchReports.html',
+                  {'search_filters': search_filters_array, 'search_values': search_values_array, 'found_entries': found_entries})
+
 
 def sendMessage(request):
     if request.method == 'POST':
@@ -388,19 +421,29 @@ def sendMessage(request):
         if message_form.is_valid():
             message = message_form.save(commit=False)
             message.sender = request.user
+            message.opened = False
             message.save()
             # if report.has_attachments == True:
             # upload multiples files
             messages.success(request, "Message sent")
-            return redirect('index')
+            return redirect('viewMessages')
     else:
             message_form = MessageForm(prefix="message_form")
     return render(request, 'messages/sendMessage.html', {'message_form': message_form})
 
-def viewMessage(request):
-    message = get_object_or_404(Message)
+def viewMessage(request, pk):
+    message = get_object_or_404(Message, pk=pk)
+    message.opened = True
+    message.save()
     return render(request, 'messages/viewMessage.html', {'message': message})
 
 def viewMessages(request):
-    message_list = Message.objects.filter(receiver=request.user)
+    message_list = Message.objects.filter(receiver=request.user).order_by('-timestamp')
     return render(request, 'messages/viewMessages.html', {'message_list': message_list})
+
+def deleteMessage(request, pk):
+    message = get_object_or_404(Message, pk=pk)
+    if message.receiver == request.user:
+        message.delete()
+    return redirect("viewMessages")
+

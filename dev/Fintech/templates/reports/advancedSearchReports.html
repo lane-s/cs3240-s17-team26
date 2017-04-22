@@ -3,8 +3,7 @@
 
 {% block content %}
     {% if found_entries %}
-        <h1 style="width: 90%; padding: 0.5%;border: solid black 2px; background-color: green; font-size: xx-large">
-            Search Results for: "{{ query_string }}"</h1>
+        <h1 style="width: 90%; padding: 0.5%;border: solid black 2px; background-color: green; font-size: xx-large">Search Results</h1>
         {% for f in found_entries %}
             <div class="row">
                 <aside class="col-md-4">
@@ -19,7 +18,6 @@
             </div>
         {% endfor %}
     {% else %}
-        <h3> No Search Results Found for "{{ query_string }}" </h3>
-
+        <h3> No Search Results Found for your search </h3>
     {% endif %}
 {% endblock %}

@@ -27,22 +27,9 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             {% if logged_in %}
-                {# if inbox has unread messages #}
-                <!--
-                <button class="btn btn-primary" type="button" style="background-color: white; border-color: silver"><a href="#" style="color: black; text-decoration: none;">
-                    Inbox </a>
-                    <span class="badge" style="background-color: green; color: white">4</span>
-                </button>
-                -->
-                {# else #}
-                <button class="btn btn-primary navbar-btn navbar-left" type="button"
-                        style="margin-right: 1%;background-color: white; border-color: silver"><a
-                        href="#" style="color: black; text-decoration: none;">
-                    Inbox </a>
-                </button>
-                <button type="button" class="btn btn-default navbar-btn navbar-left"><a
-                        style="color: black; text-decoration: none;"
-                        href="/messages/">Messages</a></button>
+                {% block message %}
+                {% endblock %}
+
                 <button type="button" class="btn btn-default navbar-btn navbar-left"><a
                         style="color: black; text-decoration: none;"
                         href="/groups/">Groups</a></button>
@@ -53,6 +40,7 @@
                     </div>
                     <button type="submit" class="btn btn-default">Search</button>
                 </form>
+                <p class="navbar-text"><a href="{% url 'createAdvancedSearch' %}" class="navbar-link">Advanced Search</a></p>
                 <button type="button" class="btn btn-default navbar-btn navbar-right"><a
                         style="color: black; text-decoration: none;"
                         href="{% url 'logout' %}?next=/">Logout</a>
@@ -70,4 +58,4 @@
 
 {% block content %}
 {% endblock %}
-<body>
+</body>
