@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse
 
 import datetime
 import re
+import ast
 
 from django.contrib import messages
 from django.contrib.auth import views as auth_views
@@ -16,6 +17,9 @@ from django.forms import inlineformset_factory
 from Fintech.decorators import request_passes_test
 from Fintech.forms import *
 from Fintech.models import UserDetails, CompanyDetails, Report, File, Message
+
+from Crypto.PublicKey import RSA
+from Crypto import Random
 
 
 def super_user(request):
@@ -104,20 +108,40 @@ def signupform(request):
         investor_user_form = UserForm(request.POST, prefix="investor_user_form")
         company_user_form = UserForm(request.POST, prefix="company_user_form")
         company_detail_form = CompanyForm(request.POST, prefix="company_detail_form")
+        user_detail_form = UserDetailForm(request.POST)
 
-        if investor_user_form.is_valid() or (company_user_form.is_valid() and company_detail_form.is_valid()):
+        if investor_user_form.is_valid() or company_user_form.is_valid() and company_detail_form.is_valid():
+
+            #Assign unique key to each user when they sign up
+            key_length = 1024
+            keypair = RSA.generate(key_length, Random.new().read).exportKey()
 
             if company_user_form.is_valid():
+
                 user = company_user_form.save(commit=False)
                 user.set_password(company_user_form.cleaned_data['password'])
                 user.save()
+
                 company_detail = company_detail_form.save(commit=False)
                 company_detail.user = user
                 company_detail.save()
+
+                #assign user details to set encryption key
+                user_details = user_detail_form.save(commit=False)
+                user_details.user = User.objects.get(username=user.username)
+                user_details.key = keypair
+                user_details.save()
+
             else:
                 user = investor_user_form.save(commit=False)
                 user.set_password(investor_user_form.cleaned_data['password'])
                 user.save()
+
+                #assign user details to set encryption key
+                user_details = user_detail_form.save(commit=False)
+                user_details.user = User.objects.get(username=user.username)
+                user_details.key = keypair
+                user_details.save()
 
             return redirect('index')
     else:
@@ -444,9 +468,17 @@ def sendMessage(request):
             message = message_form.save(commit=False)
             message.sender = request.user
             message.opened = False
-            message.save()
-            # if report.has_attachments == True:
-            # upload multiples files
+
+            if message.encrypt:
+
+                receiver = UserDetails.objects.get(user=message.receiver)
+                rsa_obj = RSA.importKey(receiver.key)
+                pubkey = rsa_obj.publickey()
+                content = message.content
+                enc_content = pubkey.encrypt(content.encode('utf-8'), 32)
+                message.content = str(enc_content)
+                message.save()
+
             messages.success(request, "Message sent")
             return redirect('viewMessages')
     else:
@@ -455,9 +487,12 @@ def sendMessage(request):
 
 def viewMessage(request, pk):
     message = get_object_or_404(Message, pk=pk)
-    message.opened = True
-    message.save()
-    return render(request, 'messages/viewMessage.html', {'message': message})
+    if message.encrypt:
+        return render(request, 'messages/encryptedMessage.html', {'message': message})
+    else:
+        message.opened = True
+        message.save()
+        return render(request, 'messages/viewMessage.html', {'message': message})
 
 def viewMessages(request):
     message_list = Message.objects.filter(receiver=request.user).order_by('-timestamp')
@@ -469,3 +504,13 @@ def deleteMessage(request, pk):
         message.delete()
     return redirect("viewMessages")
 
+def decryptMessage(request, pk):
+    message = get_object_or_404(Message, pk=pk)
+    message.encrypt = False
+    content = message.content
+    user_details = UserDetails.objects.get(user=request.user)
+    private_key = RSA.importKey(user_details.key)
+    decrypted_content = private_key.decrypt(ast.literal_eval(content)).decode('utf-8')
+    message.content = decrypted_content
+    message.save()
+    return render(request, 'messages/viewMessage.html', {'message': message})

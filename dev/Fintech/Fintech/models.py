@@ -5,19 +5,7 @@ from django_countries.fields import CountryField
 
 class UserDetails(models.Model):
     user = models.OneToOneField(User)
-    user_types = (
-        ('I', 'Investor'),
-        ('C','Company'),
-    )
-    type = models.CharField(
-        max_length=2,
-        choices=user_types,
-        default='I',
-    )
-    @classmethod
-    def create(cls, user, type):
-        details = cls(user = user, type = type)
-        return details
+    key = models.TextField()
 
 class CompanyDetails(models.Model):
     user = models.OneToOneField(User)
@@ -69,3 +57,5 @@ class Message(models.Model):
     content = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True,auto_now=False)
     opened = models.BooleanField()
+    encrypt = models.BooleanField()
+

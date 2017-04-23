@@ -47,6 +47,7 @@ urlpatterns = [
     url(r'^messages/new/$', views.sendMessage, name='sendMessage'),
     url(r'^messages/(?P<pk>\d+)/view/$', views.viewMessage, name='viewMessage'),
     url(r'^messages/(?P<pk>\d+)/delete/$', views.deleteMessage, name='deleteMessage'),
+    url(r'^messages/(?P<pk>\d+)/decrypt/$', views.decryptMessage, name='decryptMessage'),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

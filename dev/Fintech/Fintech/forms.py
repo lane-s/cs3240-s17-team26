@@ -15,6 +15,11 @@ class UserForm(ModelForm):
         }
 
 
+class UserDetailForm(ModelForm):
+    class Meta:
+        model = UserDetails
+        exclude = ('user','key')
+
 class CompanyForm(ModelForm):
     class Meta:
         model = CompanyDetails
@@ -66,7 +71,7 @@ class FileForm(ModelForm):
 class MessageForm(ModelForm):
     class Meta:
         model = Message
-        fields = ('receiver','subject','content')
+        fields = ('receiver','subject','content','encrypt')
 
 class advancedSearchForm(Form):
     title = CharField(label= 'Title', required=False, max_length=30,)

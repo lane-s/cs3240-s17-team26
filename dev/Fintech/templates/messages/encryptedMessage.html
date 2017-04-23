@@ -1,0 +1,16 @@
+{% extends 'index.html' %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block content %}
+
+    <h2 style="margin-left: 2%; font-size: x-large">
+        <p2>This message is encrypted.</p2>
+    </h2>
+
+    <p2><a style="margin-left: 2%; margin-top:1%; background-color: green;" class="btn btn-primary btn-lg"
+           href="{% url 'decryptMessage' message.pk %}" role="button">Decrypt Message</a></p2>
+
+{% endblock %}
+
+
