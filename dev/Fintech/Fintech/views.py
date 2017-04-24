@@ -512,5 +512,6 @@ def decryptMessage(request, pk):
     private_key = RSA.importKey(user_details.key)
     decrypted_content = private_key.decrypt(ast.literal_eval(content)).decode('utf-8')
     message.content = decrypted_content
+    message.opened = True
     message.save()
     return render(request, 'messages/viewMessage.html', {'message': message})
