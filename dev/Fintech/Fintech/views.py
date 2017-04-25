@@ -429,6 +429,10 @@ def search(request):
                                     ['company_name', 'current_projects', 'title', 'timestamp', 'company_ceo', 'company_phone', 'company_location', 'company_country', 'sector', 'industry'])
 
             found_entries = Report.objects.filter(entry_query)
+    found_entries = list(found_entries)
+    for each in found_entries:
+        if each.is_private:
+            found_entries.remove(each)
 
     return render(request, 'reports/searchReports.html',
                   {'query_string': query_string, 'found_entries': found_entries})

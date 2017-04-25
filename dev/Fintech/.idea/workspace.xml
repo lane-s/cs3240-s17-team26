@@ -18,11 +18,11 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Fintech/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="803">
-              <caret line="453" column="35" lean-forward="true" selection-start-line="453" selection-start-column="35" selection-end-line="453" selection-end-column="35" />
+            <state relative-caret-position="353">
+              <caret line="435" column="0" lean-forward="true" selection-start-line="435" selection-start-column="0" selection-end-line="435" selection-end-column="0" />
               <folding>
                 <element signature="e#0#64#0" expanded="true" />
-                <marker date="1493142313912" expanded="true" signature="2020:2208" ph="..." />
+                <marker date="1493142385897" expanded="true" signature="2020:2208" ph="..." />
               </folding>
             </state>
           </provider>
@@ -650,7 +650,7 @@
           <caret line="118" column="134" lean-forward="false" selection-start-line="118" selection-start-column="118" selection-end-line="118" selection-end-column="134" />
           <folding>
             <element signature="e#0#64#0" expanded="true" />
-            <marker date="1493142313912" expanded="true" signature="2020:2208" ph="..." />
+            <marker date="1493142385897" expanded="true" signature="2020:2208" ph="..." />
           </folding>
         </state>
       </provider>
@@ -683,7 +683,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#64#0" expanded="true" />
-            <marker date="1493142313912" expanded="true" signature="2020:2208" ph="..." />
+            <marker date="1493142385897" expanded="true" signature="2020:2208" ph="..." />
           </folding>
         </state>
       </provider>
@@ -759,7 +759,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#64#0" expanded="true" />
-            <marker date="1493142313912" expanded="true" signature="2020:2208" ph="..." />
+            <marker date="1493142385897" expanded="true" signature="2020:2208" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1015,11 +1015,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Fintech/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="803">
-          <caret line="453" column="35" lean-forward="true" selection-start-line="453" selection-start-column="35" selection-end-line="453" selection-end-column="35" />
+        <state relative-caret-position="353">
+          <caret line="435" column="0" lean-forward="true" selection-start-line="435" selection-start-column="0" selection-end-line="435" selection-end-column="0" />
           <folding>
             <element signature="e#0#64#0" expanded="true" />
-            <marker date="1493142313912" expanded="true" signature="2020:2208" ph="..." />
+            <marker date="1493142385897" expanded="true" signature="2020:2208" ph="..." />
           </folding>
         </state>
       </provider>
