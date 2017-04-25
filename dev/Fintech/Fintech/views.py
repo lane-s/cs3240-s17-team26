@@ -623,7 +623,13 @@ def viewMessage(request, pk):
     else:
         message.opened = True
         message.save()
-        return render(request, 'messages/viewMessage.html', {'message': message, 'username': username})
+        has_messages = False
+        message_list = Message.objects.filter(receiver=request.user)
+        for m in message_list:
+            if m.opened == False:
+                has_messages = True
+                break
+        return render(request, 'messages/viewMessage.html', {'message': message, 'username': username, 'has_messages': has_messages})
 
 
 @login_required
@@ -645,12 +651,6 @@ def viewMessages(request):
 @login_required
 @request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
 def deleteMessage(request, pk):
-    has_messages = False
-    message_list = Message.objects.filter(receiver=request.user)
-    for m in message_list:
-        if m.opened == False:
-            has_messages = True
-            break
     message = get_object_or_404(Message, pk=pk)
     if message.receiver == request.user:
         message.delete()
@@ -661,6 +661,15 @@ def deleteMessage(request, pk):
 @request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
 def decryptMessage(request, pk):
     username = None
+    message = get_object_or_404(Message, pk=pk)
+    message.encrypt = False
+    content = message.content
+    user_details = UserDetails.objects.get(user=request.user)
+    private_key = RSA.importKey(user_details.key)
+    decrypted_content = private_key.decrypt(ast.literal_eval(content)).decode('utf-8')
+    message.content = decrypted_content
+    message.opened = True
+    message.save()
     if request.user.is_authenticated():
         username = request.user
     has_messages = False
@@ -669,14 +678,6 @@ def decryptMessage(request, pk):
         if m.opened == False:
             has_messages = True
             break
-    message = get_object_or_404(Message, pk=pk)
-    message.encrypt = False
-    content = message.content
-    user_details = UserDetails.objects.get(user=request.user)
-    private_key = RSA.importKey(user_details.key)
-    decrypted_content = private_key.decrypt(ast.literal_eval(content)).decode('utf-8')
-    message.content = decrypted_content
-    message.save()
     return render(request, 'messages/viewMessage.html', {'message': message, 'has_messages': has_messages, 'username': username})
 
 
