@@ -15,16 +15,6 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Fintech/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="654">
-              <caret line="50" column="56" lean-forward="true" selection-start-line="50" selection-start-column="56" selection-end-line="50" selection-end-column="56" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="settings.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/registration/settings.html">
           <provider selected="true" editor-type-id="text-editor">
@@ -35,23 +25,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="advancedSearchReports.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/reports/advancedSearchReports.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="550">
-              <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="473">
-              <caret line="66" column="56" lean-forward="false" selection-start-line="66" selection-start-column="52" selection-end-line="66" selection-end-column="56" />
+            <state relative-caret-position="251">
+              <caret line="66" column="76" lean-forward="false" selection-start-line="66" selection-start-column="76" selection-end-line="66" selection-end-column="76" />
               <folding>
                 <element signature="n#style#0;n#button#4;n#div#1;n#div#0;n#nav#0;n#body#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#1;n#div#1;n#div#0;n#nav#0;n#body#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -60,79 +41,35 @@
       <file leaf-file-name="splash.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/splash.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="6" column="103" lean-forward="false" selection-start-line="6" selection-start-column="103" selection-end-line="6" selection-end-column="103" />
+            <state relative-caret-position="225">
+              <caret line="47" column="95" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="114" selection-end-column="14" />
               <folding>
                 <element signature="e#1000#1137#0#HTML" expanded="true" />
-                <element signature="e#1225#1289#0#HTML" expanded="true" />
-                <element signature="e#1664#1705#0#HTML" expanded="true" />
-                <element signature="e#1753#1838#0#HTML" expanded="true" />
-                <element signature="e#2192#2214#0#HTML" expanded="true" />
-                <element signature="e#2344#2366#0#HTML" expanded="true" />
-                <element signature="e#2443#2507#0#HTML" expanded="true" />
-                <element signature="e#2706#2843#0#HTML" expanded="true" />
-                <element signature="e#3177#3218#0#HTML" expanded="true" />
-                <element signature="e#3266#3351#0#HTML" expanded="true" />
-                <element signature="e#3705#3727#0#HTML" expanded="true" />
+                <element signature="e#1420#1469#0#HTML" expanded="true" />
+                <element signature="e#1498#1559#0#HTML" expanded="true" />
+                <element signature="e#1589#1622#0#HTML" expanded="true" />
+                <element signature="e#1656#1695#0#HTML" expanded="true" />
+                <element signature="e#1736#1783#0#HTML" expanded="true" />
+                <element signature="e#2083#2126#0#HTML" expanded="true" />
+                <element signature="e#2170#2253#0#HTML" expanded="true" />
+                <element signature="e#2485#2544#0#HTML" expanded="true" />
+                <element signature="e#2574#2607#0#HTML" expanded="true" />
+                <element signature="e#2645#2714#0#HTML" expanded="true" />
+                <element signature="e#3017#3060#0#HTML" expanded="true" />
+                <element signature="e#3104#3187#0#HTML" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="createAdvancedSearchReports.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/reports/createAdvancedSearchReports.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="5" column="75" lean-forward="false" selection-start-line="5" selection-start-column="75" selection-end-line="5" selection-end-column="75" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Fintech/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="24" column="30" lean-forward="true" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Fintech/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="533">
-              <caret line="688" column="24" lean-forward="true" selection-start-line="688" selection-start-column="24" selection-end-line="688" selection-end-column="24" />
+            <state relative-caret-position="-1912">
+              <caret line="324" column="16" lean-forward="false" selection-start-line="324" selection-start-column="4" selection-end-line="324" selection-end-column="16" />
               <folding>
                 <element signature="e#0#64#0" expanded="true" />
                 <marker date="1493151489062" expanded="true" signature="2122:2311" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="sendMessage.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/messages/sendMessage.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="viewGroup.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/groups/viewGroup.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="775">
-              <caret line="31" column="9" lean-forward="true" selection-start-line="28" selection-start-column="4" selection-end-line="31" selection-end-column="9" />
-              <folding>
-                <element signature="e#79#178#0#HTML" expanded="true" />
-                <element signature="e#1204#1269#0#HTML" expanded="true" />
-                <element signature="e#1392#1457#0#HTML" expanded="true" />
-                <element signature="e#1609#1657#0#HTML" expanded="true" />
-                <element signature="e#1914#1960#0#HTML" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -149,8 +86,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>logged</find>
-      <find>color</find>
       <find>.filter</find>
       <find>__icontains</find>
       <find>contains</find>
@@ -175,10 +110,12 @@
       <find>pri</find>
       <find>logo</find>
       <find>{{</find>
-      <find>message</find>
-      <find>sign</find>
       <find>render</find>
       <find>username</find>
+      <find>message</find>
+      <find>is_private</find>
+      <find>createReport</find>
+      <find>sign</find>
     </findStrings>
     <replaceStrings>
       <replace>,</replace>
@@ -204,9 +141,9 @@
         <option value="$PROJECT_DIR$/templates/reports/viewReport.html" />
         <option value="$PROJECT_DIR$/templates/groups/viewGroup.html" />
         <option value="$PROJECT_DIR$/templates/registration/settings.html" />
+        <option value="$PROJECT_DIR$/Fintech/views.py" />
         <option value="$PROJECT_DIR$/templates/splash.html" />
         <option value="$PROJECT_DIR$/templates/index.html" />
-        <option value="$PROJECT_DIR$/Fintech/views.py" />
       </list>
     </option>
   </component>
@@ -218,9 +155,9 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-11" />
-    <option name="y" value="62" />
+    <option name="y" value="-11" />
     <option name="width" value="2080" />
-    <option name="height" value="1454" />
+    <option name="height" value="1462" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -669,7 +606,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-11" y="62" width="2080" height="1454" extended-state="0" />
+    <frame x="-11" y="-11" width="2080" height="1462" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18172984" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -678,7 +615,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32997677" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32794458" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -1037,35 +974,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/reports/viewReport.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="566">
-          <caret line="50" column="3" lean-forward="true" selection-start-line="50" selection-start-column="3" selection-end-line="51" selection-end-column="37" />
-          <folding>
-            <element signature="e#1975#2039#0#HTML" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/groups/viewGroup.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="775">
           <caret line="31" column="9" lean-forward="true" selection-start-line="28" selection-start-column="4" selection-end-line="31" selection-end-column="9" />
           <folding>
-            <element signature="e#79#178#0#HTML" expanded="true" />
-            <element signature="e#1204#1269#0#HTML" expanded="true" />
-            <element signature="e#1392#1457#0#HTML" expanded="true" />
-            <element signature="e#1609#1657#0#HTML" expanded="true" />
-            <element signature="e#1914#1960#0#HTML" expanded="true" />
+            <element signature="e#79#178#0#HTML" expanded="false" />
+            <element signature="e#1204#1269#0#HTML" expanded="false" />
+            <element signature="e#1392#1457#0#HTML" expanded="false" />
+            <element signature="e#1609#1657#0#HTML" expanded="false" />
+            <element signature="e#1914#1960#0#HTML" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Fintech/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="24" column="30" lean-forward="true" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1085,14 +1004,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/reports/createAdvancedSearchReports.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="5" column="75" lean-forward="false" selection-start-line="5" selection-start-column="75" selection-end-line="5" selection-end-column="75" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Fintech/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="654">
@@ -1101,10 +1012,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/registration/settings.html">
+    <entry file="file://$PROJECT_DIR$/templates/reports/createAdvancedSearchReports.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="4" column="14" lean-forward="true" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
+        <state relative-caret-position="125">
+          <caret line="5" column="75" lean-forward="false" selection-start-line="5" selection-start-column="75" selection-end-line="5" selection-end-column="75" />
           <folding />
         </state>
       </provider>
@@ -1117,43 +1028,70 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/registration/settings.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="4" column="14" lean-forward="true" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Fintech/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="24" column="30" lean-forward="true" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/reports/viewReport.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="574">
+          <caret line="50" column="3" lean-forward="true" selection-start-line="50" selection-start-column="3" selection-end-line="51" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Fintech/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1912">
+          <caret line="324" column="16" lean-forward="false" selection-start-line="324" selection-start-column="4" selection-end-line="324" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#64#0" expanded="true" />
+            <marker date="1493151489062" expanded="true" signature="2122:2311" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/splash.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="6" column="103" lean-forward="false" selection-start-line="6" selection-start-column="103" selection-end-line="6" selection-end-column="103" />
+        <state relative-caret-position="225">
+          <caret line="47" column="95" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="114" selection-end-column="14" />
           <folding>
             <element signature="e#1000#1137#0#HTML" expanded="true" />
-            <element signature="e#1225#1289#0#HTML" expanded="true" />
-            <element signature="e#1664#1705#0#HTML" expanded="true" />
-            <element signature="e#1753#1838#0#HTML" expanded="true" />
-            <element signature="e#2192#2214#0#HTML" expanded="true" />
-            <element signature="e#2344#2366#0#HTML" expanded="true" />
-            <element signature="e#2443#2507#0#HTML" expanded="true" />
-            <element signature="e#2706#2843#0#HTML" expanded="true" />
-            <element signature="e#3177#3218#0#HTML" expanded="true" />
-            <element signature="e#3266#3351#0#HTML" expanded="true" />
-            <element signature="e#3705#3727#0#HTML" expanded="true" />
+            <element signature="e#1420#1469#0#HTML" expanded="true" />
+            <element signature="e#1498#1559#0#HTML" expanded="true" />
+            <element signature="e#1589#1622#0#HTML" expanded="true" />
+            <element signature="e#1656#1695#0#HTML" expanded="true" />
+            <element signature="e#1736#1783#0#HTML" expanded="true" />
+            <element signature="e#2083#2126#0#HTML" expanded="true" />
+            <element signature="e#2170#2253#0#HTML" expanded="true" />
+            <element signature="e#2485#2544#0#HTML" expanded="true" />
+            <element signature="e#2574#2607#0#HTML" expanded="true" />
+            <element signature="e#2645#2714#0#HTML" expanded="true" />
+            <element signature="e#3017#3060#0#HTML" expanded="true" />
+            <element signature="e#3104#3187#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="473">
-          <caret line="66" column="56" lean-forward="false" selection-start-line="66" selection-start-column="52" selection-end-line="66" selection-end-column="56" />
+        <state relative-caret-position="251">
+          <caret line="66" column="76" lean-forward="false" selection-start-line="66" selection-start-column="76" selection-end-line="66" selection-end-column="76" />
           <folding>
             <element signature="n#style#0;n#button#4;n#div#1;n#div#0;n#nav#0;n#body#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Fintech/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="533">
-          <caret line="688" column="24" lean-forward="true" selection-start-line="688" selection-start-column="24" selection-end-line="688" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#64#0" expanded="true" />
-            <marker date="1493151489062" expanded="true" signature="2122:2311" ph="..." />
+            <element signature="n#style#0;n#p#1;n#div#1;n#div#0;n#nav#0;n#body#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
