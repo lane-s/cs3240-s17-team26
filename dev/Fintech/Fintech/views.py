@@ -105,7 +105,7 @@ def index(request):
                                                 | Q(permissions__in=request.user.reportpermissions_set.all())
                                                 | Q(
                 permissions__in=[item for sublist in groupPermissions for item in sublist]))
-        return render(request, 'index.html', {'report_list': report_list, 'has_messages': has_messages}, {'username': username})
+        return render(request, 'splash.html', {'report_list': report_list, 'has_messages': has_messages,})
 
 
 def signupform(request):
@@ -176,7 +176,7 @@ def createGroup(request):
     else:
         group_form = GroupForm(prefix="group_form")
 
-    return render(request, 'groups/createGroup.html', {'group_form': group_form})
+    return render(request, 'groups/createGroup.html', {'group_form': group_form}, )
 
 
 @login_required
@@ -192,9 +192,16 @@ def viewGroups(request):
     else:
         group_list = request.user.groups.all()
 
+    has_messages = False
+    message_list = Message.objects.filter(receiver=request.user)
+    for m in message_list:
+        if m.opened == False:
+            has_messages = True
+            break
+
     return render(request, 'groups/viewGroups.html',
                   {'group_list': group_list, 'site_manager_group': site_manager_group,
-                   'suspended_user_group': suspended_user_group})
+                   'suspended_user_group': suspended_user_group,'has_messages': has_messages,},)
 
 
 @login_required
@@ -207,9 +214,14 @@ def viewGroup(request, pk):
 
     if not in_group and not is_site_manager(request.user):
         return redirect('groups')
-
+    has_messages = False
+    message_list = Message.objects.filter(receiver=request.user)
+    for m in message_list:
+        if m.opened == False:
+            has_messages = True
+            break
     return render(request, 'groups/viewGroup.html',
-                  {'group': group, 'user_list': user_list, 'user_id': request.user.pk, 'in_group': in_group})
+                  {'group': group, 'user_list': user_list, 'user_id': request.user.pk, 'in_group': in_group, 'has_messages': has_messages})
 
 
 @login_required
@@ -237,7 +249,12 @@ def leaveGroup(request, pk, user_id):
             else:
                 messages.success(request, "User removed from group")
                 return redirect('viewGroup', pk=group.pk)
-
+    has_messages = False
+    message_list = Message.objects.filter(receiver=request.user)
+    for m in message_list:
+        if m.opened == False:
+            has_messages = True
+            break
     return redirect('groups')
 
 
@@ -247,7 +264,12 @@ def deleteGroup(request, pk):
 
     if is_site_manager(request.user) and group.name != "Site Managers":
         group.delete()
-
+    has_messages = False
+    message_list = Message.objects.filter(receiver=request.user)
+    for m in message_list:
+        if m.opened == False:
+            has_messages = True
+            break
     return redirect('groups')
 
 
@@ -279,8 +301,13 @@ def editGroup(request, pk):
 
     else:
         add_user_form = GroupAddUser(prefix="add_user_form")
-
-    return render(request, 'groups/editGroup.html', {'group': group, 'form': add_user_form})
+    has_messages = False
+    message_list = Message.objects.filter(receiver=request.user)
+    for m in message_list:
+        if m.opened == False:
+            has_messages = True
+            break
+    return render(request, 'groups/editGroup.html', {'group': group, 'form': add_user_form, 'has_messages': has_messages})
 
 
 FileFormset = inlineformset_factory(Report, File, form=FileForm, extra=0)
@@ -290,7 +317,12 @@ FileFormset = inlineformset_factory(Report, File, form=FileForm, extra=0)
 @request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
 def createReport(request):
     company_user = CompanyDetails.objects.filter(user=request.user)
-
+    has_messages = False
+    message_list = Message.objects.filter(receiver=request.user)
+    for m in message_list:
+        if m.opened == False:
+            has_messages = True
+            break
     if company_user or is_site_manager(request.user):
         if request.method == 'POST':
             report_form = ReportForm(request.POST, prefix="report_form")
@@ -329,7 +361,7 @@ def createReport(request):
             permissions_form = ReportPermissionsForm(prefix="permissions_form")
             file_formset = FileFormset(prefix="file_formset")
         return render(request, 'reports/createReport.html',
-                      {'report_form': report_form, 'permissions_form': permissions_form, 'file_formset': file_formset})
+                      {'report_form': report_form, 'permissions_form': permissions_form, 'file_formset': file_formset, 'has_messages': has_messages})
 
     else:
         return redirect('index')
@@ -338,20 +370,32 @@ def createReport(request):
 @login_required
 @request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
 def viewReport(request, pk):
+    has_messages = False
+    message_list = Message.objects.filter(receiver=request.user)
+    for m in message_list:
+        if m.opened == False:
+            has_messages = True
+            break
     report = get_object_or_404(Report, pk=pk)
     is_owner = report.owner.pk == request.user.pk
     if not report.is_private or is_owner or is_site_manager(request.user) or can_view_report(request.user, report):
         unencrypted_files = File.objects.filter(report__pk=report.pk, is_encrypted=False)
         # checks if user is in report group or is a collaborator
         return render(request, 'reports/viewReport.html',
-                      {'report': report, 'is_owner': is_owner, 'unencrypted_files': unencrypted_files})
+                      {'report': report, 'is_owner': is_owner, 'unencrypted_files': unencrypted_files, 'has_messages': has_messages})
     else:
-        return redirect('index')
+        return redirect('index', {'has_messages': has_messages})
 
 
 @login_required
 @request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
 def editReport(request, pk):
+    has_messages = False
+    message_list = Message.objects.filter(receiver=request.user)
+    for m in message_list:
+        if m.opened == False:
+            has_messages = True
+            break
     report = get_object_or_404(Report, pk=pk)
 
     # Apparently only managers should be allowed to edit reports
@@ -384,12 +428,18 @@ def editReport(request, pk):
 
     return render(request, 'reports/editReport.html',
                   {'report_form': report_form, 'permissions_form': permissions_form, 'report': report,
-                   'file_formset': file_formset})
+                   'file_formset': file_formse, 'has_messages': has_messagest})
 
 
 @login_required
 @request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
 def deleteReport(request, pk):
+    has_messages = False
+    message_list = Message.objects.filter(receiver=request.user)
+    for m in message_list:
+        if m.opened == False:
+            has_messages = True
+            break
     report = get_object_or_404(Report, pk=pk)
 
     if is_site_manager(request.user) or report.owner.pk == request.user.pk:
@@ -437,6 +487,12 @@ def get_query(query_string, search_fields):
 @login_required
 @request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
 def search(request):
+    has_messages = False
+    message_list = Message.objects.filter(receiver=request.user)
+    for m in message_list:
+        if m.opened == False:
+            has_messages = True
+            break
     query_string = ''
     found_entries = None
     if request.method == 'GET':
@@ -453,19 +509,31 @@ def search(request):
                     found_entries.remove(each)
 
     return render(request, 'reports/searchReports.html',
-                          {'query_string': query_string, 'found_entries': found_entries})
+                          {'query_string': query_string, 'found_entries': found_entries, 'has_messages': has_messages})
 
 
 @login_required
 @request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
 def createAdvancedSearch(request):
+    has_messages = False
+    message_list = Message.objects.filter(receiver=request.user)
+    for m in message_list:
+        if m.opened == False:
+            has_messages = True
+            break
     advanced_search_form = advancedSearchForm(prefix="advanced_search_form")
-    return render(request, 'reports/createAdvancedSearchReports.html', {'advanced_search_form': advanced_search_form})
+    return render(request, 'reports/createAdvancedSearchReports.html', {'advanced_search_form': advanced_search_form, 'has_messages': has_messages})
 
 
 @login_required
 @request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
 def advancedSearch(request):
+    has_messages = False
+    message_list = Message.objects.filter(receiver=request.user)
+    for m in message_list:
+        if m.opened == False:
+            has_messages = True
+            break
     found_entries = Report.objects
     search_form = None
     if request.method == 'POST':
@@ -481,7 +549,7 @@ def advancedSearch(request):
                 if each.is_private:
                     found_entries.remove(each)
 
-    return render(request, 'reports/advancedSearchReports.html', {'found_entries': found_entries}, {'search_form': search_form})
+    return render(request, 'reports/advancedSearchReports.html', {'found_entries': found_entries}, {'search_form': search_form, 'has_messages': has_messages})
 
 
 @login_required
@@ -507,7 +575,7 @@ def sendMessage(request):
             return redirect('viewMessages')
     else:
         message_form = MessageForm(prefix="message_form")
-    return render(request, 'messages/sendMessage.html', {'message_form': message_form})
+    return render(request, 'messages/sendMessage.html', {'message_form': message_form, 'has_messages': has_messages})
 
 
 @login_required
@@ -525,13 +593,25 @@ def viewMessage(request, pk):
 @login_required
 @request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
 def viewMessages(request):
+    has_messages = False
+    message_list = Message.objects.filter(receiver=request.user)
+    for m in message_list:
+        if m.opened == False:
+            has_messages = True
+            break
     message_list = Message.objects.filter(receiver=request.user).order_by('-timestamp')
-    return render(request, 'messages/viewMessages.html', {'message_list': message_list})
+    return render(request, 'messages/viewMessages.html', {'message_list': message_list, 'has_messages': has_messages})
 
 
 @login_required
 @request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
 def deleteMessage(request, pk):
+    has_messages = False
+    message_list = Message.objects.filter(receiver=request.user)
+    for m in message_list:
+        if m.opened == False:
+            has_messages = True
+            break
     message = get_object_or_404(Message, pk=pk)
     if message.receiver == request.user:
         message.delete()
@@ -541,6 +621,12 @@ def deleteMessage(request, pk):
 @login_required
 @request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
 def decryptMessage(request, pk):
+    has_messages = False
+    message_list = Message.objects.filter(receiver=request.user)
+    for m in message_list:
+        if m.opened == False:
+            has_messages = True
+            break
     message = get_object_or_404(Message, pk=pk)
     message.encrypt = False
     content = message.content
@@ -549,12 +635,18 @@ def decryptMessage(request, pk):
     decrypted_content = private_key.decrypt(ast.literal_eval(content)).decode('utf-8')
     message.content = decrypted_content
     message.save()
-    return render(request, 'messages/viewMessage.html', {'message': message})
+    return render(request, 'messages/viewMessage.html', {'message': message, 'has_messages': has_messages})
 
 
 @login_required
 @request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
 def settings(request):
-    return render(request, 'registration/settings.html')
+    has_messages = False
+    message_list = Message.objects.filter(receiver=request.user)
+    for m in message_list:
+        if m.opened == False:
+            has_messages = True
+            break
+    return render(request, 'registration/settings.html', {'has_messages': has_messages})
 
 
