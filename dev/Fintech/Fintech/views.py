@@ -449,6 +449,12 @@ def advancedSearch(request):
                 if value != "" and value != None:
                     entry_query = get_query(value, [field])
                     found_entries = found_entries.filter(entry_query)
+            found_entries = list(found_entries)
+            for each in found_entries:
+                if each.is_private:
+                    found_entries.remove(each)
+
+
     return render(request, 'reports/advancedSearchReports.html',{'found_entries': found_entries})
 
 
