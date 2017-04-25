@@ -105,7 +105,8 @@ def index(request):
                                                 | Q(permissions__in=request.user.reportpermissions_set.all())
                                                 | Q(
                 permissions__in=[item for sublist in groupPermissions for item in sublist]))
-        return render(request, 'splash.html', {'report_list': report_list, 'has_messages': has_messages,})
+        return render(request, 'splash.html',
+                      {'report_list': report_list, 'has_messages': has_messages, 'username': username})
 
 
 def signupform(request):
@@ -162,6 +163,9 @@ def signupform(request):
 @login_required
 @request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
 def createGroup(request):
+    username = None
+    if request.user.is_authenticated():
+        username = request.user
     if request.method == 'POST':
         group_form = GroupForm(request.POST, prefix="group_form")
 
@@ -176,12 +180,15 @@ def createGroup(request):
     else:
         group_form = GroupForm(prefix="group_form")
 
-    return render(request, 'groups/createGroup.html', {'group_form': group_form}, )
+    return render(request, 'groups/createGroup.html', {'group_form': group_form, 'username': username}, )
 
 
 @login_required
 @request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
 def viewGroups(request):
+    username = None
+    if request.user.is_authenticated():
+        username = request.user
     site_manager_group = None
     suspended_user_group = None
 
@@ -201,12 +208,15 @@ def viewGroups(request):
 
     return render(request, 'groups/viewGroups.html',
                   {'group_list': group_list, 'site_manager_group': site_manager_group,
-                   'suspended_user_group': suspended_user_group,'has_messages': has_messages,},)
+                   'suspended_user_group': suspended_user_group, 'has_messages': has_messages, 'username': username})
 
 
 @login_required
 @request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
 def viewGroup(request, pk):
+    username = None
+    if request.user.is_authenticated():
+        username = request.user
     group = get_object_or_404(Group, pk=pk)
     user_list = User.objects.filter(groups__pk=pk)
 
@@ -221,7 +231,8 @@ def viewGroup(request, pk):
             has_messages = True
             break
     return render(request, 'groups/viewGroup.html',
-                  {'group': group, 'user_list': user_list, 'user_id': request.user.pk, 'in_group': in_group, 'has_messages': has_messages})
+                  {'group': group, 'user_list': user_list, 'user_id': request.user.pk, 'in_group': in_group,
+                   'has_messages': has_messages, 'username': username})
 
 
 @login_required
@@ -249,12 +260,7 @@ def leaveGroup(request, pk, user_id):
             else:
                 messages.success(request, "User removed from group")
                 return redirect('viewGroup', pk=group.pk)
-    has_messages = False
-    message_list = Message.objects.filter(receiver=request.user)
-    for m in message_list:
-        if m.opened == False:
-            has_messages = True
-            break
+
     return redirect('groups')
 
 
@@ -266,10 +272,7 @@ def deleteGroup(request, pk):
         group.delete()
     has_messages = False
     message_list = Message.objects.filter(receiver=request.user)
-    for m in message_list:
-        if m.opened == False:
-            has_messages = True
-            break
+
     return redirect('groups')
 
 
@@ -307,7 +310,11 @@ def editGroup(request, pk):
         if m.opened == False:
             has_messages = True
             break
-    return render(request, 'groups/editGroup.html', {'group': group, 'form': add_user_form, 'has_messages': has_messages})
+    username = None
+    if request.user.is_authenticated():
+        username = request.user
+    return render(request, 'groups/editGroup.html',
+                  {'group': group, 'form': add_user_form, 'has_messages': has_messages, 'username': username})
 
 
 FileFormset = inlineformset_factory(Report, File, form=FileForm, extra=0)
@@ -317,6 +324,9 @@ FileFormset = inlineformset_factory(Report, File, form=FileForm, extra=0)
 @request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
 def createReport(request):
     company_user = CompanyDetails.objects.filter(user=request.user)
+    username = None
+    if request.user.is_authenticated():
+        username = request.user
     has_messages = False
     message_list = Message.objects.filter(receiver=request.user)
     for m in message_list:
@@ -361,15 +371,19 @@ def createReport(request):
             permissions_form = ReportPermissionsForm(prefix="permissions_form")
             file_formset = FileFormset(prefix="file_formset")
         return render(request, 'reports/createReport.html',
-                      {'report_form': report_form, 'permissions_form': permissions_form, 'file_formset': file_formset, 'has_messages': has_messages})
+                      {'report_form': report_form, 'permissions_form': permissions_form, 'file_formset': file_formset,
+                       'has_messages': has_messages, 'username': username})
 
     else:
-        return redirect('index')
+        return redirect('index', {'has_messages': has_messages, 'username': username})
 
 
 @login_required
 @request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
 def viewReport(request, pk):
+    username = None
+    if request.user.is_authenticated():
+        username = request.user
     has_messages = False
     message_list = Message.objects.filter(receiver=request.user)
     for m in message_list:
@@ -382,14 +396,18 @@ def viewReport(request, pk):
         unencrypted_files = File.objects.filter(report__pk=report.pk, is_encrypted=False)
         # checks if user is in report group or is a collaborator
         return render(request, 'reports/viewReport.html',
-                      {'report': report, 'is_owner': is_owner, 'unencrypted_files': unencrypted_files, 'has_messages': has_messages})
+                      {'report': report, 'is_owner': is_owner, 'unencrypted_files': unencrypted_files,
+                       'has_messages': has_messages, 'username': username})
     else:
-        return redirect('index', {'has_messages': has_messages})
+        return redirect('index', {'has_messages': has_messages, 'username': username})
 
 
 @login_required
 @request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
 def editReport(request, pk):
+    username = None
+    if request.user.is_authenticated():
+        username = request.user
     has_messages = False
     message_list = Message.objects.filter(receiver=request.user)
     for m in message_list:
@@ -420,7 +438,7 @@ def editReport(request, pk):
                 f.save()
 
             messages.success(request, "Report edited")
-            return redirect('viewReport', pk=report.pk)
+            return redirect('viewReport', pk=report.pk, )
     else:
         report_form = ReportForm(instance=report)
         permissions_form = ReportPermissionsForm(instance=report.permissions)
@@ -428,7 +446,7 @@ def editReport(request, pk):
 
     return render(request, 'reports/editReport.html',
                   {'report_form': report_form, 'permissions_form': permissions_form, 'report': report,
-                   'file_formset': file_formse, 'has_messages': has_messagest})
+                   'file_formset': file_formset, 'has_messages': has_messages, 'username': username})
 
 
 @login_required
@@ -487,6 +505,9 @@ def get_query(query_string, search_fields):
 @login_required
 @request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
 def search(request):
+    username = None
+    if request.user.is_authenticated():
+        username = request.user
     has_messages = False
     message_list = Message.objects.filter(receiver=request.user)
     for m in message_list:
@@ -499,8 +520,8 @@ def search(request):
         query_string = request.GET.get('q')
         if query_string != '':
             entry_query = get_query(query_string,
-                                        ['company_name', 'current_projects', 'title', 'timestamp', 'company_ceo',
-                                         'company_phone', 'company_location', 'company_country', 'sector', 'industry'])
+                                    ['company_name', 'current_projects', 'title', 'timestamp', 'company_ceo',
+                                     'company_phone', 'company_location', 'company_country', 'sector', 'industry'])
 
             found_entries = Report.objects.filter(entry_query)
             found_entries = list(found_entries)
@@ -509,12 +530,16 @@ def search(request):
                     found_entries.remove(each)
 
     return render(request, 'reports/searchReports.html',
-                          {'query_string': query_string, 'found_entries': found_entries, 'has_messages': has_messages})
+                  {'query_string': query_string, 'found_entries': found_entries, 'has_messages': has_messages,
+                   'username': username})
 
 
 @login_required
 @request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
 def createAdvancedSearch(request):
+    username = None
+    if request.user.is_authenticated():
+        username = request.user
     has_messages = False
     message_list = Message.objects.filter(receiver=request.user)
     for m in message_list:
@@ -522,12 +547,16 @@ def createAdvancedSearch(request):
             has_messages = True
             break
     advanced_search_form = advancedSearchForm(prefix="advanced_search_form")
-    return render(request, 'reports/createAdvancedSearchReports.html', {'advanced_search_form': advanced_search_form, 'has_messages': has_messages})
+    return render(request, 'reports/createAdvancedSearchReports.html',
+                  {'advanced_search_form': advanced_search_form, 'has_messages': has_messages, 'username': username})
 
 
 @login_required
 @request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
 def advancedSearch(request):
+    username = None
+    if request.user.is_authenticated():
+        username = request.user
     has_messages = False
     message_list = Message.objects.filter(receiver=request.user)
     for m in message_list:
@@ -549,12 +578,16 @@ def advancedSearch(request):
                 if each.is_private:
                     found_entries.remove(each)
 
-    return render(request, 'reports/advancedSearchReports.html', {'found_entries': found_entries}, {'search_form': search_form, 'has_messages': has_messages})
+    return render(request, 'reports/advancedSearchReports.html', {'found_entries': found_entries},
+                  {'search_form': search_form, 'has_messages': has_messages, 'username': username})
 
 
 @login_required
 @request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
 def sendMessage(request):
+    username = None
+    if request.user.is_authenticated():
+        username = request.user
     if request.method == 'POST':
         message_form = MessageForm(request.POST, prefix="message_form")
         if message_form.is_valid():
@@ -575,24 +608,30 @@ def sendMessage(request):
             return redirect('viewMessages')
     else:
         message_form = MessageForm(prefix="message_form")
-    return render(request, 'messages/sendMessage.html', {'message_form': message_form, 'has_messages': has_messages})
+    return render(request, 'messages/sendMessage.html', {'message_form': message_form, 'username': username})
 
 
 @login_required
 @request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
 def viewMessage(request, pk):
+    username = None
+    if request.user.is_authenticated():
+        username = request.user
     message = get_object_or_404(Message, pk=pk)
     if message.encrypt:
         return render(request, 'messages/encryptedMessage.html', {'message': message})
     else:
         message.opened = True
         message.save()
-        return render(request, 'messages/viewMessage.html', {'message': message})
+        return render(request, 'messages/viewMessage.html', {'message': message, 'username': username})
 
 
 @login_required
 @request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
 def viewMessages(request):
+    username = None
+    if request.user.is_authenticated():
+        username = request.user
     has_messages = False
     message_list = Message.objects.filter(receiver=request.user)
     for m in message_list:
@@ -600,7 +639,7 @@ def viewMessages(request):
             has_messages = True
             break
     message_list = Message.objects.filter(receiver=request.user).order_by('-timestamp')
-    return render(request, 'messages/viewMessages.html', {'message_list': message_list, 'has_messages': has_messages})
+    return render(request, 'messages/viewMessages.html', {'message_list': message_list, 'has_messages': has_messages, 'username': username})
 
 
 @login_required
@@ -621,6 +660,9 @@ def deleteMessage(request, pk):
 @login_required
 @request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
 def decryptMessage(request, pk):
+    username = None
+    if request.user.is_authenticated():
+        username = request.user
     has_messages = False
     message_list = Message.objects.filter(receiver=request.user)
     for m in message_list:
@@ -635,18 +677,19 @@ def decryptMessage(request, pk):
     decrypted_content = private_key.decrypt(ast.literal_eval(content)).decode('utf-8')
     message.content = decrypted_content
     message.save()
-    return render(request, 'messages/viewMessage.html', {'message': message, 'has_messages': has_messages})
+    return render(request, 'messages/viewMessage.html', {'message': message, 'has_messages': has_messages, 'username': username})
 
 
 @login_required
 @request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
 def settings(request):
+    username = None
+    if request.user.is_authenticated():
+        username = request.user
     has_messages = False
     message_list = Message.objects.filter(receiver=request.user)
     for m in message_list:
         if m.opened == False:
             has_messages = True
             break
-    return render(request, 'registration/settings.html', {'has_messages': has_messages})
-
-
+    return render(request, 'registration/settings.html', {'has_messages': has_messages, 'username': username})
