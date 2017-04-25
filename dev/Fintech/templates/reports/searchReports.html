@@ -2,7 +2,7 @@
 {% load bootstrap3 %}
 
 {% block content %}
-    {% if found_entries %}
+    {% if found_entries and query_string != '' %}
         <h1 style="width: 90%; padding: 0.5%;border: solid black 2px; background-color: green; font-size: xx-large">
             Search Results for: "{{ query_string }}"</h1>
         {% for f in found_entries %}
@@ -18,8 +18,9 @@
                 </aside>
             </div>
         {% endfor %}
-    {% else %}
+    {% elif not found_entries and query_string != '' %}
         <h3> No Search Results Found for "{{ query_string }}" </h3>
-
+    {% elif query_string == '' %}
+        <h3> You Did Not Insert a Search Keyword </h3>
     {% endif %}
 {% endblock %}
