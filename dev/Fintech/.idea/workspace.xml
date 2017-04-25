@@ -64,10 +64,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="viewMessages.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="viewMessages.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/messages/viewMessages.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
+            <state relative-caret-position="425">
               <caret line="17" column="171" lean-forward="false" selection-start-line="17" selection-start-column="171" selection-end-line="17" selection-end-column="171" />
               <folding>
                 <element signature="n#style#0;n#h2#0;n#section#0;n#aside#0;n#div#0;n#!!top" expanded="true" />
@@ -76,12 +76,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Fintech/models.py">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Fintech/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-225">
-              <caret line="24" column="30" lean-forward="true" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="30" />
-              <folding />
+            <state relative-caret-position="591">
+              <caret line="606" column="30" lean-forward="false" selection-start-line="606" selection-start-column="30" selection-end-line="606" selection-end-column="30" />
+              <folding>
+                <element signature="e#0#64#0" expanded="true" />
+                <marker date="1493157686573" expanded="true" signature="2122:2311" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -153,8 +156,8 @@
         <option value="$PROJECT_DIR$/templates/registration/settings.html" />
         <option value="$PROJECT_DIR$/templates/splash.html" />
         <option value="$PROJECT_DIR$/templates/index.html" />
-        <option value="$PROJECT_DIR$/Fintech/views.py" />
         <option value="$PROJECT_DIR$/templates/messages/viewMessages.html" />
+        <option value="$PROJECT_DIR$/Fintech/views.py" />
       </list>
     </option>
   </component>
@@ -677,7 +680,7 @@
           <caret line="118" column="134" lean-forward="false" selection-start-line="118" selection-start-column="118" selection-end-line="118" selection-end-column="134" />
           <folding>
             <element signature="e#0#64#0" expanded="true" />
-            <marker date="1493157089408" expanded="true" signature="2122:2311" ph="..." />
+            <marker date="1493157686573" expanded="true" signature="2122:2311" ph="..." />
           </folding>
         </state>
       </provider>
@@ -712,7 +715,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#64#0" expanded="true" />
-            <marker date="1493157089408" expanded="true" signature="2122:2311" ph="..." />
+            <marker date="1493157686573" expanded="true" signature="2122:2311" ph="..." />
           </folding>
         </state>
       </provider>
@@ -792,7 +795,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#64#0" expanded="true" />
-            <marker date="1493157089408" expanded="true" signature="2122:2311" ph="..." />
+            <marker date="1493157686573" expanded="true" signature="2122:2311" ph="..." />
           </folding>
         </state>
       </provider>
@@ -991,14 +994,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/messages/sendMessage.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Fintech/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="654">
@@ -1053,17 +1048,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Fintech/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="541">
-          <caret line="640" column="24" lean-forward="true" selection-start-line="640" selection-start-column="24" selection-end-line="640" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#64#0" expanded="true" />
-            <marker date="1493157089408" expanded="true" signature="2122:2311" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/splash.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="625">
@@ -1085,14 +1069,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Fintech/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-225">
-          <caret line="24" column="30" lean-forward="true" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/reports/searchReports.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="575">
@@ -1101,12 +1077,39 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Fintech/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-225">
+          <caret line="24" column="30" lean-forward="true" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/messages/sendMessage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/messages/viewMessages.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
+        <state relative-caret-position="425">
           <caret line="17" column="171" lean-forward="false" selection-start-line="17" selection-start-column="171" selection-end-line="17" selection-end-column="171" />
           <folding>
             <element signature="n#style#0;n#h2#0;n#section#0;n#aside#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Fintech/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="591">
+          <caret line="606" column="30" lean-forward="false" selection-start-line="606" selection-start-column="30" selection-end-line="606" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#64#0" expanded="true" />
+            <marker date="1493157686573" expanded="true" signature="2122:2311" ph="..." />
           </folding>
         </state>
       </provider>

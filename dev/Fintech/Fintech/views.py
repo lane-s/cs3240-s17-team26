@@ -603,6 +603,8 @@ def sendMessage(request):
                 enc_content = pubkey.encrypt(content.encode('utf-8'), 32)
                 message.content = str(enc_content)
                 message.save()
+            else:
+                message.save()
 
             messages.success(request, "Message sent")
             return redirect('viewMessages')
