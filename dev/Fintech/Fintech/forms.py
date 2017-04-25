@@ -75,8 +75,6 @@ class MessageForm(ModelForm):
 
 class advancedSearchForm(Form):
     title = CharField(label= 'Title', required=False, max_length=30,)
-    timestart = DateField(label= 'Start Date Range', required=False,)
-    timeend = DateField(label= 'End Date Range', required=False,)
     company_name = CharField(label= 'Company Name', max_length=30, required=False,)
     company_ceo = CharField(label= 'Company CEO', max_length=30, required=False,)
     company_phone = CharField(label= 'Company Phone', max_length=30, required=False,)

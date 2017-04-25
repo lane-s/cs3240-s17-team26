@@ -440,27 +440,16 @@ def createAdvancedSearch(request):
 
 
 def advancedSearch(request):
-    found_entries = None
-    search_values_array = []
-    search_filters_array = []
+    found_entries = Report.objects
     if request.method == 'POST':
         search_form = advancedSearchForm(request.POST, prefix="advanced_search_form")
         if search_form.is_valid():
-            for field in search_form.fields:
-                print(field)
-                search_filters_array += field
-            for val in search_form:
-                search_values_array += val
-            search_dict = {}
-            for each in range(len(search_filters_array)):
-                search_dict[search_filters_array[each]] = search_values_array[each]
-            if search_filters_array:
-                for filters in search_filters_array:
-                    if search_dict[filters] != filters:
-                        entry_query = get_query(search_dict[filters], filters)
-                        found_entries = found_entries.filter(entry_query)
-    return render(request, 'reports/advancedSearchReports.html',
-                      {'search_filters': search_filters_array, 'search_values': search_values_array, 'found_entries': found_entries})
+            search_form = search_form.cleaned_data
+            for field, value in search_form.items():
+                if value != "" and value != None:
+                    entry_query = get_query(value, [field])
+                    found_entries = found_entries.filter(entry_query)
+    return render(request, 'reports/advancedSearchReports.html',{'found_entries': found_entries})
 
 
 def sendMessage(request):
@@ -514,6 +503,5 @@ def decryptMessage(request, pk):
     private_key = RSA.importKey(user_details.key)
     decrypted_content = private_key.decrypt(ast.literal_eval(content)).decode('utf-8')
     message.content = decrypted_content
-    message.opened = True
     message.save()
     return render(request, 'messages/viewMessage.html', {'message': message})
