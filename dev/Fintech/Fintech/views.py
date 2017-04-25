@@ -63,6 +63,9 @@ def user_context_processor(request):
 
 
 def index(request):
+    username = None
+    if request.user.is_authenticated():
+        username = request.user
     # This is wasteful, but it's what the TA is requiring us to do as far as I can tell
     if not Group.objects.filter(name="Site Managers"):
         Group.objects.create(name="Site Managers")
@@ -102,7 +105,7 @@ def index(request):
                                                 | Q(permissions__in=request.user.reportpermissions_set.all())
                                                 | Q(
                 permissions__in=[item for sublist in groupPermissions for item in sublist]))
-        return render(request, 'splash.html', {'report_list': report_list, 'has_messages': has_messages})
+        return render(request, 'index.html', {'report_list': report_list, 'has_messages': has_messages}, {'username': username})
 
 
 def signupform(request):
@@ -464,6 +467,7 @@ def createAdvancedSearch(request):
 @request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
 def advancedSearch(request):
     found_entries = Report.objects
+    search_form = None
     if request.method == 'POST':
         search_form = advancedSearchForm(request.POST, prefix="advanced_search_form")
         if search_form.is_valid():
@@ -477,7 +481,7 @@ def advancedSearch(request):
                 if each.is_private:
                     found_entries.remove(each)
 
-    return render(request, 'reports/advancedSearchReports.html', {'found_entries': found_entries})
+    return render(request, 'reports/advancedSearchReports.html', {'found_entries': found_entries}, {'search_form': search_form})
 
 
 @login_required
@@ -551,6 +555,6 @@ def decryptMessage(request, pk):
 @login_required
 @request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
 def settings(request):
-    return None
+    return render(request, 'registration/settings.html')
 
 
