@@ -16,6 +16,7 @@ downloads/
 eggs/
 .eggs/
 dev/bin/
+dev/media/reportFiles
 dev/include/
 dev/lib/
 lib64/
