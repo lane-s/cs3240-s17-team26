@@ -1,21 +1,6 @@
 {% extends 'index.html' %}
 {% load bootstrap3 %}
-{% block message %}
-                {% if has_messages %}
 
-                <button class="btn btn-primary navbar-btn navbar-left" type="button" style="background-color: white; border-color: silver"><a href="/messages/" style="color: black; text-decoration: none;">
-                    Inbox </a>
-                    <span class="badge" style="background-color: green; color: white">New Messages</span>
-                </button>
-
-                {% else %}
-                <button class="btn btn-primary navbar-btn navbar-left" type="button"
-                        style="margin-right: 1%;background-color: white; border-color: silver"><a
-                        href="/messages/" style="color: black; text-decoration: none;">
-                    Inbox </a>
-                </button>
-                {% endif %}
-                {% endblock %}
 
 {% block content %}
     {% if not logged_in %}
@@ -47,28 +32,55 @@
             {% if report_list %}
                 <p2><a style="margin-left: 3%; margin-top: 1%;background-color: green;" class="btn btn-primary btn-lg"
                        href="/reports/new/" role="button">New Report</a></p2>
-                {% for r in report_list %}
-                    <div class="row">
-                        <aside class="col-md-4">
-                            <section class="report_info">
-                                <h2>
-                                    <li style="margin-left: 18%; margin-top: 1%;"><a
-                                            style="margin-left: -5%;color: green; text-decoration: underline; font-size: x-large"
-                                            href={% url 'viewReport' r.pk %}>{{ r.title }}</a></li>
-                                </h2>
-                            </section>
-                        </aside>
-                    </div>
-                {% endfor %}
+                <div style="width: 80%; margin: auto; margin-top: 3%;">
+                    <table style="width: 48%; margin:auto; float:left; margin-right: 1%">
+                        <tr style="border: solid dimgray 1px">
+                            <th style="background-color: green; color:white;alignment: center; margin: auto"><h2
+                                    style="width:50%; margin:auto; font-size: 28pt">Private
+                                Reports</h2></th>
+                        </tr>
+                        {% for r in report_list %}
+                            {% if r.is_private %}
+                                <tr>
+                                <td>
+                                <li style="margin-left: 3%; font-size: x-large"><a
+                                        style="margin-left: -5%; color: green; text-decoration: underline; font-size: 25pt"
+                                        href={% url 'viewReport' r.pk %}>{{ r.title }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+
+                    </table>
+
+                    <table style="width: 48%; margin:auto;float:left; margin-left: 1%">
+                        <tr style="border: solid dimgray 1px">
+                            <th><h2 style="background-color: green; color: white;text-align: center; width: 100%; margin:auto; font-size: 28pt">Public
+                                Reports</h2></th>
+                        </tr>
+                        {% for r in report_list %}
+                            {% if not r.is_private %}
+                                <tr>
+                                <td>
+                                <li style="margin-left: 3%; font-size: x-large"><a
+                                        style="margin-left: -5%; color: green; text-decoration: underline; font-size: 25pt"
+                                        href={% url 'viewReport' r.pk %}>{{ r.title }}</a>
+                                </li>
+
+                            {% endif %}
+                        {% endfor %}
+                        </td>
+                        </tr>
+                    </table>
+                </div>
             {% else %}
                 {% if suspended_user %}
                     <h3 style="margin-top: 1%"> Your account was suspended. Please contact a site manager.
-                </h3>
+                    </h3>
                 {% else %}
-                <h3 style="margin-top: 1%"> There are no reports to view.
-                </h3>
-                <p2><a style="margin-left: 3%; margin-top: 1%;background-color: green;" class="btn btn-primary btn-lg"
-                       href="/reports/new/" role="button">New Report</a></p2>
+                    <h3 style="margin-top: 1%"> There are no reports to view.
+                    </h3>
+                    <p2><a style="margin-left: 3%; margin-top: 1%;background-color: green;"
+                           class="btn btn-primary btn-lg"
+                           href="/reports/new/" role="button">New Report</a></p2>
                 {% endif %}
             {% endif %}
 
@@ -93,9 +105,9 @@
             {% else %}
                 {% if suspended_user %}
                     <h3 style="margin-top: 1%"> Your account was suspended. Please contact a site manager.
-                </h3>
+                    </h3>
                 {% else %}
-                <h3> There are no reports to view. </h3>
+                    <h3> There are no reports to view. </h3>
                 {% endif %}
             {% endif %}
         {% endif %}

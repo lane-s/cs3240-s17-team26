@@ -3,37 +3,44 @@
 
 {% block content %}
 
-	<h1 style="background-color: silver; color: white; padding: 0.5%; border: solid black 2px; width: 80%;"> {{group.name}} </h1>
+    <h1 style="background-color: silver; color: white; padding: 0.5%; border: solid black 2px; width: 80%;"> {{ group.name }} </h1>
 
-	<h2 style="margin-left: 12%; font-size: x-large;"> Users: </h2>
-	{% for u in user_list %}
-		<div class="row">
-			<aside class="col-md-4">
-				<section class="user_info">
-					<h2>
-						<li style="margin-left: 42%; color: green; font-size: large;">
-							<p2 style="color: black; font-size: large;">
-								{{ u.username }}
-								{% if site_manager and group.name != "Site Managers" and u.pk != user_id %}
-									<span><a style="display: inline; color: red" class="glyphicon glyphicon-remove" href="{% url 'leaveGroup' group.pk u.pk %}" role="button"></a></span>
-								{% endif %}
-							</p2>
-						</li>
+    <h2 style="margin-left: 12%; font-size: x-large;"> Users: </h2>
+    {% for u in user_list %}
+        <div class="row">
+            <aside class="col-md-4">
+                <section class="user_info">
+                    <h2>
+                        <li style="margin-left: 42%; color: green; font-size: large;">
+                            <p2 style="color: black; font-size: large;">
+                                {{ u.username }}
+                                {% if site_manager and group.name != "Site Managers" and u.pk != user_id %}
+                                    <span><a style="display: inline; color: red" class="glyphicon glyphicon-remove"
+                                             href="{% url 'leaveGroup' group.pk u.pk %}" role="button"></a></span>
+                                {% endif %}
+                            </p2>
+                        </li>
 
-					</h2>
-				</section>
-			</aside>
-		</div>
-	{% endfor %}
+                    </h2>
+                </section>
+            </aside>
+        </div>
+    {% endfor %}
+    <p2 style="margin-left: 12%; margin-top:5%; background-color: green;" class="btn btn-primary btn-lg"
+        onClick="javascript:history.go(-1);"
+        type=button>Back
+    </p2>
+    <p2><a style="margin-left: 3%; margin-top: 5%; background-color: green;" class="btn btn-primary btn-lg"
+           href="{% url 'editGroup' group.pk %}" role="button">Add Users</a></p2>
 
-	<p2><a style="margin-left: 12%; margin-top: 5%; background-color: green;" class="btn btn-primary btn-lg" href="{% url 'editGroup' group.pk %}" role="button">Add Users</a></p2>
+    {% if in_group %}
+        <p2><a style="margin-top: 5%; background-color: green;" class="btn btn-primary btn-lg"
+               href="{% url 'leaveGroup' group.pk user_id %}" role="button">Leave Group</a></p2>
+    {% endif %}
 
-	{% if in_group %}
-		<p2><a style="margin-top: 5%; background-color: green;" class="btn btn-primary btn-lg" href="{% url 'leaveGroup' group.pk user_id %}" role="button">Leave Group</a></p2>
-	{% endif %}
-
-	{% if site_manager and group.name != "Site Managers" and group.name != "Suspended Users" %}
-		<p2><a style="margin-top: 5%; background-color: red;" class="btn btn-primary btn-lg" href="{% url 'deleteGroup' group.pk%}" role="button">Delete Group</a></p2>
-	{% endif %}
+    {% if site_manager and group.name != "Site Managers" and group.name != "Suspended Users" %}
+        <p2><a style="margin-top: 5%; background-color: red;" class="btn btn-primary btn-lg"
+               href="{% url 'deleteGroup' group.pk %}" role="button">Delete Group</a></p2>
+    {% endif %}
 
 {% endblock %}

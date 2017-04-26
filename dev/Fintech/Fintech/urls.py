@@ -43,7 +43,7 @@ urlpatterns = [
     url(r'^reports/(?P<pk>\d+)/delete/$',views.deleteReport, name='deleteReport'),
     url(r'^search/?q=', views.search, name='searchReports'),
     url(r'^search/advanced/$', views.createAdvancedSearch, name='createAdvancedSearch'),
-    url(r'^search/advanced/?fields=/?values=/$', views.advancedSearch, name='advancedSearchReports'),
+    url(r'^search/advanced/results/', views.advancedSearch, name='advancedSearchReports'),
     url(r'^messages/$', views.viewMessages, name='viewMessages'),
     url(r'^messages/new/$', views.sendMessage, name='sendMessage'),
     url(r'^messages/(?P<pk>\d+)/view/$', views.viewMessage, name='viewMessage'),
@@ -52,6 +52,6 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/reports/$', api.ReportList.as_view()),
     url(r'^api/reports/(?P<reportID>\d+)/files/$', api.ReportFiles.as_view()),
-
+    url(r'^settings/$', views.settings, name='settings'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
