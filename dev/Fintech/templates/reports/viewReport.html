@@ -41,6 +41,9 @@
             <p style="font-size: 16px;margin-top:15px;margin-left: 5%;">{{f.title}} -- <a href="{{f.upload.url}}" download>Download</a></p>
         {% endfor %}
     {% endif %}
+    {% if has_encrypted_files %}
+        <h3> This report has encrypted files. To view them, use our <a href="/media/fda.py" download>File Download App</a> </h3>
+    {% endif %}
 
     {% if site_manager %}
     <p2><a style="margin-left: 5%; margin-top:1%; background-color: green;" class="btn btn-primary btn-lg"

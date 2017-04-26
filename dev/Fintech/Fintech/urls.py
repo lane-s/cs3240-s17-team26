@@ -19,9 +19,10 @@ django.setup()
 from django.contrib.auth import views as auth_views
 from django.conf.urls.static import static
 from django.conf import settings
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
-from Fintech import views
+from Fintech import views, api
+
 
 
 urlpatterns = [
@@ -48,6 +49,9 @@ urlpatterns = [
     url(r'^messages/(?P<pk>\d+)/view/$', views.viewMessage, name='viewMessage'),
     url(r'^messages/(?P<pk>\d+)/delete/$', views.deleteMessage, name='deleteMessage'),
     url(r'^messages/(?P<pk>\d+)/decrypt/$', views.decryptMessage, name='decryptMessage'),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^api/reports/$', api.ReportList.as_view()),
+    url(r'^api/reports/(?P<reportID>\d+)/files/$', api.ReportFiles.as_view()),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

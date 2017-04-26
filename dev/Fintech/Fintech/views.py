@@ -335,8 +335,9 @@ def viewReport(request, pk):
     is_owner = report.owner.pk == request.user.pk
     if not report.is_private or is_owner or is_site_manager(request.user) or can_view_report(request.user,report):
         unencrypted_files = File.objects.filter(report__pk = report.pk, is_encrypted=False)
+        has_encrypted_files = True if File.objects.filter(report__pk=report.pk, is_encrypted=True) else False
         # checks if user is in report group or is a collaborator
-        return render(request, 'reports/viewReport.html', {'report': report, 'is_owner':is_owner,'unencrypted_files':unencrypted_files})
+        return render(request, 'reports/viewReport.html', {'report': report, 'is_owner':is_owner,'unencrypted_files':unencrypted_files,'has_encrypted_files':has_encrypted_files})
     else:
         return redirect('index')
 
