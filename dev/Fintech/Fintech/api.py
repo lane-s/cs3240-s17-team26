@@ -1,5 +1,5 @@
 from Fintech.models import Report, File
-from Fintech.views import is_site_manager
+from Fintech.users import is_site_manager
 from rest_framework import routers, serializers, generics
 from django.db.models import Q
 
