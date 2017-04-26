@@ -591,6 +591,12 @@ def sendMessage(request):
     if request.method == 'POST':
         message_form = MessageForm(request.POST, prefix="message_form")
         if message_form.is_valid():
+            message_dict = message_form.cleaned_data
+            receiver = message_dict['receiver']
+            if receiver == request.user:
+                messages.error(request, "Intended Message Recipient is You. Please Try Again.")
+                return render(request, 'messages/sendMessage.html',
+                              {'message_form': message_form, 'username': username})
             message = message_form.save(commit=False)
             message.sender = request.user
             message.opened = False
