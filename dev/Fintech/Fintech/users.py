@@ -192,6 +192,12 @@ def settings(request):
     username = None
     if is_company_user(request.user):
         username = request.user
+        has_messages = False
+        message_list = Message.objects.filter(receiver=request.user)
+        for m in message_list:
+            if m.opened == False:
+                has_messages = True
+                break
         is_company = True
 
         if request.method == 'POST':
@@ -209,10 +215,16 @@ def settings(request):
             user_settings = UserSettings(instance = request.user)
             company_settings = CompanySettings(instance = request.user)
 
-        return render(request, 'registration/settings.html', {'user_settings':user_settings,'company_settings':company_settings,'is_company':is_company,'username':username})
+        return render(request, 'registration/settings.html', {'user_settings':user_settings,'company_settings':company_settings,'is_company':is_company,'username':username,'has_messages':has_messages})
 
     else:
         username = request.user
+        has_messages = False
+        message_list = Message.objects.filter(receiver=request.user)
+        for m in message_list:
+            if m.opened == False:
+                has_messages = True
+                break
         is_company = False
 
         if request.method == 'POST':
@@ -227,7 +239,7 @@ def settings(request):
 
             user_settings = UserSettings(instance=request.user)
 
-        return render(request, 'registration/settings.html', {'user_settings':user_settings,'is_company':is_company,'username':username})
+        return render(request, 'registration/settings.html', {'user_settings':user_settings,'is_company':is_company,'username':username,'has_messages':has_messages})
 
 
 @login_required
