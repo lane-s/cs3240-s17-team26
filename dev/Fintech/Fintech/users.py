@@ -1,15 +1,19 @@
 from django.shortcuts import redirect, render, get_object_or_404
 
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Group
+from django.contrib.auth.forms import PasswordChangeForm
 
 from django.db.models import Q
 
 from django.forms import ModelForm, Form, CharField, PasswordInput
 from Fintech.models import UserDetails, CompanyDetails, Report, Message
 from Fintech.decorators import request_passes_test
+from Crypto.PublicKey import RSA
+from Crypto import Random
+
 
 #Forms
 class UserForm(ModelForm):
@@ -20,6 +24,15 @@ class UserForm(ModelForm):
             'password': PasswordInput(),
         }
 
+class UserSettings(ModelForm):
+    class Meta:
+        model = User
+        fields = ('first_name','last_name','email')
+
+class CompanySettings(ModelForm):
+    class Meta:
+        model = CompanyDetails
+        fields = ('company_phone','company_location')
 
 class UserDetailForm(ModelForm):
     class Meta:
@@ -177,12 +190,60 @@ def signupform(request):
 @request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
 def settings(request):
     username = None
-    if request.user.is_authenticated():
+    if is_company_user(request.user):
         username = request.user
-    has_messages = False
-    message_list = Message.objects.filter(receiver=request.user)
-    for m in message_list:
-        if m.opened == False:
-            has_messages = True
-            break
-    return render(request, 'registration/settings.html', {'has_messages': has_messages, 'username': username})
+        is_company = True
+
+        if request.method == 'POST':
+
+            user_settings = UserSettings(request.POST, instance = request.user)
+            company_settings = CompanySettings(request.POST, instance = request.user)
+
+            if user_settings.is_valid() and company_settings.is_valid():
+                user_settings.save()
+                company_settings.save()
+                messages.success(request, 'Changes have been saved')
+
+
+        else:
+            user_settings = UserSettings(instance = request.user)
+            company_settings = CompanySettings(instance = request.user)
+
+        return render(request, 'registration/settings.html', {'user_settings':user_settings,'company_settings':company_settings,'is_company':is_company,'username':username})
+
+    else:
+        username = request.user
+        is_company = False
+
+        if request.method == 'POST':
+
+            user_settings = UserSettings(request.POST, instance=request.user)
+
+            if user_settings.is_valid():
+                user_settings.save()
+                messages.success(request, 'Changes have been saved')
+
+        else:
+
+            user_settings = UserSettings(instance=request.user)
+
+        return render(request, 'registration/settings.html', {'user_settings':user_settings,'is_company':is_company,'username':username})
+
+
+@login_required
+@request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('index')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'registration/change_password.html', {
+        'form': form
+    })

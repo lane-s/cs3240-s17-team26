@@ -53,5 +53,6 @@ urlpatterns = [
     url(r'^api/reports/$', api.ReportList.as_view()),
     url(r'^api/reports/(?P<reportID>\d+)/files/$', api.ReportFiles.as_view()),
     url(r'^settings/$', users.settings, name='settings'),
+    url(r'^settings/password/$', users.change_password, name='change_password'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
