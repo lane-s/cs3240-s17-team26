@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fa4964d6-0b50-40cc-b76a-4b756db66bea" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dev/Fintech/Fintech/users.py" afterPath="$PROJECT_DIR$/dev/Fintech/Fintech/users.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dev/Fintech/Fintech/reports.py" afterPath="$PROJECT_DIR$/dev/Fintech/Fintech/reports.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,14 +17,24 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="users.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/dev/Fintech/Fintech/users.py">
+      <file leaf-file-name="reports.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/dev/Fintech/Fintech/reports.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="238" column="0" lean-forward="true" selection-start-line="238" selection-start-column="0" selection-end-line="238" selection-end-column="0" />
+            <state relative-caret-position="420">
+              <caret line="74" column="0" lean-forward="true" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
               <folding>
                 <element signature="e#0#64#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dev/Fintech/Fintech/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="9" column="35" lean-forward="false" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -84,6 +93,7 @@
         <option value="$PROJECT_DIR$/dev/Fintech/templates/messages/sendMessage.html" />
         <option value="$PROJECT_DIR$/dev/Fintech/templates/registration/settings.html" />
         <option value="$PROJECT_DIR$/dev/Fintech/Fintech/users.py" />
+        <option value="$PROJECT_DIR$/dev/Fintech/Fintech/reports.py" />
       </list>
     </option>
   </component>
@@ -548,7 +558,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1440" height="841" extended-state="6" />
+    <frame x="0" y="22" width="1440" height="841" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -764,6 +774,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="239">
           <caret line="89" column="8" lean-forward="false" selection-start-line="89" selection-start-column="2" selection-end-line="89" selection-end-column="8" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -846,14 +857,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dev/Fintech/Fintech/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="9" column="35" lean-forward="false" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dev/Fintech/templates/splash.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -878,20 +881,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dev/Fintech/Fintech/reports.py">
+    <entry file="file://$PROJECT_DIR$/dev/Fintech/Fintech/users.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="447">
-          <caret line="57" column="17" lean-forward="true" selection-start-line="57" selection-start-column="17" selection-end-line="57" selection-end-column="17" />
+        <state relative-caret-position="474">
+          <caret line="243" column="0" lean-forward="true" selection-start-line="243" selection-start-column="0" selection-end-line="243" selection-end-column="0" />
           <folding>
-            <element signature="e#0#64#0" expanded="true" />
+            <element signature="e#0#64#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dev/Fintech/Fintech/users.py">
+    <entry file="file://$PROJECT_DIR$/dev/Fintech/Fintech/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="238" column="0" lean-forward="true" selection-start-line="238" selection-start-column="0" selection-end-line="238" selection-end-column="0" />
+        <state relative-caret-position="90">
+          <caret line="9" column="35" lean-forward="false" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/Fintech/Fintech/reports.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="74" column="0" lean-forward="true" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
           <folding>
             <element signature="e#0#64#0" expanded="true" />
           </folding>
