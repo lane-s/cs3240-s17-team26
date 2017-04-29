@@ -3,13 +3,39 @@
 {% load bootstrap3 %}
 
 {% block content %}
-
+    {% if recipient %}
     <h2 style="margin-left: 2%; font-size: x-large">
         <p2>This message is encrypted.</p2>
     </h2>
 
-    <p2><a style="margin-left: 2%; margin-top:1%; background-color: green;" class="btn btn-primary btn-lg"
+    <div class="panel-heading row">
+    <div class="col-xs-6 text-left">
+        <div class="previous">
+          <p2><a style="margin-left: 2%; margin-top:1%; background-color: green;" class="btn btn-primary btn-lg"
            href="{% url 'decryptMessage' message.pk %}" role="button">Decrypt Message</a></p2>
+        </div>
+    </div>
+    <div class="col-xs-6 text-right">
+        <div class="next">
+            <p2><a style="margin-left: 1%; background-color: green;" class="btn btn-primary btn-lg" href="/messages/"
+           role="button">Back</a></p2>
+        </div>
+    </div>
+    </div>
+
+
+
+
+    {% else %}
+    <h2 style="margin-left: 2%; font-size: x-large">
+        <p2>You chose to encrypt this message. Only the recipient can view it.</p2>
+    </h2>
+
+        <p2><a style="margin-left: 1%; background-color: green;" class="btn btn-primary btn-lg" href="/messages/sent/"
+           role="button">Back</a></p2>
+
+    {% endif %}
+
 
 {% endblock %}
 

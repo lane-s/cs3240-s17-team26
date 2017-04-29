@@ -3,8 +3,22 @@
 
 {% block content %}
 
-    <p2><a style="margin-left: 1%; background-color: green;" class="btn btn-primary btn-lg" href="/messages/new"
+
+
+    <div class="panel-heading row">
+    <div class="col-xs-6 text-left">
+        <div class="previous">
+          <p2><a style="margin-left: 1%; background-color: green;" class="btn btn-primary btn-lg" href="/messages/new"
            role="button">Send Message</a></p2>
+        </div>
+    </div>
+    <div class="col-xs-6 text-right">
+        <div class="next">
+            <p2><a style="margin-left: 1%; background-color: green;" class="btn btn-primary btn-lg btn-pull-right" href="/messages/sent"
+           role="button">View Sent Messages</a></p2>
+        </div>
+    </div>
+    </div>
 
     {% if message_list %}
         {% for m in message_list %}
@@ -35,5 +49,7 @@
     {% else %}
         <h3> You have no messages. </h3>
     {% endif %}
+
+
 
 {% endblock %}

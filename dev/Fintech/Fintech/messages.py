@@ -13,7 +13,7 @@ class MessageForm(ModelForm):
     class Meta:
         model = Message
         fields = ('receiver','subject','content','encrypt')
-
+        exclude = ('static_encrypt',)
 
 #Views
 @login_required
@@ -36,6 +36,7 @@ def sendMessage(request):
             message.opened = False
 
             if message.encrypt:
+                message.static_encrypt = True
                 receiver = UserDetails.objects.get(user=message.receiver)
                 rsa_obj = RSA.importKey(receiver.key)
                 pubkey = rsa_obj.publickey()
@@ -61,7 +62,8 @@ def viewMessage(request, pk):
         username = request.user
     message = get_object_or_404(Message, pk=pk,receiver=request.user)
     if message.encrypt:
-        return render(request, 'messages/encryptedMessage.html', {'message': message})
+        recipient = True
+        return render(request, 'messages/encryptedMessage.html', {'message': message,'recipient':recipient})
     else:
         message.opened = True
         message.save()
@@ -73,6 +75,24 @@ def viewMessage(request, pk):
                 break
         return render(request, 'messages/viewMessage.html', {'message': message, 'username': username, 'has_messages': has_messages})
 
+@login_required
+@request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
+def viewSentMessage(request, pk):
+    username = None
+    if request.user.is_authenticated():
+        username = request.user
+    message = get_object_or_404(Message, pk=pk,sender=request.user)
+    if message.static_encrypt:
+        recipient = False
+        return render(request, 'messages/encryptedMessage.html', {'message': message,'recipient':recipient})
+    else:
+        has_messages = False
+        message_list = Message.objects.filter(receiver=request.user)
+        for m in message_list:
+            if m.opened == False:
+                has_messages = True
+                break
+        return render(request, 'messages/viewSentMessage.html', {'message': message, 'username': username, 'has_messages': has_messages})
 
 @login_required
 @request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
@@ -89,6 +109,20 @@ def viewMessages(request):
     message_list = Message.objects.filter(receiver=request.user).order_by('-timestamp')
     return render(request, 'messages/viewMessages.html', {'message_list': message_list, 'has_messages': has_messages, 'username': username})
 
+@login_required
+@request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
+def viewSentMessages(request):
+    username = None
+    if request.user.is_authenticated():
+        username = request.user
+    has_messages = False
+    message_list = Message.objects.filter(receiver=request.user)
+    for m in message_list:
+        if m.opened == False:
+            has_messages = True
+            break
+    sent_message_list = Message.objects.filter(sender=request.user).order_by('-timestamp')
+    return render(request, 'messages/SentMessages.html',{'sent_message_list': sent_message_list, 'has_messages': has_messages, 'username': username})
 
 @login_required
 @request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
