@@ -59,7 +59,7 @@ def viewMessage(request, pk):
     username = None
     if request.user.is_authenticated():
         username = request.user
-    message = get_object_or_404(Message, pk=pk)
+    message = get_object_or_404(Message, pk=pk,receiver=request.user)
     if message.encrypt:
         return render(request, 'messages/encryptedMessage.html', {'message': message})
     else:
