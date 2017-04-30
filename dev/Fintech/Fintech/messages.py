@@ -45,6 +45,7 @@ def sendMessage(request):
                 message.content = str(enc_content)
                 message.save()
             else:
+                message.static_encrypt = False
                 message.save()
 
             messages.success(request, "Message sent")

@@ -23,22 +23,25 @@
     {% if message_list %}
         {% for m in message_list %}
             <div class="row">
-                <aside class="col-md-4">
+                <aside>
                     <section class="message_info">
-                        <h2 style="margin-left: 5%; font-size: x-large;">
+                        <h2 style="margin-left: 1%; font-size: x-large;">
                             {% if not m.opened %}
-                                <li style="text-decoration:underline; margin-left: 15%; color: green; font-size: x-large;">
+                                <li style="text-decoration:underline; margin-left: 5%; color: green; font-size: x-large;">
                                     <a style="color: green; font-size: x-large;"
                                             href={% url 'viewMessage' m.pk %}>{{ m.subject }} <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span></a></li>
                             {% elif m.opened %}
-                                <li style="text-decoration:underline; margin-left: 15%; color: green; font-size: x-large;">
+                                <li style="text-decoration:underline; margin-left: 5%; color: green; font-size: x-large;">
                                     <a style="color: green; font-size: x-large;"
                                             href={% url 'viewMessage' m.pk %}>{{ m.subject }}</a></li>
                             {% endif %}
-                            <p1 style="margin-left: 25%; padding-top: 1%; color:black; font-size: large">
-                                From: {{ m.sender }}</p1>
-                            <p1 style="margin-left: 25%; padding-top: 1%; color:black; font-size: large">
-                                Received: {{ m.timestamp }}</p1>
+
+                    <div class="row">
+                            <p1 style="margin-left: 9%; padding-top: 1%; color:black; font-size: large;">
+                                From: {{ m.sender }}</p1></div>
+                    <div class="row">
+                            <p1 style="margin-left: 9%; padding-top: 1%; color:black; font-size: large">
+                                Received: {{ m.timestamp }}</p1></div>
                         </h2>
                     </section>
 

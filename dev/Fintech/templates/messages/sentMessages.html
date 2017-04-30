@@ -3,7 +3,8 @@
 
 {% block content %}
 
-
+    <p2><a style="margin-left: 1%; background-color: green;" class="btn btn-primary btn-lg" href="/messages/"
+           role="button">Back</a></p2>
     {% if sent_message_list %}
         {% for m in sent_message_list %}
             <div class="row">
@@ -11,9 +12,9 @@
                     <section class="message_info">
                         <h2 style="margin-left: 5%; font-size: x-large;">
 
-                                <li style="text-decoration:underline; margin-left: 15%; color: green; font-size: x-large;">
-                                    <a style="color: green; font-size: x-large;"
-                                            href={% url 'viewSentMessage' m.pk %}>{{ m.subject }}</a></li>
+                            <li style="text-decoration:underline; margin-left: 15%; color: green; font-size: x-large;">
+                                <a style="color: green; font-size: x-large;"
+                                   href={% url 'viewSentMessage' m.pk %}>{{ m.subject }}</a></li>
 
                             <p1 style="margin-left: 25%; padding-top: 1%; color:black; font-size: large">
                                 To: {{ m.receiver }}</p1>
@@ -31,7 +32,5 @@
         <h3> You haven't sent any messages. </h3>
     {% endif %}
 
-    <p2><a style="margin-left: 1%; background-color: green;" class="btn btn-primary btn-lg" href="/messages/"
-           role="button">Back</a></p2>
 
 {% endblock %}
