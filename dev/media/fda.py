@@ -10,7 +10,7 @@ import requests
 from requests.auth import HTTPBasicAuth
 
 
-host = "http://127.0.0.1:8000"
+host = "https://lokahifintech26.herokuapp.com"
 api = host+"/api"
 
 def encrypt_file(key, in_filename, out_filename=None, chunksize=64*1024):

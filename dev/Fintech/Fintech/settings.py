@@ -33,7 +33,7 @@ SECRET_KEY = 'i$2gf2!-do3=dc$+4b%84+)ib_wr@^c+lfn#dtu4wzbjzayu2c'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['lokahifintech26.herokuapp.com']
 
 
 # Application definition
