@@ -14,7 +14,6 @@ from django.core.urlresolvers import reverse
 from django.contrib.messages import constants as messages
 import dj_database_url
 # Update database configuration with $DATABASE_URL.
-
 DATABASES = {'default':dj_database_url.config()}
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
