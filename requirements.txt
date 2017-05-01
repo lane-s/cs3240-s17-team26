@@ -1,5 +1,4 @@
 appnope==0.1.0
-appscript==1.0.1
 argcomplete==1.0.0
 astroid==1.4.7
 astropy==1.2.1
