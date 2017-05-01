@@ -4,10 +4,11 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Group
-
 from django.db.models import Q
-
 from django.forms import ModelForm, Form, CharField, PasswordInput
+
+from Crypto.PublicKey import RSA
+
 from Fintech.models import UserDetails, CompanyDetails, Report, Message
 from Fintech.decorators import request_passes_test
 
