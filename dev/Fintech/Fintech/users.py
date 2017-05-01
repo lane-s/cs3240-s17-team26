@@ -8,6 +8,7 @@ from django.db.models import Q
 from django.forms import ModelForm, Form, CharField, PasswordInput
 
 from Crypto.PublicKey import RSA
+from Crypto import Random
 
 from Fintech.models import UserDetails, CompanyDetails, Report, Message
 from Fintech.decorators import request_passes_test
