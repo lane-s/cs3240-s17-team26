@@ -45,6 +45,8 @@ urlpatterns = [
     url(r'^search/advanced/$', search.createAdvancedSearch, name='createAdvancedSearch'),
     url(r'^search/advanced/results/', search.advancedSearch, name='advancedSearchReports'),
     url(r'^messages/$', messages.viewMessages, name='viewMessages'),
+    url(r'^messages/sent/$', messages.viewSentMessages, name='viewSentMessages'),
+    url(r'^messages/(?P<pk>\d+)/view/sent/$', messages.viewSentMessage, name='viewSentMessage'),
     url(r'^messages/new/$', messages.sendMessage, name='sendMessage'),
     url(r'^messages/(?P<pk>\d+)/view/$', messages.viewMessage, name='viewMessage'),
     url(r'^messages/(?P<pk>\d+)/delete/$', messages.deleteMessage, name='deleteMessage'),
@@ -53,5 +55,6 @@ urlpatterns = [
     url(r'^api/reports/$', api.ReportList.as_view()),
     url(r'^api/reports/(?P<reportID>\d+)/files/$', api.ReportFiles.as_view()),
     url(r'^settings/$', users.settings, name='settings'),
+    url(r'^settings/password/$', users.change_password, name='change_password'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

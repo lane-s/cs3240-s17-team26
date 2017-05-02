@@ -58,4 +58,5 @@ class Message(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True,auto_now=False)
     opened = models.BooleanField()
     encrypt = models.BooleanField()
+    static_encrypt = models.BooleanField()
 

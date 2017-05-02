@@ -12,8 +12,8 @@ from Fintech.models import CompanyDetails, Report, ReportPermissions, File, Mess
 class ReportForm(ModelForm):
     class Meta:
         model = Report
-        fields = ('title', 'company_name', 'company_ceo', 'company_phone', 'company_location', 'company_country',
-                  'sector', 'industry', 'current_projects', 'is_private')
+        fields = ('title', 'company_ceo', 'sector', 'industry', 'current_projects', 'is_private')
+        exclude = ('company_name','company_phone','company_location','company_country')
 
 class ReportPermissionsForm(ModelForm):
     class Meta:
@@ -46,7 +46,7 @@ FileFormset = inlineformset_factory(Report, File, form=FileForm, extra=0)
 @login_required
 @request_passes_test(suspended_test, login_url='/', redirect_field_name=None)
 def createReport(request):
-    company_user = CompanyDetails.objects.filter(user=request.user)
+    company_user = CompanyDetails.objects.get(user=request.user)
     username = None
     if request.user.is_authenticated():
         username = request.user
@@ -66,6 +66,10 @@ def createReport(request):
             if report_form.is_valid() and permissions_form.is_valid() and file_formset.is_valid():
                 report = report_form.save(commit=False)
                 report.owner = request.user
+                report.company_name = getattr(company_user,'company_name')
+                report.company_phone = getattr(company_user,'company_phone')
+                report.company_location = getattr(company_user,'company_location')
+                report.company_country = getattr(company_user,'company_country')
                 report.has_attachments = False
                 report.save()
 
