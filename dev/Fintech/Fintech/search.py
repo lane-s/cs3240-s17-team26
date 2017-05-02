@@ -118,7 +118,7 @@ def advancedSearch(request):
         if m.opened == False:
             has_messages = True
             break
-    found_entries = Report.objects
+    found_entries = Report.objects.all()
     search_form = None
     if request.method == 'POST':
         search_form = advancedSearchForm(request.POST, prefix="advanced_search_form")
@@ -126,6 +126,7 @@ def advancedSearch(request):
             search_form = search_form.cleaned_data
             for field, value in search_form.items():
                 if value != "" and value != None:
+                    print("sup")
                     entry_query = get_query(value, [field])
                     found_entries = found_entries.filter(entry_query)
             found_entries = list(found_entries)

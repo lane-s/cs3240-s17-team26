@@ -12,9 +12,11 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 import os
 from django.core.urlresolvers import reverse
 from django.contrib.messages import constants as messages
+import dj_database_url
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-REPOSITORY_ROOT = os.path.dirname(BASE_DIR)
+REPOSITORY_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(REPOSITORY_ROOT, 'media/')
@@ -31,7 +33,7 @@ SECRET_KEY = 'i$2gf2!-do3=dc$+4b%84+)ib_wr@^c+lfn#dtu4wzbjzayu2c'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['lokahifintech26.herokuapp.com']
 
 
 # Application definition
@@ -100,10 +102,14 @@ WSGI_APPLICATION = 'Fintech.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.path.join(BASE_DIR, 'db.psql'),
     }
 }
+
+# Update database configuration with $DATABASE_URL.
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
 
 
 # Password validation
@@ -141,7 +147,3 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.10/howto/static-files/
-
-STATIC_URL = '/static/'
