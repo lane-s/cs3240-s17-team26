@@ -3,24 +3,24 @@
 
 {% block content %}
 
-    <p2><a style="margin-left: 1%; background-color: green;" class="btn btn-primary btn-lg" href="/messages/"
+    <p2><a style="margin-left: 2%; background-color: green;" class="btn btn-primary btn-lg" href="/messages/"
            role="button">Back</a></p2>
     {% if sent_message_list %}
         {% for m in sent_message_list %}
             <div class="row">
-                <aside class="col-md-4">
+                <aside>
                     <section class="message_info">
                         <h2 style="margin-left: 5%; font-size: x-large;">
 
-                            <li style="text-decoration:underline; margin-left: 15%; color: green; font-size: x-large;">
+                            <li style="text-decoration:underline; margin-left: 2%; color: green; font-size: x-large;">
                                 <a style="color: green; font-size: x-large;"
                                    href={% url 'viewSentMessage' m.pk %}>{{ m.subject }}</a></li>
                             <div class="row">
-                                <p1 style="margin-left: 26%; padding-top: 1%; color:black; font-size: large">
+                                <p1 style="margin-left: 6.5%; padding-top: 1%; color:black; font-size: large;">
                                     To: {{ m.receiver }}</p1>
                             </div>
                             <div class="row">
-                                <p1 style="margin-left: 26%; padding-top: 1%; color:black; font-size: large">
+                                <p1 style="margin-left: 6.5%; padding-top: 1%; color:black; font-size: large;">
                                     Sent: {{ m.timestamp }}</p1>
                             </div>
                         </h2>
