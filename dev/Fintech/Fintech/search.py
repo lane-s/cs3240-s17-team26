@@ -126,6 +126,7 @@ def advancedSearch(request):
             search_form = search_form.cleaned_data
             for field, value in search_form.items():
                 if value != "" and value != None:
+                    print("sup")
                     entry_query = get_query(value, [field])
                     found_entries = found_entries.filter(entry_query)
             found_entries = list(found_entries)
