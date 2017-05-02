@@ -15,8 +15,8 @@ from Fintech.models import CompanyDetails, Report, ReportPermissions, File, Mess
 class ReportForm(ModelForm):
     class Meta:
         model = Report
-        fields = ('title', 'current_projects', 'is_private')
-        exclude = ('company_name','company_phone','company_location','company_country', 'company_ceo', 'sector', 'industry')
+        fields = ('title','sector', 'industry','current_projects', 'is_private')
+        exclude = ('company_name','company_phone','company_location','company_country', 'company_ceo')
 
 class ReportPermissionsForm(ModelForm):
     class Meta:
@@ -74,8 +74,6 @@ def createReport(request):
                 report.company_location = getattr(company_user,'company_location')
                 report.company_country = getattr(company_user,'company_country')
                 report.company_ceo = getattr(company_user, 'company_ceo')
-                report.industry = getattr(company_user,'industry')
-                report.sector = getattr(company_user,'sector')
                 report.has_attachments = False
                 report.save()
 
