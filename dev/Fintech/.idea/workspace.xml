@@ -35,11 +35,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="reports.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="reports.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Fintech/reports.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="32" column="68" lean-forward="true" selection-start-line="32" selection-start-column="68" selection-end-line="32" selection-end-column="68" />
+            <state relative-caret-position="237">
+              <caret line="48" column="15" lean-forward="true" selection-start-line="48" selection-start-column="15" selection-end-line="48" selection-end-column="15" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="search.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Fintech/search.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="987">
+              <caret line="132" column="47" lean-forward="false" selection-start-line="132" selection-start-column="47" selection-end-line="132" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -115,7 +125,6 @@
         <option value="$PROJECT_DIR$/Fintech/users.py" />
         <option value="$PROJECT_DIR$/Fintech/static/admin/css/base.css" />
         <option value="$PROJECT_DIR$/templates/index.html" />
-        <option value="$PROJECT_DIR$/Fintech/search.py" />
         <option value="$PROJECT_DIR$/Fintech/users.py" />
         <option value="$PROJECT_DIR$/Fintech/models.py" />
         <option value="$PROJECT_DIR$/templates/messages/viewMessages.html" />
@@ -123,6 +132,7 @@
         <option value="$PROJECT_DIR$/Fintech/settings.py" />
         <option value="$PROJECT_DIR$/templates/registration/change_password.html" />
         <option value="$PROJECT_DIR$/Fintech/reports.py" />
+        <option value="$PROJECT_DIR$/Fintech/search.py" />
       </list>
     </option>
   </component>
@@ -713,7 +723,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#310#319#0" expanded="true" />
+            <element signature="e#310#319#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -950,16 +960,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Fintech/search.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="837">
-          <caret line="126" column="52" lean-forward="false" selection-start-line="126" selection-start-column="52" selection-end-line="126" selection-end-column="52" />
-          <folding>
-            <element signature="e#0#64#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/messages/viewMessages.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="800">
@@ -989,7 +989,7 @@
         <state relative-caret-position="723">
           <caret line="29" column="23" lean-forward="false" selection-start-line="29" selection-start-column="23" selection-end-line="29" selection-end-column="23" />
           <folding>
-            <element signature="e#310#319#0" expanded="true" />
+            <element signature="e#310#319#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -999,7 +999,7 @@
         <state relative-caret-position="225">
           <caret line="9" column="14" lean-forward="true" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
           <folding>
-            <element signature="e#94#126#0#HTML" expanded="true" />
+            <element signature="e#94#126#0#HTML" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1022,8 +1022,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Fintech/reports.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="32" column="68" lean-forward="true" selection-start-line="32" selection-start-column="68" selection-end-line="32" selection-end-column="68" />
+        <state relative-caret-position="237">
+          <caret line="48" column="15" lean-forward="true" selection-start-line="48" selection-start-column="15" selection-end-line="48" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Fintech/search.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="987">
+          <caret line="132" column="47" lean-forward="false" selection-start-line="132" selection-start-column="47" selection-end-line="132" selection-end-column="47" />
           <folding />
         </state>
       </provider>

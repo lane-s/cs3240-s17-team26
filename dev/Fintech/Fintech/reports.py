@@ -15,11 +15,7 @@ from Fintech.models import CompanyDetails, Report, ReportPermissions, File, Mess
 class ReportForm(ModelForm):
     class Meta:
         model = Report
-<<<<<<< HEAD
         fields = ('title', 'sector', 'industry', 'current_projects', 'is_private')
-=======
-        fields = ('title','sector', 'industry','current_projects', 'is_private')
->>>>>>> origin/production
         exclude = ('company_name','company_phone','company_location','company_country', 'company_ceo')
 
 class ReportPermissionsForm(ModelForm):

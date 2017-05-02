@@ -118,7 +118,8 @@ def advancedSearch(request):
         if m.opened == False:
             has_messages = True
             break
-    found_entries = Report.objects.all()
+    found_entries = []
+    all_entries = Report.objects.all()
     search_form = None
     if request.method == 'POST':
         search_form = advancedSearchForm(request.POST, prefix="advanced_search_form")
@@ -126,8 +127,10 @@ def advancedSearch(request):
             search_form = search_form.cleaned_data
             for field, value in search_form.items():
                 if value != "" and value != None:
+                    found_entries = all_entries
                     entry_query = get_query(value, [field])
                     found_entries = found_entries.filter(entry_query)
+                    all_entries = found_entries
             found_entries = list(found_entries)
             for each in found_entries:
                 if each.is_private:
