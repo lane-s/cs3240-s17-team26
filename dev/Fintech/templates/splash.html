@@ -48,13 +48,15 @@
                                         href={% url 'viewReport' r.pk %}>{{ r.title }}</a></li>
                             {% endif %}
                         {% endfor %}
-
+                        <tr style="height: 100px"></tr>
                     </table>
 
                     <table style="width: 48%; margin:auto;float:left; margin-left: 1%">
                         <tr style="border: solid dimgray 1px">
-                            <th><h2 style="background-color: green; color: white;text-align: center; width: 100%; margin:auto; font-size: 28pt">Public
-                                Reports</h2></th>
+                            <th>
+                                <h2 style="background-color: green; color: white;text-align: center; width: 100%; margin:auto; font-size: 28pt">
+                                    Public
+                                    Reports</h2></th>
                         </tr>
                         {% for r in report_list %}
                             {% if not r.is_private %}
@@ -69,6 +71,7 @@
                         {% endfor %}
                         </td>
                         </tr>
+                    <tr style="height: 100px"></tr>
                     </table>
                 </div>
             {% else %}
@@ -91,17 +94,18 @@
             {% if report_list %}
                 {% for r in report_list %}
                     <div class="row">
-                        <aside class="col-md-4">
+                        <aside>
                             <section class="report_info">
                                 <h2>
-                                    <li style="margin-left: 18%; margin-top: 1%;"><a
-                                            style="margin-left: -5%;color: green; text-decoration: underline; font-size: x-large"
+                                    <li style="margin-left: 5%; margin-top: 1%; font-size: x-large"><a
+                                            style="color: green; text-decoration: underline; font-size: 25pt"
                                             href={% url 'viewReport' r.pk %}>{{ r.title }}</a></li>
                                 </h2>
                             </section>
                         </aside>
                     </div>
                 {% endfor %}
+                <div class="row" style="height:50px;"></div>
             {% else %}
                 {% if suspended_user %}
                     <h3 style="margin-top: 1%"> Your account was suspended. Please contact a site manager.

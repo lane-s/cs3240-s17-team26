@@ -33,7 +33,7 @@ class UserSettings(ModelForm):
 class CompanySettings(ModelForm):
     class Meta:
         model = CompanyDetails
-        fields = ('company_phone','company_location')
+        fields = ('company_phone','company_location','industry','sector')
 
 class UserDetailForm(ModelForm):
     class Meta:
@@ -43,7 +43,7 @@ class UserDetailForm(ModelForm):
 class CompanyForm(ModelForm):
     class Meta:
         model = CompanyDetails
-        fields = ('company_name', 'company_phone', 'company_location', 'company_country')
+        fields = ('company_name', 'company_ceo', 'company_phone', 'company_location', 'company_country')
 
 
 
