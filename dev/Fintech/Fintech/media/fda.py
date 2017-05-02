@@ -167,7 +167,7 @@ while(menuLoop):
                                             print("Decrypted filed stored as "+outname+" in the directory of this script")
                                         except:
                                             print("Decryption error! Incorrect password or encryption method")
-                        except Exception as e:
+                    except Exception as e:
                             print(e)
                             print("Enter a number between 1 and "+str(i+1))
             else:
