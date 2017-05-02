@@ -10,8 +10,11 @@ class UserDetails(models.Model):
 class CompanyDetails(models.Model):
     user = models.OneToOneField(User)
     company_name = models.CharField(max_length=30)
+    company_ceo = models.CharField(max_length=30)
     company_phone = models.CharField(max_length=30)
     company_location = models.CharField(max_length=30)
+    industry = models.CharField(max_length=30)
+    sector = models.CharField(max_length=30)
     company_country = CountryField(blank_label='(Select Country)')#Look at django countries for choices
 
 
@@ -58,4 +61,5 @@ class Message(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True,auto_now=False)
     opened = models.BooleanField()
     encrypt = models.BooleanField()
+    static_encrypt = models.BooleanField()
 

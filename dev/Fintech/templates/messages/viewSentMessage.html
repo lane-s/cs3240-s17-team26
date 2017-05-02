@@ -1,0 +1,25 @@
+{% extends 'index.html' %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block content %}
+
+    <h2 style="margin-left: 2%; font-size: x-large">
+        <p2><b>To: </b>{{ message.sender }}</p2>
+    </h2>
+    <h2 style="margin-left: 2%; font-h2ze: x-large">
+        <p2><b>Subject: </b> {{ message.subject }}</p2>
+    </h2>
+    <p2 style="margin-left: 2%;"><b>Sent: </b>{{ message.timestamp }}</p2>
+
+
+    <h2 style=" margin-left: 3%; width:30%; margin-right: 3%; font-size: large">
+        <p style=" width: 100%">{{ message.content|linebreaks }}</p>
+    </h2>
+
+
+    <p2><a style="margin-left: 1%; background-color: green;" class="btn btn-primary btn-lg" href="/messages/sent/"
+           role="button">Back</a></p2>
+
+
+{% endblock %}
