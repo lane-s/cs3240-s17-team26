@@ -1,9 +1,12 @@
+from django.db.models.functions import datetime
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.forms import inlineformset_factory, ModelForm
 from django.forms.widgets import CheckboxSelectMultiple
 from django.contrib.auth.models import User, Group
+from django.utils import timezone
+
 from Fintech.users import suspended_test, is_site_manager
 from Fintech.decorators import request_passes_test
 from Fintech.models import CompanyDetails, Report, ReportPermissions, File, Message
@@ -12,8 +15,8 @@ from Fintech.models import CompanyDetails, Report, ReportPermissions, File, Mess
 class ReportForm(ModelForm):
     class Meta:
         model = Report
-        fields = ('title', 'company_ceo', 'sector', 'industry', 'current_projects', 'is_private')
-        exclude = ('company_name','company_phone','company_location','company_country')
+        fields = ('title', 'current_projects', 'is_private')
+        exclude = ('company_name','company_phone','company_location','company_country', 'company_ceo', 'sector', 'industry')
 
 class ReportPermissionsForm(ModelForm):
     class Meta:
@@ -70,24 +73,27 @@ def createReport(request):
                 report.company_phone = getattr(company_user,'company_phone')
                 report.company_location = getattr(company_user,'company_location')
                 report.company_country = getattr(company_user,'company_country')
+                report.company_ceo = getattr(company_user, 'company_ceo')
+                report.industry = getattr(company_user,'industry')
+                report.sector = getattr(company_user,'sector')
                 report.has_attachments = False
                 report.save()
 
-                permissions = permissions_form.save(commit=False);
-                permissions.report = report;
-                permissions.save();
-                permissions_form.save_m2m();
+                permissions = permissions_form.save(commit=False)
+                permissions.report = report
+                permissions.save()
+                permissions_form.save_m2m()
 
                 for form in file_formset:
                     file = form.save(commit=False)
-                    file.upload_date = datetime.date.today()
+                    file.upload_date = timezone.now()
                     file.report = report
                     file.save()
 
                 if File.objects.filter(report__pk=report.pk):
-                    report.has_attachments = True;
+                    report.has_attachments = True
                 else:
-                    report.has_attachments = False;
+                    report.has_attachments = False
 
                 report.save()
 

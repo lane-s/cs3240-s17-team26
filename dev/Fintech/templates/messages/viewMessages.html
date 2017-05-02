@@ -6,18 +6,20 @@
 
 
     <div class="panel-heading row">
-    <div class="col-xs-6 text-left">
-        <div class="previous">
-          <p2><a style="margin-left: 1%; background-color: green;" class="btn btn-primary btn-lg" href="/messages/new"
-           role="button">Send Message</a></p2>
+        <div class="col-xs-6 text-left">
+            <div class="previous">
+                <p2><a style="margin-left: 1%; background-color: green;" class="btn btn-primary btn-lg"
+                       href="/messages/new"
+                       role="button">Send Message</a></p2>
+            </div>
         </div>
-    </div>
-    <div class="col-xs-6 text-right">
-        <div class="next">
-            <p2><a style="margin-left: 1%; background-color: green;" class="btn btn-primary btn-lg btn-pull-right" href="/messages/sent"
-           role="button">View Sent Messages</a></p2>
+        <div class="col-xs-6 text-right">
+            <div class="next">
+                <p2><a style="margin-left: 1%; background-color: green;" class="btn btn-primary btn-lg btn-pull-right"
+                       href="/messages/sent"
+                       role="button">View Sent Messages</a></p2>
+            </div>
         </div>
-    </div>
     </div>
 
     {% if message_list %}
@@ -29,19 +31,23 @@
                             {% if not m.opened %}
                                 <li style="text-decoration:underline; margin-left: 5%; color: green; font-size: x-large;">
                                     <a style="color: green; font-size: x-large;"
-                                            href={% url 'viewMessage' m.pk %}>{{ m.subject }} <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span></a></li>
+                                       href={% url 'viewMessage' m.pk %}>{{ m.subject }} <span
+                                            class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span></a>
+                                </li>
                             {% elif m.opened %}
                                 <li style="text-decoration:underline; margin-left: 5%; color: green; font-size: x-large;">
                                     <a style="color: green; font-size: x-large;"
-                                            href={% url 'viewMessage' m.pk %}>{{ m.subject }}</a></li>
+                                       href={% url 'viewMessage' m.pk %}>{{ m.subject }}</a></li>
                             {% endif %}
 
-                    <div class="row">
-                            <p1 style="margin-left: 9%; padding-top: 1%; color:black; font-size: large;">
-                                From: {{ m.sender }}</p1></div>
-                    <div class="row">
-                            <p1 style="margin-left: 9%; padding-top: 1%; color:black; font-size: large">
-                                Received: {{ m.timestamp }}</p1></div>
+                            <div class="row">
+                                <p1 style="margin-left: 9%; padding-top: 1%; color:black; font-size: large;">
+                                    From: {{ m.sender }}</p1>
+                            </div>
+                            <div class="row">
+                                <p1 style="margin-left: 9%; padding-top: 1%; color:black; font-size: large">
+                                    Received: {{ m.timestamp }}</p1>
+                            </div>
                         </h2>
                     </section>
 
@@ -49,6 +55,8 @@
             </div>
 
         {% endfor %}
+
+        <div class="row" style="height:50px"></div>
     {% else %}
         <h3> You have no messages. </h3>
     {% endif %}
