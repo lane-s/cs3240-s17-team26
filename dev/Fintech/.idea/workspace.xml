@@ -27,18 +27,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="splash.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/splash.html">
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Fintech/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="650">
-              <caret line="100" column="108" lean-forward="false" selection-start-line="100" selection-start-column="108" selection-end-line="100" selection-end-column="108" />
-              <folding>
-                <element signature="e#2120#2163#0#HTML" expanded="true" />
-                <element signature="e#2207#2262#0#HTML" expanded="true" />
-                <element signature="e#4809#4868#0#HTML" expanded="true" />
-                <element signature="e#4916#4981#0#HTML" expanded="true" />
-                <element signature="e#5281#5301#0#HTML" expanded="true" />
-              </folding>
+            <state relative-caret-position="742">
+              <caret line="134" column="25" lean-forward="false" selection-start-line="134" selection-start-column="25" selection-end-line="134" selection-end-column="25" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -93,7 +87,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/templates/registration/signup.html" />
-        <option value="$PROJECT_DIR$/Fintech/settings.py" />
         <option value="$PROJECT_DIR$/templates/groups/editGroup.html" />
         <option value="$PROJECT_DIR$/templates/groups/viewGroups.html" />
         <option value="$PROJECT_DIR$/templates/reports/createReport.html" />
@@ -117,6 +110,7 @@
         <option value="$PROJECT_DIR$/Fintech/models.py" />
         <option value="$PROJECT_DIR$/templates/messages/viewMessages.html" />
         <option value="$PROJECT_DIR$/templates/splash.html" />
+        <option value="$PROJECT_DIR$/Fintech/settings.py" />
       </list>
     </option>
   </component>
@@ -782,14 +776,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Fintech/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="69" column="41" lean-forward="false" selection-start-line="69" selection-start-column="41" selection-end-line="69" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Fintech/decorators.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1050,16 +1036,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/messages/viewMessages.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="679">
-          <caret line="49" column="34" lean-forward="true" selection-start-line="49" selection-start-column="34" selection-end-line="49" selection-end-column="34" />
-          <folding>
-            <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/splash.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="650">
@@ -1071,6 +1047,24 @@
             <element signature="e#4916#4981#0#HTML" expanded="true" />
             <element signature="e#5281#5301#0#HTML" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/messages/viewMessages.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="679">
+          <caret line="49" column="34" lean-forward="true" selection-start-line="49" selection-start-column="34" selection-end-line="49" selection-end-column="34" />
+          <folding>
+            <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Fintech/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="742">
+          <caret line="134" column="25" lean-forward="false" selection-start-line="134" selection-start-column="25" selection-end-line="134" selection-end-column="25" />
+          <folding />
         </state>
       </provider>
     </entry>
