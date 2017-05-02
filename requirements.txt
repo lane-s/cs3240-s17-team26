@@ -125,6 +125,7 @@ unicodecsv==0.14.1
 virtualenv==15.1.0
 wcwidth==0.1.7
 Werkzeug==0.11.11
+whitenoise==3.3.0
 widgetsnbextension==1.2.6
 wrapt==1.10.6
 django-countries==4.4
